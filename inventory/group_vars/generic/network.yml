@@ -1,0 +1,43 @@
+---
+##########################################################
+# network
+
+network_mgmt_interface: eno1
+network_workload_interface: eno2
+network_data_interface: bond_data
+
+network_type: netplan
+
+network_mgmt_address: "{{ network_mgmt_network | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}"
+network_mgmt_mtu: 1500
+network_mgmt_network: "192.168.16.0/20"
+network_mgmt_network_subnet_mask: "20"  # NOTE: This should be obtained via ipaddr filter over mgmt_network
+
+network_data_interface_1: eno3
+network_data_interface_2: eno4
+
+network_data_address: "{{ network_data_network | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}"
+network_data_mtu: 1500
+network_data_network: "192.168.32.0/20"
+network_data_network_subnet_mask: "20"  # NOTE: This should be obtained via ipaddr filter over data_network
+
+network_bonds:
+  "{{ network_data_interface }}":
+    addresses:
+      - "{{ network_data_network | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}/{{ network_data_network_subnet_mask }}"
+    interfaces:
+      - "{{ network_data_interface_1 }}"
+      - "{{ network_data_interface_2 }}"
+    parameters:
+      lacp-rate: fast
+      mode: 802.3ad
+      transmit-hash-policy: layer2+3
+
+network_ethernets:
+  "{{ network_mgmt_interface }}":
+    addresses:
+      - "{{ network_mgmt_network | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}/{{ network_mgmt_network_subnet_mask }}"
+    gateway4: "{{ network_mgmt_network | ipaddr('net') | ipaddr('1') | ipaddr('address') }}"
+  "{{ network_workload_interface }}": {}
+  "{{ network_data_interface_1 }}": {}
+  "{{ network_data_interface_2 }}": {}

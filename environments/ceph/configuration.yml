@@ -1,0 +1,40 @@
+---
+##########################
+# generic
+
+fsid: 11111111-1111-1111-1111-111111111111
+
+##########################
+# network
+
+public_network: 192.168.32.0/20
+cluster_network: 192.168.32.0/20
+
+##########################
+# osd
+
+# NOTE: Set too high to be able to simulate more OSDs.
+
+osds_per_device: 4
+
+##########################
+# openstack
+
+# NOTE: After the initial deployment of the Ceph Clusters, the following parameter can be
+#       set to false. It must only be set to true again when new pools or keys are added.
+
+openstack_config: true
+
+openstack_pool_default_size: 1
+openstack_pool_default_pg_num: 8
+
+##########################
+# custom
+
+ceph_conf_overrides:
+  global:
+    osd pool default size: 1
+    osd pool default min size: 0
+
+  mon:
+    mon allow pool delete: true

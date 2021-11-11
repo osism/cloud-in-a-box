@@ -1,0 +1,20 @@
+---
+node_id: 10
+
+netdata_host_type: server
+
+netbox_inventory_tags:
+  - ceph-control
+  - ceph-resource
+  - compute
+  - control
+  - generic
+  - manager
+  - monitoring
+  - network
+
+devices:
+  - /dev/sdb
+  # - /dev/sdc
+  # - /dev/sdd
+  # - /dev/sde

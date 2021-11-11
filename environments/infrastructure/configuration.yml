@@ -1,0 +1,11 @@
+---
+##########################
+# cephclient
+
+cephclient_mons:
+  - 192.168.32.10
+
+##########################
+# homer
+
+homer_host: "{{ hostvars[inventory_hostname]['ansible_' + hostvars[inventory_hostname]['internal_interface']]['ipv4']['address'] }}"

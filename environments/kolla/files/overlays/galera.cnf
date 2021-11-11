@@ -1,0 +1,7 @@
+[mysqld]
+userstat = 1
+expire_logs_days = 14
+
+[xtrabackup]
+password = {{ database_password }}
+user = root

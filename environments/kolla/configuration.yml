@@ -1,0 +1,103 @@
+---
+##########################################################
+# docker
+
+docker_registry: quay.io
+
+##########################################################
+# haproxy
+
+kolla_internal_fqdn: api.testbed.osism.xyz
+
+kolla_enable_tls_external: "no"
+kolla_enable_tls_internal: "no"
+
+##########################################################
+# openstack
+
+enable_aodh: "yes"
+enable_barbican: "yes"
+enable_ceilometer: "yes"
+enable_cinder: "yes"
+enable_cinder_backup: "yes"
+enable_designate: "yes"
+enable_gnocchi: "yes"
+enable_heat: "yes"
+enable_octavia: "yes"
+enable_panko: "yes"
+
+enable_etcd: "yes"
+enable_grafana: "yes"
+enable_prometheus: "yes"
+enable_redis: "yes"
+
+# generic
+openstack_service_workers: 2
+
+# profiling
+enable_osprofiler: "no"
+
+# elasticsearch
+es_heap_size: "1g"
+
+# grafana
+grafana_enable_unified_alerting: "yes"
+
+# mariadb
+
+enable_mariabackup: "yes"
+
+# rabbitmq
+
+rabbitmq_server_additional_erl_args: "+S 2:2 +sbwt none"
+
+# horizon
+horizon_backend_database: "yes"
+
+# keystone
+keystone_token_provider: "fernet"
+
+# neutron
+neutron_plugin_agent: ovn
+
+enable_neutron_agent_ha: "yes"
+enable_neutron_dvr: "no"
+enable_neutron_qos: "yes"
+
+# nova
+nova_console: novnc
+nova_virt_type: kvm
+
+# octavia
+octavia_network_type: tenant
+octavia_loadbalancer_topology: "ACTIVE_STANDBY"
+
+# ceilometer
+ceilometer_database_type: gnocchi
+ceilometer_event_type: panko
+
+# designate
+designate_ns_record: openstack.testbed.osism.xyz
+
+##########################################################
+# external ceph
+
+enable_ceph: "no"
+
+cinder_backend_ceph: "yes"
+glance_backend_ceph: "yes"
+gnocchi_backend_storage: "ceph"
+nova_backend_ceph: "yes"
+
+ceph_gnocchi_pool_name: "metrics"
+cinder_backup_driver: "ceph"
+glance_backend_file: "no"
+
+ceph_nova_user: nova
+ceph_nova_keyring: ceph.client.nova.keyring
+
+# NOTE: public_network from environments/ceph/configuration.yml
+ceph_public_network: 192.168.32.0/20
+
+##########################################################
+# other

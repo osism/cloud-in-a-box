@@ -1,0 +1,5 @@
+---
+##########################
+# netdata
+
+netdata_api_host: "{{ hostvars['testbed-node-0.testbed.osism.xyz']['ansible_' + hostvars['testbed-node-0.testbed.osism.xyz']['internal_interface']]['ipv4']['address'] }}"

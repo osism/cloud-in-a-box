@@ -1,0 +1,14 @@
+---
+##########################
+# dotfiles
+
+dotfiles_repo: "https://github.com/osism/dotfiles.git"
+dotfiles_repo_version: main
+dotfiles_repo_local_destination: "~/dotfiles"
+dotfiles_files:
+  - .tmux.conf
+
+##########################
+# patchman-client
+
+patchman_client_host: "{{ hostvars['testbed-node-0.testbed.osism.xyz']['ansible_' + hostvars['testbed-node-0.testbed.osism.xyz']['internal_interface']]['ipv4']['address'] }}"

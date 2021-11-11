@@ -1,0 +1,65 @@
+##########################################################
+# roles
+
+# NOTE: This file is used to store the hosts for initial import into
+#       the netbox (when using netbox).
+
+# NOTE: add all systems to this group, regardless of whether they are
+#       listed in other groups
+[generic]
+testbed-node-0.testbed.osism.xyz
+
+[manager]
+testbed-node-0.testbed.osism.xyz
+
+[monitoring]
+testbed-node-0.testbed.osism.xyz
+
+[control]
+testbed-node-0.testbed.osism.xyz
+# testbed-node-1.testbed.osism.xyz
+# testbed-node-2.testbed.osism.xyz
+
+[compute]
+testbed-node-0.testbed.osism.xyz
+# testbed-node-1.testbed.osism.xyz
+# testbed-node-2.testbed.osism.xyz
+# testbed-node-3.testbed.osism.xyz
+# testbed-node-4.testbed.osism.xyz
+
+[network]
+testbed-node-0.testbed.osism.xyz
+# testbed-node-1.testbed.osism.xyz
+# testbed-node-2.testbed.osism.xyz
+
+[ceph-control]
+testbed-node-0.testbed.osism.xyz
+# testbed-node-1.testbed.osism.xyz
+# testbed-node-2.testbed.osism.xyz
+
+[ceph-resource]
+testbed-node-0.testbed.osism.xyz
+# testbed-node-1.testbed.osism.xyz
+# testbed-node-2.testbed.osism.xyz
+# testbed-node-3.testbed.osism.xyz
+# testbed-node-4.testbed.osism.xyz
+
+# NOTE: After the initial import of the inventory in the netbox,
+#       the groups in this file can be emptied. The systems are
+#       then assigned to their roles via tags in the netbox.
+
+# [generic]
+#
+# [manager]
+#
+# [monitoring]
+#
+# [control]
+#
+# [compute]
+#
+# [network]
+#
+# [ceph-control]
+#
+# [ceph-resource]

@@ -1,0 +1,11 @@
+---
+sources:
+  - name: meter_source
+    meters:
+      - "*"
+    sinks:
+      - meter_sink
+sinks:
+  - name: meter_sink
+    publishers:
+      - prometheus://testbed-node-0.testbed.osism.xyz/metrics/job/openstack-telemetry
