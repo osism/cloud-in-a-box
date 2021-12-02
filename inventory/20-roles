@@ -9,17 +9,21 @@
 [generic]
 testbed-node-0.testbed.osism.xyz
 
+# NOTE: Here the manager services (Netbox, Ansible, ..) run
 [manager]
 testbed-node-0.testbed.osism.xyz
 
+# NOTE: Systems to be used for monitoring (Prometheus, Netdata, ..)
 [monitoring]
 testbed-node-0.testbed.osism.xyz
 
+# NOTE: Services that are necessary for the control of OpenStack (API, scheduler, messaging, ..)
 [control]
 testbed-node-0.testbed.osism.xyz
 # testbed-node-1.testbed.osism.xyz
 # testbed-node-2.testbed.osism.xyz
 
+# NOTE: Systems used for virtualization
 [compute]
 testbed-node-0.testbed.osism.xyz
 # testbed-node-1.testbed.osism.xyz
@@ -27,16 +31,19 @@ testbed-node-0.testbed.osism.xyz
 # testbed-node-3.testbed.osism.xyz
 # testbed-node-4.testbed.osism.xyz
 
+# Systems used for Neutron services
 [network]
 testbed-node-0.testbed.osism.xyz
 # testbed-node-1.testbed.osism.xyz
 # testbed-node-2.testbed.osism.xyz
 
+# Services that are necessary for the control of Ceph
 [ceph-control]
 testbed-node-0.testbed.osism.xyz
 # testbed-node-1.testbed.osism.xyz
 # testbed-node-2.testbed.osism.xyz
 
+# Systems provide storage for Ceph
 [ceph-resource]
 testbed-node-0.testbed.osism.xyz
 # testbed-node-1.testbed.osism.xyz
