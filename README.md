@@ -159,6 +159,12 @@ Finally, a reboot with ``./run.sh reboot`` should be performed.
 
 From this point on, the deploy user ``dragon`` is used.
 
+First create the deploy user on the other nodes.
+
+```
+osism-generic operator -l "all:!manager" -u ubuntu
+```
+
 If necessary, the network is prepared.
 
 ```
