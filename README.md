@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/osism/gaia-x-hackathon-2021/main/assets/banner.jpg" alt="Gaia-X Hackathon #2" />
 </p>
 
-Registration is required to participate in the hackathon: https://mautic.cloudandheat.com/gaiaxhackathon2
+**The secrets are stored in plain text and are not secure. Do not use for public accessible systems.**
 
 # Target of this hackathon track
 
