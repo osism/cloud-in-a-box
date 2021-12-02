@@ -96,6 +96,13 @@ The network configuration and the IP addresses and CIDRs used are adjusted accor
 
 The same applies to the block devices that are to be used for Ceph.
 
+If you want to use different hostnames you have to change all occurences.
+
+```
+grep -r testbed-
+find . -name 'testbed-*'
+```
+
 After completing this step, a finished configuration repository is available.
 
 # Step 2: Solve chicken egg problem (seed phase)
