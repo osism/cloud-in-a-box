@@ -134,6 +134,10 @@ ANSIBLE_USER=ubuntu \
 ./run.sh operator
 ```
 
+* ``ANSIBLE_USER=ubuntu`` -- the user to be used to log in
+* ``ANSIBLE_ASK_PASS=true`` -- asks for the password of the ``ANSIBLE_USER``
+* ``ANSIBLE_BECOME_ASK_PASS=true`` -- asks for the password to use sudo
+
 If the network is to be managed as well, ``./run.sh network`` is executed
 at this point. By default, new network settings are not applied. A reboot
 of the system can be performed with ``./run.sh reboot``.
