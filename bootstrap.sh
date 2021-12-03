@@ -6,6 +6,8 @@ sudo apt-get install -y python3-virtualenv sshpass
 pushd environments/manager
 
 ./run.sh operator -e ansible_ssh_pass=install -e ansible_ssh_user=install
+./run.sh network
+sudo netplan apply
 ./run.sh bootstrap
 ./run.sh configuration
 ./run.sh netbox
