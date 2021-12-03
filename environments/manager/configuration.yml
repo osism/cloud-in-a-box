@@ -42,4 +42,3 @@ configuration_git_protocol: https
 
 api_address_family: ipv4
 api_interface: "{{ internal_interface }}"
-etcd_port: 2379
