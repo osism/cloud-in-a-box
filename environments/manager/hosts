@@ -1,2 +1,11 @@
 [manager]
 testbed-node-0.testbed.osism.xyz
+
+# NOTE: Workaround for AIO installation to enable support
+#       for Zun directly in Docker.
+
+[zun-compute:children]
+manager
+
+[etcd:children]
+manager

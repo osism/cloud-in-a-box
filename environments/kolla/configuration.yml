@@ -25,6 +25,7 @@ enable_gnocchi: "yes"
 enable_heat: "yes"
 enable_octavia: "yes"
 enable_panko: "yes"
+enable_zun: "yes"
 
 enable_etcd: "yes"
 enable_grafana: "yes"

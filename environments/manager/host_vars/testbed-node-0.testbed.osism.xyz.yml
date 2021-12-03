@@ -12,9 +12,3 @@ netbox_inventory_tags:
   - manager
   - monitoring
   - network
-
-devices:
-  - /dev/sdc
-  - /dev/sdd
-  - /dev/sde
-  - /dev/sdf

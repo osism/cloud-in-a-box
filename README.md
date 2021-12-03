@@ -241,6 +241,8 @@ osism apply neutron
 osism apply nova
 osism apply octavia
 osism apply barbican
+osism apply kuryr
+osism apply zun
 osism apply openstackclient
 osism apply --environment custom bootstrap-openstack
 ```

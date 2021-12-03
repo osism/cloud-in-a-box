@@ -36,3 +36,10 @@ configuration_git_host: github.com
 configuration_git_port: 443
 configuration_git_repository: osism/gaia-x-hackathon-2021.git
 configuration_git_protocol: https
+
+##########################
+# NOTE: Workaround to be able to use Zun in AIO installation
+
+api_address_family: ipv4
+api_interface: "{{ internal_interface }}"
+etcd_port: 2379
