@@ -21,8 +21,8 @@ enable_ceilometer: "yes"
 enable_cinder: "yes"
 enable_cinder_backup: "yes"
 enable_designate: "yes"
-enable_gnocchi: "yes"
 enable_heat: "yes"
+enable_ironic: "yes"
 enable_octavia: "yes"
 enable_panko: "yes"
 enable_zun: "yes"
@@ -80,25 +80,33 @@ ceilometer_event_type: panko
 # designate
 designate_ns_record: openstack.testbed.osism.xyz
 
+# ironic
+ironic_dnsmasq_default_gateway: 192.168.112.1
+ironic_dnsmasq_dhcp_range: "192.168.112.50,192.168.112.60"
+ironic_cleaning_network: "public"
+
 ##########################################################
 # external ceph
 
+# NOTE: This is on purpose. Do not change.
 enable_ceph: "no"
 
-cinder_backend_ceph: "yes"
-glance_backend_ceph: "yes"
-gnocchi_backend_storage: "ceph"
-nova_backend_ceph: "yes"
+# NOTE: Uncomment the following lines if Ceph is to be deployed.
 
-ceph_gnocchi_pool_name: "metrics"
-cinder_backup_driver: "ceph"
-glance_backend_file: "no"
+# cinder_backend_ceph: "yes"
+# glance_backend_ceph: "yes"
+# gnocchi_backend_storage: "ceph"
+# nova_backend_ceph: "yes"
 
-ceph_nova_user: nova
-ceph_nova_keyring: ceph.client.nova.keyring
+# ceph_gnocchi_pool_name: "metrics"
+# cinder_backup_driver: "ceph"
+# glance_backend_file: "no"
+
+# ceph_nova_user: nova
+# ceph_nova_keyring: ceph.client.nova.keyring
 
 # NOTE: public_network from environments/ceph/configuration.yml
-ceph_public_network: 192.168.32.0/20
+# ceph_public_network: 192.168.32.0/20
 
 ##########################################################
 # other

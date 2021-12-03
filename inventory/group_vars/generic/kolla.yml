@@ -2,6 +2,7 @@
 ##########################################################
 # kolla
 
+ironic_dnsmasq_interface: "{{ network_workload_interface }}"
 network_interface: "{{ network_mgmt_interface }}"
-tunnel_interface: "{{ network_data_interface }}"
 neutron_external_interface: "{{ network_workload_interface }}"
+tunnel_interface: "{{ network_data_interface }}"

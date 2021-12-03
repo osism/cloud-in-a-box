@@ -205,7 +205,8 @@ After completing this step, all necessary services such as database or queuing a
 
 ## Ceph
 
-Deploying Swift/S3 API using RGW or CephFS is not included in this deployment.
+The deployment of Ceph is optional. If Ceph is to be deployed, follow the instructions
+in ``environment/ceph/configuration.yml``.
 
 ```
 osism apply ceph-mons
@@ -214,9 +215,7 @@ osism apply ceph-osds
 osism apply ceph-crash
 ```
 
-After this step is complete, Ceph is available as storage backend.
-
-### Make Ceph keys known in the configuration
+Deploying Swift/S3 API using RGW or CephFS is not included in this deployment.
 
 After deploying Ceph, the keys generated during the deployment must currently be stored
 in the configuration repository. In the future, these keys will be automatically stored
@@ -229,6 +228,8 @@ osism apply cephclient
 osism apply --environment custom bootstrap-ceph
 ```
 
+After this step is complete, Ceph is available as storage backend.
+
 ## OpenStack
 
 ```
@@ -239,6 +240,7 @@ osism apply glance
 osism apply cinder
 osism apply neutron
 osism apply nova
+osism apply panko
 osism apply octavia
 osism apply designate
 osism apply barbican
@@ -259,6 +261,38 @@ osism apply netdata
 ```
 
 After this step is completed, telemetry data can be displayed visually.
+
+## Ironic
+
+```
+curl https://tarballs.opendev.org/openstack/ironic-python-agent/dib/files/ipa-centos8-master.kernel \
+  -o /opt/configuration/environments/kolla/files/overlays/ironic/ironic-agent.kernel
+curl https://tarballs.opendev.org/openstack/ironic-python-agent/dib/files/ipa-centos8-master.initramfs \
+  -o /opt/configuration/environments/kolla/files/overlays/ironic/ironic-agent.initramfs
+osism apply ironic
+```
+
+```
+cp /opt/configuration/environments/kolla/files/overlays/ironic/ironic-agent.kernel /opt/configuration/environments/openstack
+cp /opt/configuration/environments/kolla/files/overlays/ironic/ironic-agent.initramfs /opt/configuration/environments/openstack
+openstack --os-cloud admin image create --disk-format aki --container-format aki --public \
+  --file /configuration/ironic-agent.kernel deploy-vmlinuz
+openstack --os-cloud admin image create --disk-format ari --container-format ari --public \
+  --file /configuration/ironic-agent.initramfs deploy-initrd
+```
+
+https://docs.openstack.org/ironic/latest/install/configure-nova-flavors
+
+```
+openstack --os-cloud admin flavor create --ram 65536 --disk 240 --vcpus 8 baremetal-testing
+openstack --os-cloud admin flavor set baremetal-testing --property \
+  resources:CUSTOM_BAREMETAL_RESOURCE_CLASS=1 \
+  resources:resources:VCPU=0 \
+  resources:resources:MEMORY_MB=0 \
+  resources:resources:DISK_GB=0
+```
+
+https://docs.openstack.org/ironic/latest/install/enrollment
 
 # Notes
 
