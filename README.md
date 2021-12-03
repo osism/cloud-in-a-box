@@ -21,10 +21,9 @@ the hackathon.
 
 * 256GB RAM
 * 2 CPU sockets
-* 2 HDD/SSD/NVMe >=1TB (for the operating system)
-* 4 HDD/SSD/NVMe >=4TB (for Ceph)
-* 2 >= 1 GBit NICs (for the control plane)
-* 2 >= 10/25/40/100 GBit NICs (for the data plane)
+* 2 HDD/SSD/NVMe >= 1TB (for the operating system)
+* 4 HDD/SSD/NVMe >= 4TB (for Ceph)
+* 2 >= 1 GBit NICs (for the control & data plane)
 
 The minimum recommendations listed are not the minimum requirements of the
 solution itself. They are significantly lower.

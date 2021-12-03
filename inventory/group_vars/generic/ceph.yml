@@ -2,5 +2,5 @@
 ##########################################################
 # ceph
 
-monitor_address: "{{ '192.168.32.0/20' | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}"
-radosgw_address: "{{ '192.168.32.0/20' | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}"
+monitor_address: "{{ '192.168.16.0/20' | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}"
+radosgw_address: "{{ '192.168.16.0/20' | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}"
