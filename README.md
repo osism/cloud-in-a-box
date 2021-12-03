@@ -226,7 +226,7 @@ takes some time.
 ```
 osism-run custom fetch-ceph-keys
 osism apply cephclient
-osism-run custom bootstrap-ceph-dashboard
+osism apply --environment custom bootstrap-ceph
 ```
 
 ## OpenStack
@@ -242,6 +242,7 @@ osism apply nova
 osism apply octavia
 osism apply barbican
 osism apply openstackclient
+osism apply --environment custom bootstrap-openstack
 ```
 
 Once this step is complete, OpenStack is available as an Infrastructure as a Service layer.
