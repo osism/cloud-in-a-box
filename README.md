@@ -226,6 +226,7 @@ takes some time.
 ```
 osism-run custom fetch-ceph-keys
 osism apply cephclient
+osism-run custom bootstrap-ceph-dashboard
 ```
 
 ## OpenStack
