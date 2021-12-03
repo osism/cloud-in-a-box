@@ -240,6 +240,7 @@ osism apply cinder
 osism apply neutron
 osism apply nova
 osism apply octavia
+osism apply designate
 osism apply barbican
 osism apply kuryr
 osism apply zun
