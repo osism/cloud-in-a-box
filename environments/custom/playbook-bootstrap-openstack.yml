@@ -266,7 +266,6 @@
         external: true
         provider_network_type: flat
         provider_physical_network: physnet1
-        mtu: 1300  # NOTE: necessary because Geneve/VxLAN in Geneve/VxLAN
 
     - name: Create public subnet
       os_subnet:
@@ -280,12 +279,32 @@
         allocation_pool_end: 192.168.112.200
         gateway_ip: 192.168.112.1
 
+    - name: Create ironic network
+      os_network:
+        cloud: admin
+        state: present
+        name: ironic
+        external: true
+        provider_network_type: flat
+        provider_physical_network: physnet2
+
+    - name: Create ironic subnet
+      os_subnet:
+        cloud: admin
+        state: present
+        name: subnet-ironic
+        network_name: ironic
+        cidr: 192.168.101.0/24
+        enable_dhcp: true
+        allocation_pool_start: 192.168.101.100
+        allocation_pool_end: 192.168.101.200
+        gateway_ip: 192.168.101.1
+
     - name: Create test network
       os_network:
         cloud: test
         state: present
         name: test
-        mtu: 1300  # NOTE: necessary because Geneve/VxLAN in Geneve/VxLAN
 
     - name: Create test subnet
       os_subnet:

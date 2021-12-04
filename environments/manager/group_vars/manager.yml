@@ -39,3 +39,20 @@ network_ethernets:
       - "{{ network_mgmt_network | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}/{{ network_mgmt_network_subnet_mask }}"
     gateway4: "{{ network_mgmt_network | ipaddr('net') | ipaddr('1') | ipaddr('address') }}"
   "{{ network_workload_interface }}": {}
+
+network_vlans:
+  vlan100:
+    id: 100
+    link: "{{ network_mgmt_interface }}"
+    addresses:
+      - "192.168.100.{{ node_id }}/24"
+  vlan101:
+    id: 101
+    link: "{{ network_mgmt_interface }}"
+    addresses:
+      - "192.168.101.{{ node_id }}/24"
+  vlan102:
+    id: 102
+    link: "{{ network_mgmt_interface }}"
+    addresses:
+      - "192.168.102.{{ node_id }}/24"

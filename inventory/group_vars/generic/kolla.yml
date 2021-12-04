@@ -2,7 +2,9 @@
 ##########################################################
 # kolla
 
-ironic_dnsmasq_interface: "{{ network_workload_interface }}"
+ironic_dnsmasq_interface: "vlan102"
 network_interface: "{{ network_mgmt_interface }}"
-neutron_external_interface: "{{ network_workload_interface }}"
+neutron_external_interface: "{{ network_workload_interface }},vlan101"
 tunnel_interface: "{{ network_mgmt_interface }}"
+
+neutron_bridge_name: "br-ex,br-ironic"

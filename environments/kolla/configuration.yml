@@ -7,7 +7,9 @@ docker_registry: quay.io
 ##########################################################
 # haproxy
 
-kolla_internal_fqdn: api.testbed.osism.xyz
+# NOTE: Uncomment if a DNS name is to be used for the API endpoint
+#       instead of an IP address.
+# kolla_internal_fqdn: api.testbed.osism.xyz
 
 kolla_enable_tls_external: "no"
 kolla_enable_tls_internal: "no"
@@ -46,11 +48,9 @@ es_heap_size: "1g"
 grafana_enable_unified_alerting: "yes"
 
 # mariadb
-
 enable_mariabackup: "yes"
 
 # rabbitmq
-
 rabbitmq_server_additional_erl_args: "+S 2:2 +sbwt none"
 
 # horizon
@@ -60,7 +60,9 @@ horizon_backend_database: "yes"
 keystone_token_provider: "fernet"
 
 # neutron
-neutron_plugin_agent: ovn
+
+# NOTE: Uncomment if OVN is to be used as SDN
+# neutron_plugin_agent: ovn
 
 enable_neutron_agent_ha: "yes"
 enable_neutron_dvr: "no"
@@ -82,12 +84,16 @@ ceilometer_event_type: panko
 designate_ns_record: openstack.testbed.osism.xyz
 
 # ironic
-ironic_dnsmasq_default_gateway: 192.168.112.1
-ironic_dnsmasq_dhcp_range: "192.168.112.50,192.168.112.60"
-ironic_cleaning_network: "public"
+ironic_dnsmasq_default_gateway: 192.168.102.1
+ironic_dnsmasq_dhcp_range: "192.168.102.50,192.168.102.60"
+ironic_cleaning_network: "ironic"
+
+enable_ironic_ipxe: "yes"
+# enable_ironic_pxe_uefi: "no"
+# ironic_inspector_pxe_filter: "noop"
 
 ##########################################################
-# external ceph
+# storage backend
 
 # NOTE: This is on purpose. Do not change.
 enable_ceph: "no"
@@ -108,6 +114,9 @@ enable_ceph: "no"
 
 # NOTE: public_network from environments/ceph/configuration.yml
 # ceph_public_network: 192.168.16.0/20
+
+# NOTE: Comment the following lines if Ceph is to be deployed.
+enable_cinder_backend_lvm: "yes"
 
 ##########################################################
 # other
