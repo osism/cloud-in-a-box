@@ -55,17 +55,38 @@ if [[ ! -e id_rsa.operator ]]; then
 
 fi
 
-ansible-playbook \
-    --private-key id_rsa.operator \
-    -i hosts \
-    -e @../images.yml \
-    -e @../configuration.yml \
-    -e @../secrets.yml \
-    -e @images.yml \
-    -e @configuration.yml \
-    -e @secrets.yml \
-    -u "$ANSIBLE_USER" \
-    playbook-"$playbook".yml "$@"
+if [[ $playbook == "netbox" || $playbook == "traefik" ]]; then
+
+    ansible-playbook \
+        --private-key id_rsa.operator \
+        -i hosts \
+        -e @../images.yml \
+        -e @../configuration.yml \
+        -e @../secrets.yml \
+        -e @../infrastructure/images.yml \
+        -e @../infrastructure/configuration.yml \
+        -e @../infrastructure/secrets.yml \
+        -e @images.yml \
+        -e @configuration.yml \
+        -e @secrets.yml \
+        -u "$ANSIBLE_USER" \
+        playbook-"$playbook".yml "$@"
+
+else
+
+    ansible-playbook \
+        --private-key id_rsa.operator \
+        -i hosts \
+        -e @../images.yml \
+        -e @../configuration.yml \
+        -e @../secrets.yml \
+        -e @images.yml \
+        -e @configuration.yml \
+        -e @secrets.yml \
+        -u "$ANSIBLE_USER" \
+        playbook-"$playbook".yml "$@"
+
+fi
 
 if [[ $CLEANUP == "true" ]]; then
 
