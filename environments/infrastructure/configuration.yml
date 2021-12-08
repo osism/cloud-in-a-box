@@ -13,13 +13,12 @@ homer_host: "{{ hostvars[inventory_hostname]['ansible_' + hostvars[inventory_hos
 ##########################
 # netbox
 
-netbox_enable: true
 netbox_traefik: true
 netbox_host: "{{ hostvars[inventory_hostname]['ansible_' + internal_interface]['ipv4']['address'] }}"
-netbox_api_url: "http://{{ netbox_host }}:8121"
 
 ##########################
 # traefik
 
 traefik_enable: true
 traefik_host: "{{ hostvars[inventory_hostname]['ansible_' + internal_interface]['ipv4']['address'] }}"
+traefik_port_http: 1080

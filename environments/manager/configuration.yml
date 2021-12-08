@@ -19,6 +19,12 @@ ara_server_database_type: sqlite3
 ara_server_host: "{{ hostvars[inventory_hostname]['ansible_' + internal_interface]['ipv4']['address'] }}"
 
 ##########################
+# netbox
+
+netbox_enable: true
+netbox_api_url: "http://192.168.10.16:1080/netbox"
+
+##########################
 # configuration
 
 configuration_directory: /opt/configuration
