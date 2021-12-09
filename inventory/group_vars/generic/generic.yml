@@ -12,4 +12,4 @@ management_interface: "{{ internal_interface }}"
 # netbox
 
 netbox_inventory_status: Active
-netbox_inventory_device_role: generic-node
+netbox_inventory_device_role: generic
