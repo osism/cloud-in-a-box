@@ -5,6 +5,7 @@
 INSTALL_ANSIBLE=${INSTALL_ANSIBLE:-true}
 INSTALL_ANSIBLE_ROLES=${INSTALL_ANSIBLE_ROLES:-true}
 VENV_PATH=${VENV_PATH:-.venv}
+VENV_PYTHON_BIN=${VENV_PYTHON_BIN:-python3}
 
 if [[ $# -lt 1 ]]; then
     echo "usage: $0 PLAYBOOK [ANSIBLEARGS...]"
@@ -21,7 +22,7 @@ if [[ $INSTALL_ANSIBLE == "true" ]]; then
 
         command -v virtualenv >/dev/null 2>&1 || { echo >&2 "virtualenv not installed"; exit 1; }
 
-        virtualenv -p python3 "$VENV_PATH"
+        virtualenv -p "$VENV_PYTHON_BIN" "$VENV_PATH"
         # shellcheck source=/dev/null
         source "$VENV_PATH/bin/activate"
         pip3 install -r requirements.txt
