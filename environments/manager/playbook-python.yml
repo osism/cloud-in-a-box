@@ -7,5 +7,5 @@
 
   tasks:
   - name: Install required packages
-    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+    ansible.builtin.raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
     become: true

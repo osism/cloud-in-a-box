@@ -11,7 +11,7 @@
 
   tasks:
     - name: Create id_operator.rsa file
-      copy:
+      ansible.builtin.copy:
         content: "{{ operator_private_key }}"
         dest: "{{ keypair_dest }}"
         mode: 0600

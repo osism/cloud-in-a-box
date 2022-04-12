@@ -8,7 +8,7 @@
 
   tasks:
     - name: Do not require tty for all users
-      replace:
+      ansible.builtin.replace:
         path: /etc/sudoers
         regexp: "^Defaults.*requiretty$"
         replace: "Defaults !requiretty"

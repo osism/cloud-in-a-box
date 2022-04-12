@@ -6,22 +6,22 @@
   tasks:
     # NOTE: disable and re-enable the dashboard to trigger a restart of the dashboard
     - name: Disable the ceph dashboard
-      command: ceph mgr module disable dashboard  # noqa 301
+      ansible.builtin.command: ceph mgr module disable dashboard  # noqa 301
       environment:
         INTERACTIVE: false
 
     - name: Set mgr/dashboard/ssl to false
-      command: ceph config set mgr mgr/dashboard/ssl false  # noqa 301
+      ansible.builtin.command: ceph config set mgr mgr/dashboard/ssl false  # noqa 301
       environment:
         INTERACTIVE: false
 
     - name: Set mgr/dashboard/server_port to 7000
-      command: ceph config set mgr mgr/dashboard/server_port 7000  # noqa 301
+      ansible.builtin.command: ceph config set mgr mgr/dashboard/server_port 7000  # noqa 301
       environment:
         INTERACTIVE: false
 
     - name: Enable the ceph dashboard
-      command: ceph mgr module enable dashboard  # noqa 301
+      ansible.builtin.command: ceph mgr module enable dashboard  # noqa 301
       environment:
         INTERACTIVE: false
 
@@ -33,7 +33,7 @@
       no_log: true
 
     - name: Create admin user
-      command: "ceph dashboard ac-user-create {{ ceph_dashboard_username }} administrator -i /data/ceph_dashboard_password"  # noqa 301
+      ansible.builtin.command: "ceph dashboard ac-user-create {{ ceph_dashboard_username }} administrator -i /data/ceph_dashboard_password"  # noqa 301
       register: result
       changed_when: "'already exists' not in result.stderr"
       failed_when: ( result.rc not in [ 0, 17 ] )
@@ -54,6 +54,6 @@
   tasks:
     - name: Restart ceph manager service
       become: true
-      service:
+      ansible.builtin.service:
         name: "ceph-mgr@{{ inventory_hostname_short }}"
         state: restarted
