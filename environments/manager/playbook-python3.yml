@@ -7,5 +7,5 @@
 
   tasks:
     - name: Install required packages
-      ansible.builtin.raw: test -e /usr/bin/python3 || (apt-get -y update && apt-get install -y python3-minimal)
       become: true
+      ansible.builtin.raw: test -e /usr/bin/python3 || (apt-get -y update && apt-get install -y python3-minimal)

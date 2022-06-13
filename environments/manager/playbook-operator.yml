@@ -8,11 +8,11 @@
 
   tasks:
     - name: Do not require tty for all users
+      become: true
       ansible.builtin.replace:
         path: /etc/sudoers
         regexp: "^Defaults.*requiretty$"
         replace: "Defaults !requiretty"
-      become: true
       ignore_errors: true
 
 - name: Apply role operator
