@@ -5,53 +5,39 @@
 docker_registry: quay.io
 
 ##########################################################
-# haproxy
+# loadbalancer
 
-# NOTE: Uncomment if a DNS name is to be used for the API endpoint
-#       instead of an IP address.
-# kolla_internal_fqdn: api.testbed.osism.xyz
-
-kolla_enable_tls_external: "no"
-kolla_enable_tls_internal: "no"
+kolla_internal_vip_address: 192.168.16.254
+kolla_internal_fqdn: api.cloud-in-a-box.osism.xyz
 
 ##########################################################
 # openstack
 
-enable_aodh: "yes"
-enable_barbican: "yes"
-enable_ceilometer: "yes"
+# enable services
 enable_cinder: "yes"
-enable_cinder_backup: "no"
-enable_designate: "yes"
-enable_heat: "yes"
-enable_ironic: "yes"
-enable_kuryr: "yes"
-enable_octavia: "yes"
-enable_panko: "yes"
-enable_zun: "yes"
+enable_cinder_backup: "yes"
 
-enable_etcd: "yes"
 enable_grafana: "yes"
+enable_iscsid: "yes"
 enable_prometheus: "yes"
 enable_redis: "yes"
+enable_tgtd: "yes"
 
 # generic
-openstack_service_workers: 2
 
-# profiling
-enable_osprofiler: "no"
+openstack_service_workers: 2
+openstack_logging_debug: "True"
 
 # elasticsearch
 es_heap_size: "1g"
 
-# grafana
-grafana_enable_unified_alerting: "yes"
+enable_elasticsearch_curator: "yes"
+
+elasticsearch_curator_soft_retention_period_days: 1
+elasticsearch_curator_hard_retention_period_days: 1
 
 # mariadb
 enable_mariabackup: "yes"
-
-# rabbitmq
-rabbitmq_server_additional_erl_args: "+S 2:2 +sbwt none"
 
 # horizon
 horizon_backend_database: "yes"
@@ -59,64 +45,35 @@ horizon_backend_database: "yes"
 # keystone
 keystone_token_provider: "fernet"
 
+# libvirt
+# NOTE: Doesn't work yet with our setup
+libvirt_enable_sasl: "no"
+
+# cinder
+enable_iscsid_for_cinder: "yes"
+
 # neutron
+neutron_plugin_agent: ovn
 
-# NOTE: Uncomment if OVN is to be used as SDN
-# neutron_plugin_agent: ovn
-
-enable_neutron_agent_ha: "yes"
-enable_neutron_dvr: "no"
 enable_neutron_qos: "yes"
+
+# NOTE: Disable the debugging logs for Libvirt as Libvirt writes a lot of logs
+#       that are not of interest.
+nova_libvirt_logging_debug: "no"
 
 # nova
 nova_console: novnc
-nova_virt_type: kvm
 
 # octavia
 octavia_network_type: tenant
-octavia_loadbalancer_topology: "ACTIVE_STANDBY"
-
-# ceilometer
-ceilometer_database_type: gnocchi
-ceilometer_event_type: panko
 
 # designate
-designate_ns_record: openstack.testbed.osism.xyz
-
-# ironic
-ironic_dnsmasq_default_gateway: 192.168.102.1
-ironic_dnsmasq_dhcp_range: "192.168.102.50,192.168.102.60"
-ironic_cleaning_network: "ironic"
-
-enable_ironic_ipxe: "yes"
-# enable_ironic_pxe_uefi: "no"
-# ironic_inspector_pxe_filter: "noop"
+designate_ns_record: openstack.cloud-in-a-box.osism.xyz
 
 ##########################################################
-# storage backend
+# external ceph
 
-# NOTE: This is on purpose. Do not change.
 enable_ceph: "no"
-
-# NOTE: Uncomment the following lines if Ceph is to be deployed.
-
-# cinder_backend_ceph: "yes"
-# glance_backend_ceph: "yes"
-# gnocchi_backend_storage: "ceph"
-# nova_backend_ceph: "yes"
-
-# ceph_gnocchi_pool_name: "metrics"
-# cinder_backup_driver: "ceph"
-# glance_backend_file: "no"
-
-# ceph_nova_user: nova
-# ceph_nova_keyring: ceph.client.nova.keyring
-
-# NOTE: public_network from environments/ceph/configuration.yml
-# ceph_public_network: 192.168.16.0/20
-
-# NOTE: Comment the following lines if Ceph is to be deployed.
-enable_cinder_backend_lvm: "yes"
 
 ##########################################################
 # other

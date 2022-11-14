@@ -1,17 +1,23 @@
 #!/usr/bin/env bash
 
-sudo apt-get update
-sudo apt-get install -y python3-virtualenv sshpass
+apt-get update
+apt-get install -y python3-virtualenv sshpass
 
-pushd environments/manager
+pushd /opt/cloud-in-a-box/environments/manager
 
-./run.sh operator -e ansible_ssh_pass=install -e ansible_ssh_user=install
+./run.sh operator \
+  -e ansible_ssh_pass=password \
+  -e ansible_ssh_user=ubuntu \
+  -e ansible_become_password=password
+
+export INSTALL_ANSIBLE_ROLES=false
 ./run.sh network
-sudo netplan apply
+ip link add link eno1 name vlan100 type vlan id 100
+netplan apply
 ./run.sh bootstrap
 ./run.sh configuration
-./run.sh netbox
 ./run.sh manager
-./run.sh reboot
 
 popd
+
+osism apply bootstrap

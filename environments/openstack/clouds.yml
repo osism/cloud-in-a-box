@@ -4,7 +4,7 @@ clouds:
     auth:
       username: admin
       project_name: admin
-      auth_url: http://api.testbed.osism.xyz:5000/v3
+      auth_url: http://api.cloud-in-a-box.osism.xyz:5000/v3
       project_domain_name: default
       user_domain_name: default
     identity_api_version: 3
@@ -12,7 +12,7 @@ clouds:
     auth:
       username: test
       project_name: test
-      auth_url: http://api.testbed.osism.xyz:5000/v3
+      auth_url: http://api.cloud-in-a-box.osism.xyz:5000/v3
       project_domain_name: default
       user_domain_name: default
     identity_api_version: 3

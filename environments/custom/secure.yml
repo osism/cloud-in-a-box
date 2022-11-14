@@ -1,8 +1,0 @@
----
-clouds:
-  admin:
-    auth:
-      password: password
-  test:
-    auth:
-      password: test

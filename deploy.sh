@@ -1,23 +1,17 @@
 #!/usr/bin/env bash
 
-osism apply bootstrap
-osism apply homer
-
-# NOTE: comment the following lines if Ceph is used
-sudo pvcreate /dev/sdb
-sudo vgcreate cinder-volumes /dev/sdb
-osism apply iscsi
+wipefs -a /dev/sdb
+pvcreate /dev/sdb
+vgcreate cinder-volumes /dev/sdb
 
 osism apply common
-osism apply haproxy
-osism apply elasticsearch
-osism apply kibana
+osism apply iscsi
+osism apply loadbalancer
 osism apply openvswitch
+osism apply ovn
 osism apply memcached
 osism apply redis
-osism apply etcd
 osism apply mariadb
-osism apply phpmyadmin
 osism apply rabbitmq
 osism apply keystone
 osism apply horizon
@@ -26,7 +20,5 @@ osism apply glance
 osism apply neutron
 osism apply nova
 osism apply cinder
-osism apply ironic
 
 osism apply openstackclient
-osism apply --environment custom bootstrap-openstack

@@ -3,56 +3,39 @@
 # ansible
 
 ansible_python_interpreter: /usr/bin/python3
-ansible_host: "{{ '192.168.16.0/20' | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}"
+ansible_host: localhost
 
 ##########################################################
 # generic
 
-internal_address: "{{ '192.168.16.0/20' | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}"
-internal_interface: "{{ network_mgmt_interface }}"
+internal_address: "{{ '192.168.16.0/24' | ansible.utils.ipaddr('net') | ansible.utils.ipaddr(node_id) | ansible.utils.ipaddr('address') }}"
+internal_interface: "{{ network_internal_interface }}"
 
 console_interface: "{{ internal_interface }}"
 management_interface: "{{ internal_interface }}"
 
 ##########################################################
-# netbox
-
-netbox_inventory_status: Active
-netbox_inventory_device_role: generic
-
-##########################################################
 # network
 
+network_internal_interface: vlan100
 network_mgmt_interface: eno1
 network_workload_interface: eno2
 
 network_type: netplan
 
-network_mgmt_address: "{{ network_mgmt_network | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}"
-network_mgmt_mtu: 1500
-network_mgmt_network: "192.168.16.0/20"
-network_mgmt_network_subnet_mask: "20"  # NOTE: This should be obtained via ipaddr filter over mgmt_network
-
 network_ethernets:
-  "{{ network_mgmt_interface }}":
-    addresses:
-      - "{{ network_mgmt_network | ipaddr('net') | ipaddr(node_id) | ipaddr('address') }}/{{ network_mgmt_network_subnet_mask }}"
-    gateway4: "{{ network_mgmt_network | ipaddr('net') | ipaddr('1') | ipaddr('address') }}"
-  "{{ network_workload_interface }}": {}
+  alleths:
+    match:
+      name: en*
+    dhcp4: true
+    optional: true
+
+  eno1:
+    dhcp4: true
 
 network_vlans:
   vlan100:
     id: 100
     link: "{{ network_mgmt_interface }}"
     addresses:
-      - "192.168.100.{{ node_id }}/24"
-  vlan101:
-    id: 101
-    link: "{{ network_mgmt_interface }}"
-    addresses:
-      - "192.168.101.{{ node_id }}/24"
-  vlan102:
-    id: 102
-    link: "{{ network_mgmt_interface }}"
-    addresses:
-      - "192.168.102.{{ node_id }}/24"
+      - "192.168.16.{{ node_id }}/24"
