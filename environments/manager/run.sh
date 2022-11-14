@@ -15,8 +15,6 @@ fi
 playbook=$1
 shift
 
-[[ -e playbook-$playbook.yml ]] >/dev/null 2>&1 || { echo >&2 "playbook-$playbook.yml is not a playbook"; exit 1; }
-
 if [[ $INSTALL_ANSIBLE == "true" ]]; then
     if [[ ! -e $VENV_PATH ]]; then
 
@@ -52,8 +50,8 @@ if [[ ! -e id_rsa.operator ]]; then
     ansible-playbook \
         -i localhost, \
         -e @../secrets.yml \
-        playbook-keypair.yml "$@"
-
+        -e "keypair_dest=$(pwd)/id_rsa.operator" \
+        osism.manager.keypair "$@"
 fi
 
 if [[ $playbook == "netbox" || $playbook == "traefik" ]]; then
@@ -71,7 +69,7 @@ if [[ $playbook == "netbox" || $playbook == "traefik" ]]; then
         -e @configuration.yml \
         -e @secrets.yml \
         -u "$ANSIBLE_USER" \
-        playbook-"$playbook".yml "$@"
+        osism.manager."$playbook" "$@"
 
 else
 
@@ -85,7 +83,7 @@ else
         -e @configuration.yml \
         -e @secrets.yml \
         -u "$ANSIBLE_USER" \
-        playbook-"$playbook".yml "$@"
+        osism.manager."$playbook" "$@"
 
 fi
 
