@@ -47,3 +47,10 @@ cleanup_services_extra:
 # kolla
 
 kolla_internal_vip_address: 192.168.16.254
+
+##########################
+# hardening
+
+# NOTE: Disabling hardening in the cloud-in-a-box to significantly reduce
+#       deployment time.
+enable_hardening: false
