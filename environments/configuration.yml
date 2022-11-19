@@ -23,7 +23,7 @@ operator_authorized_keys:
 resolvconf_nameserver:
   - 8.8.8.8
   - 9.9.9.9
-resolvconf_search: cloud-in-a-box.osism.xyz
+resolvconf_search: in-a-box.cloud
 resolvconf_dnssec: false
 
 ##########################
@@ -31,11 +31,12 @@ resolvconf_dnssec: false
 
 hosts_type: template
 hosts_additional_entries:
-  api.cloud-in-a-box.osism.xyz: 192.168.16.254
+  api.in-a-box.cloud: 192.168.16.254
 
 ##########################
 # common
 
+cleanup_cloudinit: false
 cleanup_services_extra:
   - NetworkManager
   - iscsid
@@ -54,3 +55,6 @@ kolla_internal_vip_address: 192.168.16.254
 # NOTE: Disabling hardening in the cloud-in-a-box to significantly reduce
 #       deployment time.
 enable_hardening: false
+
+# NOTE: Disabling auditd in the cloud-in-a-box to save compute power.
+enable_auditd: false

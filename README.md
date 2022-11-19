@@ -10,6 +10,24 @@ accessible systems.**
 * the 1st network device is available as ``eno1``
 * the 2nd network device is available as ``eno2``
 
+## Download
+
+| :zap: When booting from this image, all data on the hard disks will be destroyed without confirmation. |
+|--------------------------------------------------------------------------------------------------------|
+
+* https://minio.services.osism.tech/node-image/ubuntu-autoinstall-4.iso
+
+## Usage
+
+* Copy image to USB stick
+* Boot from USB stick
+* Installation is performed, system shuts down afterwards
+* Remove USB stick and start system
+* Deloyment is performed, system shuts down afterwards
+* System is ready for use, by default DHCP is tried on
+  the 1st network device
+* Login via ``dragon`` and ``password``
+
 ## Notes
 
 If you have found a bug, a feature is missing or you have a question just open a

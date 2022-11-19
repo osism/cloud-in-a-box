@@ -8,25 +8,30 @@ docker_registry: quay.io
 # loadbalancer
 
 kolla_internal_vip_address: 192.168.16.254
-kolla_internal_fqdn: api.cloud-in-a-box.osism.xyz
+
+kolla_internal_fqdn: api.in-a-box.cloud
+
+kolla_enable_tls_external: "yes"
+kolla_enable_tls_internal: "yes"
+
+kolla_copy_ca_into_containers: "yes"
+openstack_cacert: /etc/ssl/certs/ca-certificates.crt
 
 ##########################################################
 # openstack
 
 # enable services
 enable_cinder: "yes"
-enable_cinder_backup: "yes"
+enable_cinder_backup: "no"
 
 enable_grafana: "yes"
 enable_iscsid: "yes"
-enable_prometheus: "yes"
 enable_redis: "yes"
 enable_tgtd: "yes"
 
 # generic
 
 openstack_service_workers: 2
-openstack_logging_debug: "True"
 
 # elasticsearch
 es_heap_size: "1g"
@@ -51,6 +56,7 @@ libvirt_enable_sasl: "no"
 
 # cinder
 enable_iscsid_for_cinder: "yes"
+enable_cinder_backend_lvm: "yes"
 
 # neutron
 neutron_plugin_agent: ovn
@@ -68,7 +74,7 @@ nova_console: novnc
 octavia_network_type: tenant
 
 # designate
-designate_ns_record: openstack.cloud-in-a-box.osism.xyz
+designate_ns_record: cloud.in-a-box.cloud
 
 ##########################################################
 # external ceph

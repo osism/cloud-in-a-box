@@ -1,14 +1,46 @@
 ---
 ##########################
+# cgit
+
+cgit_host: cgit.services.in-a-box.cloud
+cgit_traefik: true
+
+##########################
 # homer
 
-homer_host: "{{ hostvars[inventory_hostname]['ansible_' + hostvars[inventory_hostname]['internal_interface']]['ipv4']['address'] }}"
+homer_host: homer.services.in-a-box.cloud
+homer_traefik: true
+
+homer_url_ara: "https://ara.services.in-a-box.cloud/"
+homer_url_flower: "https://flower.services.in-a-box.cloud/"
+homer_url_grafana: "https://api.in-a-box.cloud:3000"
+homer_url_horizon: "https://api.in-a-box.cloud/"
+homer_url_kibana: "https://api.in-a-box.cloud:5601"
+homer_url_netbox: "https://netbox.services.in-a-box.cloud/"
+homer_url_netdata: "http://manager.systems.in-a-box.cloud:19999"
+homer_url_phpmyadmin: "https://phpmyadmin.services.in-a-box.cloud/"
+homer_url_rabbitmq: "https://api.in-a-box.cloud:15672"
+
+homer_url_ceph: ""
+homer_url_keycloak: ""
+homer_url_patchman: ""
+homer_url_prometheus: ""
+homer_url_vault: ""
 
 ##########################
 # netbox
 
+netbox_host: netbox.services.in-a-box.cloud
 netbox_traefik: true
-netbox_host: "{{ hostvars[inventory_hostname]['ansible_' + internal_interface]['ipv4']['address'] }}"
+netbox_plugins_extra:
+  - netbox_bgp
+  - netbox_dns
+
+##########################
+# phpmyadmin
+
+phpmyadmin_host: phpmyadmin.services.in-a-box.cloud
+phpmyadmin_traefik: true
 
 ##########################
 # traefik
@@ -16,3 +48,11 @@ netbox_host: "{{ hostvars[inventory_hostname]['ansible_' + internal_interface]['
 traefik_enable: true
 traefik_host: "{{ hostvars[inventory_hostname]['ansible_' + internal_interface]['ipv4']['address'] }}"
 traefik_port_http: 1080
+
+##########################
+# wireguard
+
+wireguard_allowed_client_ips: 192.168.16.0/24
+wireguard_allowed_server_ips: 192.168.17.0/24
+wireguard_client_address: 192.168.17.4/24
+wireguard_server_address: 192.168.17.5/24

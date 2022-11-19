@@ -4,24 +4,24 @@
 # NOTE: add all systems to this group, regardless of whether they are
 #       listed in other groups
 [generic]
-cloud-in-a-box.osism.xyz
+manager.systems.in-a-box.cloud
 
 # NOTE: Here the manager services (Netbox, Ansible, ..) run
 [manager]
-cloud-in-a-box.osism.xyz
+manager.systems.in-a-box.cloud
 
 # NOTE: Systems to be used for monitoring (Prometheus, Netdata, ..)
 [monitoring]
-cloud-in-a-box.osism.xyz
+manager.systems.in-a-box.cloud
 
 # NOTE: Services that are necessary for the control of OpenStack (API, scheduler, messaging, ..)
 [control]
-cloud-in-a-box.osism.xyz
+manager.systems.in-a-box.cloud
 
 # NOTE: Systems used for virtualization
 [compute]
-cloud-in-a-box.osism.xyz
+manager.systems.in-a-box.cloud
 
 # NOTE: Systems used for Neutron services
 [network]
-cloud-in-a-box.osism.xyz
+manager.systems.in-a-box.cloud

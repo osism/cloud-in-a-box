@@ -24,14 +24,9 @@ network_workload_interface: eno2
 network_type: netplan
 
 network_ethernets:
-  alleths:
-    match:
-      name: en*
-    dhcp4: true
-    optional: true
-
   eno1:
     dhcp4: true
+  eno2: {}
 
 network_vlans:
   vlan100:

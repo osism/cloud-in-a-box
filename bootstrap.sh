@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
+export INTERACTIVE=false
+
 apt-get update
 apt-get install -y python3-virtualenv sshpass
+
+cp /opt/cloud-in-a-box/environments/kolla/certificates/ca/cloud-in-a-box.crt /usr/local/share/ca-certificates/
+update-ca-certificates
 
 pushd /opt/cloud-in-a-box/environments/manager
 
@@ -12,10 +17,16 @@ pushd /opt/cloud-in-a-box/environments/manager
 
 export INSTALL_ANSIBLE_ROLES=false
 ./run.sh network
-ip link add link eno1 name vlan100 type vlan id 100
 netplan apply
+
 ./run.sh bootstrap
+
+# NOTE: hackish workaround for initial permission denied issues
+chmod o+rw /var/run/docker.sock
+
 ./run.sh configuration
+./run.sh traefik
+./run.sh netbox
 ./run.sh manager
 
 popd
