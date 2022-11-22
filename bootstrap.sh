@@ -8,6 +8,11 @@ apt-get install -y python3-virtualenv sshpass
 cp /opt/cloud-in-a-box/environments/kolla/certificates/ca/cloud-in-a-box.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
+firstip_address=$(hostname --all-ip-addresses | awk '{print $1}')
+first_network_interface=$(ip -br -4 a sh | grep ${firstip_address} | awk '{print $1}')
+
+find /opt/cloud-in-a-box -type f -exec sed -i "s/eno1/${first_network_interface}/g" {} \;
+
 pushd /opt/cloud-in-a-box/environments/manager
 
 ./run.sh operator \
@@ -25,6 +30,9 @@ netplan apply
 chmod o+rw /var/run/docker.sock
 
 ./run.sh configuration
+
+find /opt/configuration -type f -exec sed -i "s/eno1/${first_network_interface}/g" {} \;
+
 ./run.sh traefik
 ./run.sh netbox
 ./run.sh manager

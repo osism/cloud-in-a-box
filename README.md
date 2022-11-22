@@ -5,17 +5,15 @@ accessible systems.**
 
 ## Assumptions
 
-* the 1st blockdevice is available as ``/dev/sda``
-* the 2nd blockdevice is available as ``/dev/sdb``
-* the 1st network device is available as ``eno1``
-* the 2nd network device is available as ``eno2``
+* the 1st blockdevice is available as ``/dev/sda`` or ``/dev/nvme0n1``
 
 ## Download
 
 | :zap: When booting from this image, all data on the hard disks will be destroyed without confirmation. |
 |--------------------------------------------------------------------------------------------------------|
 
-* https://minio.services.osism.tech/node-image/ubuntu-autoinstall-4.iso
+* https://minio.services.osism.tech/node-image/ubuntu-autoinstall-4.iso (with /dev/sda)
+* https://minio.services.osism.tech/node-image/ubuntu-autoinstall-5.iso (with /dev/nvme0n1)
 
 ## Usage
 

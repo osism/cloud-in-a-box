@@ -2,10 +2,6 @@
 
 export INTERACTIVE=false
 
-wipefs -a /dev/sdb
-pvcreate /dev/sdb
-vgcreate cinder-volumes /dev/sdb
-
 osism apply common
 osism apply loadbalancer
 osism apply elasticsearch
