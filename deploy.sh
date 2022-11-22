@@ -42,6 +42,7 @@ osism apply octavia
 
 osism apply grafana
 osism apply homer
+osism apply netdata
 osism apply openstackclient
 osism apply phpmyadmin
 
