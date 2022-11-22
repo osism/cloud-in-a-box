@@ -4,14 +4,13 @@
 
 network_internal_interface: vlan100
 network_mgmt_interface: eno1
-network_workload_interface: eno2
+network_workload_interface: vlan101
 
 network_type: netplan
 
 network_ethernets:
   eno1:
     dhcp4: true
-  eno2: {}
 
 network_vlans:
   vlan100:
@@ -19,3 +18,6 @@ network_vlans:
     link: "{{ network_mgmt_interface }}"
     addresses:
       - "192.168.16.{{ node_id }}/24"
+  vlan101:
+    id: 100
+    link: "{{ network_mgmt_interface }}"
