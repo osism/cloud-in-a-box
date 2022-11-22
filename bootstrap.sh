@@ -40,3 +40,9 @@ find /opt/configuration -type f -exec sed -i "s/eno1/${first_network_interface}/
 popd
 
 osism apply bootstrap
+
+# NOTE: Restart the manager services to update the /etc/hosts file
+docker compose -f /opt/manager/docker-compose.yml restart
+
+# NOTE(berendt): wait for ara-server service
+wait_for_container_healthy 60 manager-ara-server-1
