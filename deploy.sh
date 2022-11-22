@@ -2,6 +2,8 @@
 
 export INTERACTIVE=false
 
+osism apply facts
+
 osism apply common
 osism apply loadbalancer
 osism apply elasticsearch
