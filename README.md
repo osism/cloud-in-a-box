@@ -12,8 +12,8 @@ accessible systems.**
 | :zap: When booting from this image, all data on the hard disks will be destroyed without confirmation. |
 |--------------------------------------------------------------------------------------------------------|
 
-* https://minio.services.osism.tech/node-image/ubuntu-autoinstall-4.iso (with /dev/sda)
-* https://minio.services.osism.tech/node-image/ubuntu-autoinstall-5.iso (with /dev/nvme0n1)
+* https://minio.services.osism.tech/node-image/ubuntu-autoinstall-cloud-in-a-box-1.iso (with /dev/sda)
+* https://minio.services.osism.tech/node-image/ubuntu-autoinstall-cloud-in-a-box-2.iso (with /dev/nvme0n1)
 
 ## Usage
 
