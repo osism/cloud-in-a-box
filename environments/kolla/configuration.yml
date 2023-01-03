@@ -20,48 +20,24 @@ openstack_cacert: /etc/ssl/certs/ca-certificates.crt
 ##########################################################
 # openstack
 
-# enable services
-enable_cinder: "yes"
-enable_cinder_backup: "no"
-
-enable_grafana: "yes"
-enable_iscsid: "yes"
-enable_redis: "yes"
-enable_tgtd: "yes"
-
 # generic
-
 openstack_service_workers: 2
 
 # elasticsearch
 es_heap_size: "1g"
 
-enable_elasticsearch_curator: "yes"
-
 elasticsearch_curator_soft_retention_period_days: 1
 elasticsearch_curator_hard_retention_period_days: 1
-
-# mariadb
-enable_mariabackup: "yes"
-
-# horizon
-horizon_backend_database: "yes"
-
-# keystone
-keystone_token_provider: "fernet"
 
 # libvirt
 # NOTE: Doesn't work yet with our setup
 libvirt_enable_sasl: "no"
 
 # cinder
-enable_iscsid_for_cinder: "yes"
 enable_cinder_backend_lvm: "yes"
 
 # neutron
 neutron_plugin_agent: ovn
-
-enable_neutron_qos: "yes"
 
 # NOTE: Disable the debugging logs for Libvirt as Libvirt writes a lot of logs
 #       that are not of interest.
