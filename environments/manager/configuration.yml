@@ -3,7 +3,7 @@
 # versions
 
 manager_version: latest
-openstack_version: yoga
+openstack_version: zed
 
 ##########################
 # listener
