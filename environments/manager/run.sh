@@ -54,7 +54,7 @@ if [[ ! -e id_rsa.operator ]]; then
         osism.manager.keypair "$@"
 fi
 
-if [[ $playbook == "netbox" || $playbook == "traefik" ]]; then
+if [[ $playbook == "k8s" || $playbook == "netbox" || $playbook == "traefik" ]]; then
 
     ansible-playbook \
         --private-key id_rsa.operator \
