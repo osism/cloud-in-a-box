@@ -48,3 +48,6 @@ osism apply phpmyadmin
 
 osism apply wireguard
 sed -i -e s/WIREGUARD_PUBLIC_IP_ADDRESS/$(hostname --all-ip-addresses | awk '{print $1}')/ /home/dragon/wireguard-client.conf
+
+osism apply --environment openstack bootstrap
+osism manage images --cloud admin --name "Cirros"
