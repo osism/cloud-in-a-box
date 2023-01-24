@@ -1,0 +1,266 @@
+---
+- name: Prepare masquerading on the manager node
+  hosts: manager
+  collections:
+    - ansible.builtin
+
+  tasks:
+    - name: Accpet FORWARD on the management interface (incoming)
+      become: true
+      ansible.builtin.iptables:
+        chain: FORWARD
+        in_interface: "{{ network_internal_interface }}"
+        jump: ACCEPT
+
+    - name: Accept FORWARD on the management interface (outgoing)
+      become: true
+      ansible.builtin.iptables:
+        chain: FORWARD
+        out_interface: "{{ network_internal_interface }}"
+        jump: ACCEPT
+
+    - name: Masquerade traffic on the management interface
+      become: true
+      ansible.builtin.iptables:
+        table: nat
+        chain: POSTROUTING
+        out_interface: "{{ network_internal_interface }}"
+        jump: MASQUERADE
+
+- name: Create SCS flavors
+  hosts: localhost
+  connection: local
+  collections:
+    - openstack.cloud
+
+  tasks:
+    # vCPU:RAM ratio: 4:8
+    - name: "Create SCS-4V:8 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-4V:8"
+        ram: 8192
+        vcpus: 4
+        disk: 0
+        ephemeral: 0
+
+    - name: "Create SCS-4V:8:20 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-4V:8:20"
+        ram: 8192
+        vcpus: 4
+        disk: 20
+        ephemeral: 0
+
+    # vCPU:RAM ratio: 2:8
+    - name: "Create SCS-2V:8 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-2V:8"
+        ram: 8192
+        vcpus: 2
+        disk: 0
+        ephemeral: 0
+
+    - name: "Create SCS-2V:8:20 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-2V:8:20"
+        ram: 8192
+        vcpus: 2
+        disk: 20
+        ephemeral: 0
+
+    # vCPU:RAM ratio: 1:8
+    - name: "Create SCS-1V:8 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-1V:8"
+        ram: 8192
+        vcpus: 1
+        disk: 0
+        ephemeral: 0
+
+    - name: "Create SCS-1V:8:20 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-1V:8:20"
+        ram: 8192
+        vcpus: 1
+        disk: 20
+        ephemeral: 0
+
+    # vCPU:RAM ratio: 2:4
+    - name: "Create SCS-2V:4 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-2V:4"
+        ram: 4096
+        vcpus: 2
+        disk: 0
+        ephemeral: 0
+
+    - name: "Create SCS-2V:4:10 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-2V:4:10"
+        ram: 4096
+        vcpus: 2
+        disk: 10
+        ephemeral: 0
+
+    # vCPU:RAM ratio: 1:4
+    - name: "Create SCS-1V:4 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-1V:4"
+        ram: 4096
+        vcpus: 1
+        disk: 0
+        ephemeral: 0
+
+    - name: "Create SCS-1V:4:10 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-1V:4:10"
+        ram: 4096
+        vcpus: 1
+        disk: 10
+        ephemeral: 0
+
+    # vCPU:RAM ratio: 1:2
+    - name: "Create SCS-1V:2 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-1V:2"
+        ram: 2048
+        vcpus: 1
+        disk: 0
+        ephemeral: 0
+
+    - name: "Create SCS-1V:2:5 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-1V:2:5"
+        ram: 2048
+        vcpus: 1
+        disk: 5
+        ephemeral: 0
+
+    # vCPU:RAM ratio: 1:1
+    - name: "Create SCS-1L:1 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-1L:1"
+        ram: 1024
+        vcpus: 1
+        disk: 0
+        ephemeral: 0
+
+    - name: "Create SCS-1L:1:5 SCS flavor"
+      openstack.cloud.compute_flavor:
+        cloud: admin
+        state: present
+        name: "SCS-1L:1:5"
+        ram: 1024
+        vcpus: 1
+        disk: 5
+        ephemeral: 0
+
+- name: Bootstrap basic OpenStack services
+  hosts: localhost
+  connection: local
+  collections:
+    - ansible.builtin
+    - openstack.cloud
+
+  vars:
+    openstack_version: yoga
+
+  tasks:
+    - name: Create test project
+      openstack.cloud.project:
+        cloud: admin
+        state: present
+        name: test
+        domain_id: default
+
+    - name: Create test user
+      openstack.cloud.identity_user:
+        cloud: admin
+        state: present
+        name: test
+        password: test
+        email: test@testbed.osism.xyz
+        domain: default
+        default_project: test
+      no_log: true
+
+    - name: Add member roles to user test
+      openstack.cloud.role_assignment:
+        cloud: admin
+        state: present
+        user: test
+        role: "{{ item }}"
+        project: test
+      loop:
+        - load-balancer_member
+        - member
+
+    - name: Download amphora image
+      ansible.builtin.get_url:
+        url: "https://minio.services.osism.tech/openstack-octavia-amphora-image/octavia-amphora-haproxy-{{ openstack_version }}.qcow2"
+        dest: /tmp/amphora.img
+        mode: 0644
+
+    - name: Upload amphora image
+      openstack.cloud.image:
+        cloud: octavia
+        state: present
+        name: amphora
+        container_format: bare
+        disk_format: qcow2
+        filename: /tmp/amphora.img
+        min_disk: 2
+        tags:
+          - amphora
+        properties:
+          cpu_arch: x86_64
+          distro: ubuntu
+          hw_rng_model: virtio
+
+    - name: Create public network
+      openstack.cloud.network:
+        cloud: admin
+        state: present
+        name: public
+        external: true
+        provider_network_type: flat
+        provider_physical_network: physnet1
+        mtu: 1300  # NOTE: necessary because Geneve/VxLAN in Geneve/VxLAN
+
+    - name: Create public subnet
+      openstack.cloud.subnet:
+        cloud: admin
+        state: present
+        name: subnet-public
+        network_name: public
+        cidr: 192.168.112.0/20
+        enable_dhcp: false
+        allocation_pool_start: 192.168.112.100
+        allocation_pool_end: 192.168.112.200
+        gateway_ip: 192.168.112.5
