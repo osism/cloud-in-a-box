@@ -53,6 +53,10 @@ find /opt/configuration -type f -exec sed -i "s/eno1/${first_network_interface}/
 
 popd
 
+# NOTE: gather facts to ensure that the addresses of the new VLAN devices
+#       are in the facts cache
+osism apply facts
+
 osism apply bootstrap
 
 # NOTE: Restart the manager services to update the /etc/hosts file
