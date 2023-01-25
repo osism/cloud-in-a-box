@@ -2,8 +2,7 @@
 ##########################
 # versions
 
-manager_version: latest
-openstack_version: yoga
+manager_version: 4.2.0
 
 ##########################
 # listener
