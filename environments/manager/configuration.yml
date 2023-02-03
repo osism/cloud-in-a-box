@@ -36,6 +36,14 @@ ara_server_host: ara.services.in-a-box.cloud
 ara_server_traefik: true
 
 ##########################
+# netbox
+
+enable_netbox: true
+
+netbox_host: "netbox.services.in-a-box.cloud"
+netbox_api_url: "https://{{ netbox_host }}"
+
+##########################
 # configuration
 
 configuration_directory: /opt/configuration
