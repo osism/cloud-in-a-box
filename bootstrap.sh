@@ -48,7 +48,6 @@ chmod o+rw /var/run/docker.sock
 find /opt/configuration -type f -exec sed -i "s/eno1/${first_network_interface}/g" {} \;
 
 ./run.sh traefik
-./run.sh netbox
 ./run.sh manager
 
 popd

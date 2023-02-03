@@ -38,7 +38,7 @@ ara_server_traefik: true
 ##########################
 # netbox
 
-enable_netbox: true
+enable_netbox: false
 
 netbox_host: "netbox.services.in-a-box.cloud"
 netbox_api_url: "https://{{ netbox_host }}"
