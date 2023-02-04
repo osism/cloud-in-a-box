@@ -9,14 +9,14 @@
       become: true
       ansible.builtin.iptables:
         chain: FORWARD
-        in_interface: "{{ network_internal_interface }}"
+        in_interface: "{{ network_mgmt_interface }}"
         jump: ACCEPT
 
     - name: Accept FORWARD on the management interface (outgoing)
       become: true
       ansible.builtin.iptables:
         chain: FORWARD
-        out_interface: "{{ network_internal_interface }}"
+        out_interface: "{{ network_mgmt_interface }}"
         jump: ACCEPT
 
     - name: Masquerade traffic on the management interface
@@ -24,7 +24,7 @@
       ansible.builtin.iptables:
         table: nat
         chain: POSTROUTING
-        out_interface: "{{ network_internal_interface }}"
+        out_interface: "{{ network_mgmt_interface }}"
         jump: MASQUERADE
 
 - name: Create SCS flavors

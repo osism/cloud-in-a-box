@@ -4,7 +4,7 @@
 
 network_internal_interface: vlan100
 network_mgmt_interface: eno1
-network_workload_interface: vlan101
+network_workload_interface: vxlan0
 
 network_type: netplan
 
@@ -18,6 +18,9 @@ network_vlans:
     link: "{{ network_mgmt_interface }}"
     addresses:
       - "192.168.16.{{ node_id }}/24"
-  vlan101:
-    id: 101
-    link: "{{ network_mgmt_interface }}"
+
+network_dispatcher_scripts:
+  - src: /opt/configuration/network/vxlan.sh
+    dest: routable.d/vxlan.sh
+  - src: /opt/configuration/network/iptables.sh
+    dest: routable.d/iptables.sh
