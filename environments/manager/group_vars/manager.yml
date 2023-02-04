@@ -36,3 +36,7 @@ network_vlans:
   vlan101:
     id: 101
     link: "{{ network_mgmt_interface }}"
+
+network_dispatcher_scripts:
+  - src: /opt/cloud-in-a-box/environments/manager/files/osism.sh
+    dest: routable.d/osism.sh

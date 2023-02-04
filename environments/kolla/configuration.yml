@@ -59,5 +59,6 @@ enable_ceph: "no"
 
 ##########################################################
 # other
+#
 om_enable_rabbitmq_high_availability: false
 external_ceph_always_copy_cinder_keyring: "no"

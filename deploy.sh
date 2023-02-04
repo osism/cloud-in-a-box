@@ -49,6 +49,10 @@ osism apply phpmyadmin
 osism apply wireguard
 sed -i -e s/WIREGUARD_PUBLIC_IP_ADDRESS/$(hostname --all-ip-addresses | awk '{print $1}')/ /home/dragon/wireguard-client.conf
 
+sudo ip addr add dev br-ex 192.168.112.10/24
+sudo ip link set up dev br-ex
+osism apply --environment custom workarounds
+
 osism apply --environment openstack bootstrap
 
 # osism manage images is only available since 4.3.0. To enable the

@@ -9,14 +9,14 @@
       become: true
       ansible.builtin.iptables:
         chain: FORWARD
-        in_interface: "{{ network_internal_interface }}"
+        in_interface: "{{ network_mgmt_interface }}"
         jump: ACCEPT
 
     - name: Accept FORWARD on the management interface (outgoing)
       become: true
       ansible.builtin.iptables:
         chain: FORWARD
-        out_interface: "{{ network_internal_interface }}"
+        out_interface: "{{ network_mgmt_interface }}"
         jump: ACCEPT
 
     - name: Masquerade traffic on the management interface
@@ -24,7 +24,7 @@
       ansible.builtin.iptables:
         table: nat
         chain: POSTROUTING
-        out_interface: "{{ network_internal_interface }}"
+        out_interface: "{{ network_mgmt_interface }}"
         jump: MASQUERADE
 
 - name: Create SCS flavors
@@ -229,7 +229,6 @@
         external: true
         provider_network_type: flat
         provider_physical_network: physnet1
-        mtu: 1300  # NOTE: necessary because Geneve/VxLAN in Geneve/VxLAN
 
     - name: Create public subnet
       openstack.cloud.subnet:
@@ -237,8 +236,11 @@
         state: present
         name: subnet-public
         network_name: public
-        cidr: 192.168.112.0/20
+        cidr: 192.168.112.0/24
         enable_dhcp: false
         allocation_pool_start: 192.168.112.100
         allocation_pool_end: 192.168.112.200
-        gateway_ip: 192.168.112.5
+        gateway_ip: 192.168.112.10
+        dns_nameservers:
+          - 8.8.8.8
+          - 9.9.9.9

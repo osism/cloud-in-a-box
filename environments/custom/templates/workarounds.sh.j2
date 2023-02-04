@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+wait_for_container_healthy() {
+    local max_attempts="$1"
+    local name="$2"
+    local attempt_num=1
+
+    until [[ "$(/usr/bin/docker inspect -f '{{.State.Health.Status}}' $name)" == "healthy" ]]; do
+        if (( attempt_num++ == max_attempts )); then
+            return 1
+        else
+            sleep 5
+        fi
+    done
+}
+
+# ensure that network configuration is applied
+
+netplan apply
+
+# ensure that all manager services are up and running
+
+systemctl start docker-compose@traefik
+systemctl start docker-compose@phpmyadmin
+systemctl start docker-compose@openstackclient
+systemctl start docker-compose@homer
+systemctl start docker-compose@netbox
+systemctl start docker-compose@manager
+
+# wait for openvswitch (this service will create br-ex)
+
+wait_for_container_healthy 60 openvswitch_vswitchd
+
+# add ip address to br-ex
+
+ip addr add dev br-ex 192.168.112.10/24
+ip link set up dev br-ex
