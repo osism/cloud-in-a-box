@@ -52,7 +52,7 @@ traefik_port_http: 1080
 ##########################
 # wireguard
 
-wireguard_allowed_client_ips: 192.168.16.0/24
+wireguard_allowed_client_ips: 192.168.16.0/24, 192.168.112.0/24
 wireguard_allowed_server_ips: 192.168.17.0/24
 wireguard_client_address: 192.168.17.4/24
 wireguard_server_address: 192.168.17.5/24
