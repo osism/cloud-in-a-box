@@ -1,0 +1,9 @@
+---
+- project:
+    default-branch: main
+    check:
+      jobs:
+        - ansible-lint
+    gate:
+      jobs:
+        - ansible-lint

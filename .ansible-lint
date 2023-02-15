@@ -1,0 +1,12 @@
+---
+use_default_rules: true
+rulesdir:
+  - ./.ansible-lint-rules/
+skip_list:
+  - fqcn-builtins
+  - galaxy[no-changelog]
+  - ignore-errors
+  - schema
+  - yaml
+warn_list:
+  - experimental  # all rules tagged as experimental
