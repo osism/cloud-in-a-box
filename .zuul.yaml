@@ -1,9 +1,12 @@
 ---
 - project:
+    merge-mode: squash-merge
     default-branch: main
     check:
       jobs:
         - ansible-lint
+        - yamllint
     gate:
       jobs:
         - ansible-lint
+        - yamllint
