@@ -2,7 +2,7 @@
 ##########################################################
 # docker
 
-docker_registry: quay.io
+docker_registry: registry.airgap.services.osism.tech
 
 ##########################################################
 # loadbalancer

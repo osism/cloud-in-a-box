@@ -5,13 +5,13 @@ adminer_tag: "4.8.1"
 adminer_image: "{{ docker_registry }}/library/adminer:{{ adminer_tag }}"
 
 ara_server_tag: "1.5.8"
-ara_server_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/ara-server:{{ ara_server_tag }}"
+ara_server_image: "{{ docker_registry_ansible|default('registry.airgap.services.osism.tech') }}/osism/ara-server:{{ ara_server_tag }}"
 
 mariadb_tag: "10.9.3"
 mariadb_image: "{{ docker_registry }}/library/mariadb:{{ mariadb_tag }}"
 
 netbox_tag: "v3.4.2"
-netbox_image: "{{ docker_registry_netbox|default('quay.io') }}/osism/netbox:{{ netbox_tag }}"
+netbox_image: "{{ docker_registry_netbox|default('registry.airgap.services.osism.tech') }}/osism/netbox:{{ netbox_tag }}"
 
 nginx_tag: "1.23.2-alpine"
 nginx_image: "{{ docker_registry }}/library/nginx:{{ nginx_tag }}"
@@ -29,7 +29,7 @@ registry_tag: "2.8"
 registry_image: "{{ docker_registry }}/library/registry:{{ registry_tag }}"
 
 osism_ansible_tag: "{{ manager_version|default('latest') }}"
-osism_ansible_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/osism-ansible:{{ osism_ansible_tag }}"
+osism_ansible_image: "{{ docker_registry_ansible|default('registry.airgap.services.osism.tech') }}/osism/osism-ansible:{{ osism_ansible_tag }}"
 
 inventory_reconciler_tag: "4.2.0"
 
@@ -53,8 +53,8 @@ traefik_image: "{{ docker_registry }}/library/traefik:{{ traefik_tag }}"
 
 ceph_ansible_tag: "{{ ceph_version|default(manager_version) }}"
 
-ceph_ansible_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/ceph-ansible:{{ ceph_ansible_tag }}"
+ceph_ansible_image: "{{ docker_registry_ansible|default('registry.airgap.services.osism.tech') }}/osism/ceph-ansible:{{ ceph_ansible_tag }}"
 
 kolla_ansible_tag: "{{ openstack_version|default(manager_version) }}"
 
-kolla_ansible_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/kolla-ansible:{{ kolla_ansible_tag }}"
+kolla_ansible_image: "{{ docker_registry_ansible|default('registry.airgap.services.osism.tech') }}/osism/kolla-ansible:{{ kolla_ansible_tag }}"

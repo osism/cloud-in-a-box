@@ -7,9 +7,9 @@ docker_version: "5:20.10.21"
 ##########################
 # docker registries
 
-docker_registry: index.docker.io
-docker_registry_ansible: quay.io
-docker_registry_service: index.docker.io
+docker_registry: registry.airgap.services.osism.tech
+docker_registry_ansible: registry.airgap.services.osism.tech
+docker_registry_service: registry.airgap.services.osism.tech
 
 ##########################
 # operator
