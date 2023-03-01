@@ -33,7 +33,8 @@
       register: certificate
 
     - name: Write manager certificate file
-      copy:
+      ansible.builtin.copy:
         dest: cloud-in-a-box-manager.pem
         content: "{{ certificate.certificate }}"
+        mode: 0640
       run_once: true
