@@ -4,9 +4,13 @@ Cloud in a Box is a minimalistic installation of OSISM with only services which 
 For more information you can consult the [Testbed](https://docs.osism.tech/testbed/index.html) documentation.
 If you want to have a full installation please have a look at the [OSISM](https://docs.osism.tech/) documentation.
 
+:::warning
+
 > **Warning:**
 > The secrets are stored in plain text and are not secure. Do not use for publicly
 > accessible systems.
+
+:::
 
 ## Requirements
 
@@ -19,10 +23,14 @@ If you want to have a full installation please have a look at the [OSISM](https:
 
 ## Download the Cloud in a Box image
 
+:::warning
+
 > **Warning:** ⚡ When booting from this image, all data on the hard disks will be destroyed without confirmation.
 
 * <https://minio.services.osism.tech/node-image/ubuntu-autoinstall-cloud-in-a-box-1.iso> (with /dev/sda)
 * <https://minio.services.osism.tech/node-image/ubuntu-autoinstall-cloud-in-a-box-2.iso> (with /dev/nvme0n1)
+
+:::
 
 ## Getting started
 
@@ -51,8 +59,13 @@ Copy the `/home/dragon/wireguard-client.conf` file to your device. This is neces
 Rename the wireguard config file to something like `ciab.conf`.
 If you want to connect to the cloud-in-a-box system from multiple clients, change the client IP in the config file to be
 different on each client.
+
+:::note
+
 > **Note:**
 > Be aware that the name does not contain any special characters!
+
+:::
 
 ```bash
 scp dragon@IP_FROM_YOUR_SERVER:/home/dragon/wireguard-client.conf /home/ubuntu/ciab.conf
@@ -87,8 +100,12 @@ If you want to access the services directly please choose the URL from the follo
 | phpMyAdmin        | <https://phpmyadmin.services.in-a-box.cloud>  | root      | password                                 |
 | RabbitMQ          | <https://api.in-a-box.cloud:15672>            | openstack | BO6yGAAq9eqA7IKqeBdtAEO7aJuNu4zfbhtnRo8Y |
 
+:::note
+
 > **Note:**
 > Watch out for http and https. It is necessary to use the right one.
+
+:::
 
 ## Configure Openstack-Client
 
