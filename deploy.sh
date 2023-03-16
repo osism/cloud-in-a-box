@@ -47,6 +47,13 @@ osism apply openstackclient
 osism apply phpmyadmin
 
 osism apply wireguard
+
+# On OSISM < 5.0.0 this file is not yet present.
+if [[ -e /home/dragon/wg0-dragon.conf ]]; then
+    mv /home/dragon/wg0-dragon.conf /home/dragon/wireguard-client.conf
+fi
+
+sed -i -e "s/CHANGEME - dragon private key/GEQ5eWshKW+4ZhXMcWkAAbqzj7QA9G64oBFB3CbrR0w=/" /home/dragon/wireguard-client.conf
 sed -i -e s/WIREGUARD_PUBLIC_IP_ADDRESS/$(hostname --all-ip-addresses | awk '{print $1}')/ /home/dragon/wireguard-client.conf
 
 sudo ip addr add dev br-ex 192.168.112.10/24
