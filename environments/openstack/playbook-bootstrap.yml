@@ -189,7 +189,7 @@
     - openstack.cloud
 
   vars:
-    openstack_version: yoga
+    openstack_version: zed
 
   tasks:
     - name: Create test project
