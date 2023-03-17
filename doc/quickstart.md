@@ -119,7 +119,7 @@ openstack server list
 
 ## Troubleshooting during installation
 
-![Broken disk setup](images/broken_disk_setup.png)
+![Broken disk setup](./images/broken_disk_setup.png)
 This error means that your disk setup is broken. Please use `cfdisk` and delete all partitions on the system on which you want
 to install the Cloud in a Box image.
 With `lsblk` you can verify if the partitions are empty.
