@@ -28,7 +28,12 @@ osism apply memcached
 osism apply redis
 osism apply mariadb
 osism apply rabbitmq
-osism apply iscsi
+#osism apply iscsi
+
+osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
+osism apply copy-ceph-keys
+osism apply cephclient
+osism apply ceph-bootstrap-dashboard
 
 osism apply keystone
 osism apply horizon

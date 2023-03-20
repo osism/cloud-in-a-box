@@ -1,0 +1,140 @@
+---
+##########################
+# generic
+
+containerized_deployment: true
+
+osd_objectstore: bluestore
+osd_scenario: lvm
+
+generate_fsid: false
+fsid: c2120a4a-669c-4769-a32c-b7e9d7b848f4
+
+##########################
+# osd
+
+dmcrypt: false
+# NOTE: It is common to place more than 1 OSD on flash devices. To simulate
+#       upgrades etc. with this approach this is also used here.
+osds_per_device: 1
+
+##########################
+# network
+
+public_network: 192.168.16.0/20
+cluster_network: 192.168.16.0/20
+
+##########################
+# openstack
+
+# NOTE: After the initial deployment of the Ceph Clusters, the following parameter can be
+#       set to false. It must only be set to true again when new pools or keys are added.
+openstack_config: true
+
+openstack_cinder_backup_pool:
+  name: backups
+  pg_num: 3
+  rule_name: ""
+  application: "rbd"
+openstack_cinder_pool:
+  name: volumes
+  pg_num: 3
+  rule_name: ""
+  application: "rbd"
+openstack_glance_pool:
+  name: images
+  pg_num: 3
+  rule_name: ""
+  application: "rbd"
+openstack_gnocchi_pool:
+  name: metrics
+  pg_num: 3
+  rule_name: ""
+  application: "rbd"
+openstack_nova_pool:
+  name: vms
+  pg_num: 3
+  rule_name: ""
+  application: "rbd"
+
+openstack_pools:
+  - "{{ openstack_cinder_backup_pool }}"
+  - "{{ openstack_cinder_pool }}"
+  - "{{ openstack_glance_pool }}"
+  - "{{ openstack_gnocchi_pool }}"
+  - "{{ openstack_nova_pool }}"
+
+openstack_keys:
+  - name: client.cinder-backup
+    caps:
+      mon: "allow r"
+      osd: "allow class-read object_prefix rbd_children, allow rwx pool={{ openstack_cinder_backup_pool.name }}"
+    mode: "0600"
+  - name: client.cinder
+    caps:
+      mon: "allow r"
+      osd: "allow class-read object_prefix rbd_children, allow rwx pool={{ openstack_cinder_pool.name }}, allow rwx pool={{ openstack_nova_pool.name }}, allow rx pool={{ openstack_glance_pool.name }}"
+    mode: "0600"
+  - name: client.glance
+    caps:
+      mon: "allow r"
+      osd: "allow class-read object_prefix rbd_children, allow rwx pool={{ openstack_glance_pool.name }}"
+    mode: "0600"
+  - name: client.gnocchi
+    caps:
+      mon: "allow r"
+      osd: "allow class-read object_prefix rbd_children, allow rwx pool={{ openstack_gnocchi_pool.name }}"
+    mode: "0600"
+  - name: client.nova
+    caps:
+      mon: "allow r"
+      osd: "allow class-read object_prefix rbd_children, allow rwx pool={{ openstack_glance_pool.name }}, allow rwx pool={{ openstack_nova_pool.name }}, allow rwx pool={{ openstack_cinder_pool.name }}, allow rwx pool={{ openstack_cinder_backup_pool.name }}"
+    mode: "0600"
+
+##########################
+# manager
+
+ceph_mgr_modules:
+  - balancer
+  - dashboard
+  - prometheus
+  - status
+
+##########################
+# custom
+
+ceph_conf_overrides:
+  global:
+    mon host: manager.systems.in-a-box.cloud
+    osd_pool_default_pg_num: 3
+    osd pool default size: 1
+    osd pool default min size: 0
+
+  osd:
+    crush_rules:
+      - crush_rule_ciab:
+          name: "replicated_rule"
+          root: default
+          type: osd
+          default: false
+
+  mon:
+    mon allow pool delete: true
+
+  "client.rgw.{{ hostvars[inventory_hostname]['ansible_hostname'] }}.rgw0":
+    "rgw content length compat": "true"
+    "rgw enable apis": "swift, s3, admin"
+    "rgw keystone accepted roles": "member, admin"
+    "rgw keystone accepted admin roles": "admin"
+    "rgw keystone admin domain": "default"
+    "rgw keystone admin password": "hF6NWPG4rWTpK00oANEcRAiKbwbEcKFHHYYskar2"
+    "rgw keystone admin project": "service"
+    "rgw keystone admin tenant": "service"
+    "rgw keystone admin user": "swift"
+    "rgw keystone api version": "3"
+    "rgw keystone revocation interval": "900"
+    "rgw keystone url": "https://api.in-a-box.cloud"
+    "rgw keystone implicit tenants": "true"
+    "rgw s3 auth use keystone": "true"
+    "rgw swift account in url": "true"
+    "rgw swift versioning enabled": "true"

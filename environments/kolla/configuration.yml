@@ -33,9 +33,6 @@ elasticsearch_curator_hard_retention_period_days: 1
 # NOTE: Doesn't work yet with our setup
 libvirt_enable_sasl: "no"
 
-# cinder
-enable_cinder_backend_lvm: "yes"
-
 # neutron
 neutron_plugin_agent: ovn
 neutron_ovn_availability_zones:
@@ -58,6 +55,19 @@ designate_ns_record: cloud.in-a-box.cloud
 # external ceph
 
 enable_ceph: "no"
+
+cinder_backend_ceph: "yes"
+glance_backend_ceph: "yes"
+nova_backend_ceph: "yes"
+
+cinder_backup_driver: "ceph"
+glance_backend_file: "no"
+
+ceph_nova_user: nova
+ceph_nova_keyring: ceph.client.nova.keyring
+
+# NOTE: public_network from environments/ceph/configuration.yml
+ceph_public_network: 192.168.16.0/20
 
 ##########################################################
 # other
