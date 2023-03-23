@@ -13,3 +13,9 @@ lvm_volumes:
     data_vg: osd-vg
   - data: osd-3
     data_vg: osd-vg
+crush_rules:
+  - crush_rule_ciab:
+    name: "replicated_rule_ciab"
+    root: default
+    type: osd
+    default: true

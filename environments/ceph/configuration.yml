@@ -33,27 +33,27 @@ openstack_config: true
 
 openstack_cinder_backup_pool:
   name: backups
-  pg_num: 3
+  pg_num: 8
   rule_name: ""
   application: "rbd"
 openstack_cinder_pool:
   name: volumes
-  pg_num: 3
+  pg_num: 8
   rule_name: ""
   application: "rbd"
 openstack_glance_pool:
   name: images
-  pg_num: 3
+  pg_num: 8
   rule_name: ""
   application: "rbd"
 openstack_gnocchi_pool:
   name: metrics
-  pg_num: 3
+  pg_num: 8
   rule_name: ""
   application: "rbd"
 openstack_nova_pool:
   name: vms
-  pg_num: 3
+  pg_num: 8
   rule_name: ""
   application: "rbd"
 
@@ -105,18 +105,11 @@ ceph_mgr_modules:
 
 ceph_conf_overrides:
   global:
-    mon host: manager.systems.in-a-box.cloud
-    osd_pool_default_pg_num: 3
-    osd pool default size: 1
-    osd pool default min size: 0
-
-  osd:
-    crush_rules:
-      - crush_rule_ciab:
-          name: "replicated_rule"
-          root: default
-          type: osd
-          default: false
+    mon host: 192.168.16.10
+    osd_pool_default_pg_num: 8
+    osd pool default size: 3
+    osd pool default min size: 2
+    auth allow insecure global id reclaim: false
 
   mon:
     mon allow pool delete: true
