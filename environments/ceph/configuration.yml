@@ -17,6 +17,7 @@ dmcrypt: false
 # NOTE: It is common to place more than 1 OSD on flash devices. To simulate
 #       upgrades etc. with this approach this is also used here.
 osds_per_device: 1
+crush_rule_config: true
 
 ##########################
 # network
@@ -34,27 +35,27 @@ openstack_config: true
 openstack_cinder_backup_pool:
   name: backups
   pg_num: 8
-  rule_name: ""
+  rule_name: "replicated_rule_ciab"
   application: "rbd"
 openstack_cinder_pool:
   name: volumes
   pg_num: 8
-  rule_name: ""
+  rule_name: "replicated_rule_ciab"
   application: "rbd"
 openstack_glance_pool:
   name: images
   pg_num: 8
-  rule_name: ""
+  rule_name: "replicated_rule_ciab"
   application: "rbd"
 openstack_gnocchi_pool:
   name: metrics
   pg_num: 8
-  rule_name: ""
+  rule_name: "replicated_rule_ciab"
   application: "rbd"
 openstack_nova_pool:
   name: vms
   pg_num: 8
-  rule_name: ""
+  rule_name: "replicated_rule_ciab"
   application: "rbd"
 
 openstack_pools:
@@ -113,6 +114,7 @@ ceph_conf_overrides:
 
   mon:
     mon allow pool delete: true
+    mon max pg per osd: 400
 
   "client.rgw.{{ hostvars[inventory_hostname]['ansible_hostname'] }}.rgw0":
     "rgw content length compat": "true"
