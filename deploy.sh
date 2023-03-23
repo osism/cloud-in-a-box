@@ -30,6 +30,7 @@ osism apply mariadb
 osism apply rabbitmq
 #osism apply iscsi
 
+osism reconciler sync
 osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
 osism apply copy-ceph-keys
 osism apply cephclient
