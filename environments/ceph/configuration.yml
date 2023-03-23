@@ -35,26 +35,31 @@ openstack_config: true
 openstack_cinder_backup_pool:
   name: backups
   pg_num: 8
+  pgp_num: 8
   rule_name: "replicated_rule_ciab"
   application: "rbd"
 openstack_cinder_pool:
   name: volumes
   pg_num: 8
+  pgp_num: 8
   rule_name: "replicated_rule_ciab"
   application: "rbd"
 openstack_glance_pool:
   name: images
   pg_num: 8
+  pgp_num: 8
   rule_name: "replicated_rule_ciab"
   application: "rbd"
 openstack_gnocchi_pool:
   name: metrics
   pg_num: 8
+  pgp_num: 8
   rule_name: "replicated_rule_ciab"
   application: "rbd"
 openstack_nova_pool:
   name: vms
   pg_num: 8
+  pgp_num: 8
   rule_name: "replicated_rule_ciab"
   application: "rbd"
 
@@ -107,7 +112,7 @@ ceph_mgr_modules:
 ceph_conf_overrides:
   global:
     mon host: 192.168.16.10
-    osd_pool_default_pg_num: 8
+    osd pool default pg num: 8
     osd pool default size: 3
     osd pool default min size: 2
     auth allow insecure global id reclaim: false
@@ -133,3 +138,49 @@ ceph_conf_overrides:
     "rgw s3 auth use keystone": "true"
     "rgw swift account in url": "true"
     "rgw swift versioning enabled": "true"
+
+cephfs_data_pool:
+  name: "cephfs_data"
+  pg_num: 8
+  pgp_num: 8
+  rule_name: "replicated_rule_ciab"
+cephfs_metadata_pool:
+  name: "cephfs_metadata"
+  pg_num: 8
+  pgp_num: 8
+  rule_name: "replicated_rule_ciab"
+cephfs_pools:
+  - "{{ cephfs_data_pool }}"
+  - "{{ cephfs_metadata_pool }}"
+
+rgw_zone: default
+rgw_create_pools:
+  "{{ rgw_zone }}.rgw.buckets.data":
+    pg_num: 8
+    pgp_num: 8
+    type: replicated
+    rule_name: "replicated_rule_ciab"
+  "{{ rgw_zone }}.rgw.buckets.index":
+    pg_num: 8
+    pgp_num: 8
+    size: 3
+    type: replicated
+    rule_name: "replicated_rule_ciab"
+  "{{ rgw_zone }}.rgw.meta":
+    pg_num: 8
+    pgp_num: 8
+    size: 3
+    type: replicated
+    rule_name: "replicated_rule_ciab"
+  "{{ rgw_zone }}.rgw.log":
+    pg_num: 8
+    pgp_num: 8
+    size: 3
+    type: replicated
+    rule_name: "replicated_rule_ciab"
+  "{{ rgw_zone }}.rgw.control":
+    pg_num: 8
+    pgp_num: 8
+    size: 3
+    type: replicated
+    rule_name: "replicated_rule_ciab"

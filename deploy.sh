@@ -34,6 +34,7 @@ osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
 osism apply copy-ceph-keys
 osism apply cephclient
 osism apply ceph-bootstrap-dashboard
+ceph osd pool set device_health_metrics crush_rule replicated_rule_ciab
 
 osism apply keystone
 osism apply horizon
