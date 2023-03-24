@@ -13,6 +13,13 @@ lvm_volumes:
     data_vg: osd-vg
   - data: osd-3
     data_vg: osd-vg
+  - data: osd-4
+    data_vg: osd-vg
+  - data: osd-5
+    data_vg: osd-vg
+  - data: osd-6
+    data_vg: osd-vg
+
 crush_rules:
   - crush_rule_ciab:
     name: "replicated_rule_ciab"
