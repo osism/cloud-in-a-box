@@ -25,50 +25,7 @@ crush_rule_config: true
 public_network: 192.168.16.0/20
 cluster_network: 192.168.16.0/20
 
-##########################
-# openstack
-
-# NOTE: After the initial deployment of the Ceph Clusters, the following parameter can be
-#       set to false. It must only be set to true again when new pools or keys are added.
-openstack_config: true
-
-openstack_cinder_backup_pool:
-  name: backups
-  pg_num: 8
-  pgp_num: 8
-  rule_name: "replicated_rule_ciab"
-  application: "rbd"
-openstack_cinder_pool:
-  name: volumes
-  pg_num: 8
-  pgp_num: 8
-  rule_name: "replicated_rule_ciab"
-  application: "rbd"
-openstack_glance_pool:
-  name: images
-  pg_num: 8
-  pgp_num: 8
-  rule_name: "replicated_rule_ciab"
-  application: "rbd"
-openstack_gnocchi_pool:
-  name: metrics
-  pg_num: 8
-  pgp_num: 8
-  rule_name: "replicated_rule_ciab"
-  application: "rbd"
-openstack_nova_pool:
-  name: vms
-  pg_num: 8
-  pgp_num: 8
-  rule_name: "replicated_rule_ciab"
-  application: "rbd"
-
-openstack_pools:
-  - "{{ openstack_cinder_backup_pool }}"
-  - "{{ openstack_cinder_pool }}"
-  - "{{ openstack_glance_pool }}"
-  - "{{ openstack_gnocchi_pool }}"
-  - "{{ openstack_nova_pool }}"
+# OpenStack pool config moved to inventory/group_vars/ceph.yml
 
 openstack_keys:
   - name: client.cinder-backup
@@ -141,48 +98,4 @@ ceph_conf_overrides:
     "rgw swift account in url": "true"
     "rgw swift versioning enabled": "true"
 
-cephfs_data_pool:
-  name: "cephfs_data"
-  pg_num: 8
-  pgp_num: 8
-  rule_name: "replicated_rule_ciab"
-cephfs_metadata_pool:
-  name: "cephfs_metadata"
-  pg_num: 8
-  pgp_num: 8
-  rule_name: "replicated_rule_ciab"
-cephfs_pools:
-  - "{{ cephfs_data_pool }}"
-  - "{{ cephfs_metadata_pool }}"
-
-rgw_zone: default
-rgw_create_pools:
-  "{{ rgw_zone }}.rgw.buckets.data":
-    pg_num: 8
-    pgp_num: 8
-    type: replicated
-    rule_name: "replicated_rule_ciab"
-  "{{ rgw_zone }}.rgw.buckets.index":
-    pg_num: 8
-    pgp_num: 8
-    size: 3
-    type: replicated
-    rule_name: "replicated_rule_ciab"
-  "{{ rgw_zone }}.rgw.meta":
-    pg_num: 8
-    pgp_num: 8
-    size: 3
-    type: replicated
-    rule_name: "replicated_rule_ciab"
-  "{{ rgw_zone }}.rgw.log":
-    pg_num: 8
-    pgp_num: 8
-    size: 3
-    type: replicated
-    rule_name: "replicated_rule_ciab"
-  "{{ rgw_zone }}.rgw.control":
-    pg_num: 8
-    pgp_num: 8
-    size: 3
-    type: replicated
-    rule_name: "replicated_rule_ciab"
+# CephFS and RGW pool config moved to inventory/group_vars/ceph.yml
