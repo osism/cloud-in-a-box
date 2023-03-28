@@ -32,8 +32,8 @@ osism apply rabbitmq
 
 # Deploy ceph
 # Create LVM if not done via curtin
-if [ -e /dev/disk/by-dname/ceph-osds ]; then
-    vgcreate osd-vg /dev/disk/by-dname/ceph-osds
+if [ -e /dev/nvme0n1p5 ]; then
+    vgcreate osd-vg /dev/nvme0n1p5
     lvcreate -n osd-1 -l16%VG osd-vg
     lvcreate -n osd-2 -l16%VG osd-vg
     lvcreate -n osd-3 -l16%VG osd-vg
