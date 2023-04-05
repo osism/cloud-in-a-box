@@ -10,3 +10,7 @@
       jobs:
         - ansible-lint
         - yamllint
+    periodic-daily:
+      jobs:
+        - ansible-lint
+        - yamllint
