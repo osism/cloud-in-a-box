@@ -48,11 +48,7 @@ osism apply phpmyadmin
 
 osism apply wireguard
 
-# On OSISM < 5.0.0 this file is not yet present.
-if [[ -e /home/dragon/wg0-dragon.conf ]]; then
-    mv /home/dragon/wg0-dragon.conf /home/dragon/wireguard-client.conf
-fi
-
+mv /home/dragon/wg0-dragon.conf /home/dragon/wireguard-client.conf
 sed -i -e "s/CHANGEME - dragon private key/GEQ5eWshKW+4ZhXMcWkAAbqzj7QA9G64oBFB3CbrR0w=/" /home/dragon/wireguard-client.conf
 sed -i -e s/WIREGUARD_PUBLIC_IP_ADDRESS/$(hostname --all-ip-addresses | awk '{print $1}')/ /home/dragon/wireguard-client.conf
 
@@ -62,12 +58,5 @@ osism apply --environment custom workarounds
 
 osism apply --environment openstack bootstrap
 
-# osism manage images is only available since 4.3.0. To enable the
-# testbed to be used with < 4.3.0, here is this check.
-MANAGER_VERSION=$(docker inspect --format '{{ index .Config.Labels "org.opencontainers.image.version"}}' osism-ansible)
-if [[ $MANAGER_VERSION == "4.0.0" || $MANAGER_VERSION == "4.1.0" || $MANAGER_VERSION == "4.2.0" ]]; then
-    osism apply --environment openstack bootstrap-images
-else
-    osism manage images --cloud admin --filter Cirros
-    osism manage images --cloud admin --name "Ubuntu 22.04 Minimal"
-fi
+osism manage images --cloud admin --filter Cirros
+osism manage images --cloud admin --filter "Ubuntu 22.04 Minimal"
