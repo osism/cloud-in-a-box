@@ -188,9 +188,6 @@
     - ansible.builtin
     - openstack.cloud
 
-  vars:
-    openstack_version: yoga
-
   tasks:
     - name: Create test project
       openstack.cloud.project:
