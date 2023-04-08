@@ -31,7 +31,6 @@ osism_api_host: "{{ hostvars[inventory_hostname]['ansible_' + internal_interface
 
 enable_ara: true
 
-ara_server_database_type: sqlite3
 ara_server_host: ara.services.in-a-box.cloud
 ara_server_traefik: true
 
