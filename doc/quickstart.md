@@ -86,19 +86,19 @@ Now your Cloud in a Box is up and you can reach the most services via the Homer 
 
 If you want to access the services directly please choose the URL from the following list:
 
-| Name              | URL                                           | Username  | Password                                 |
-|-------------------|-----------------------------------------------|-----------|------------------------------------------|
-| ARA               | <https://ara.services.in-a-box.cloud>         | ara       | password                                 |
-| Flower            | <https://flower.services.in-a-box.cloud>      | -         | -                                        |
-| Grafana           | <https://api.in-a-box.cloud:3000>             | admin     | password                                 |
-| Homer             | <https://homer.services.in-a-box.cloud>       | -         | -                                        |
-| Horizon Admin     | <https://api.in-a-box.cloud>                  | admin     | password                                 |
-| Horizon Test-User | <https://api.in-a-box.cloud>                  | test      | test                                     |
-| Kibana            | <https://api.in-a-box.cloud:5601>             | kibana    | password                                 |
-| Netbox            | <https://netbox.services.in-a-box.cloud>      | admin     | password                                 |
-| Netdata           | <http://manager.systems.in-a-box.cloud:19999> | -         | -                                        |
-| phpMyAdmin        | <https://phpmyadmin.services.in-a-box.cloud>  | root      | password                                 |
-| RabbitMQ          | <https://api.in-a-box.cloud:15672>            | openstack | BO6yGAAq9eqA7IKqeBdtAEO7aJuNu4zfbhtnRo8Y |
+| Name                    | URL                                           | Username   | Password                                 |
+|-------------------------|-----------------------------------------------|------------|------------------------------------------|
+| ARA                     | <https://ara.services.in-a-box.cloud>         | ara        | password                                 |
+| Flower                  | <https://flower.services.in-a-box.cloud>      | -          | -                                        |
+| Grafana                 | <https://api.in-a-box.cloud:3000>             | admin      | password                                 |
+| Homer                   | <https://homer.services.in-a-box.cloud>       | -          | -                                        |
+| Horizon - admin project | <https://api.in-a-box.cloud>                  | admin      | password                                 |
+| Horizon - test project  | <https://api.in-a-box.cloud>                  | test       | test                                     |
+| OpenSearch Dashboards   | <https://api.in-a-box.cloud:5601>             | opensearch | password                                 |
+| Netbox                  | <https://netbox.services.in-a-box.cloud>      | admin      | password                                 |
+| Netdata                 | <http://manager.systems.in-a-box.cloud:19999> | -          | -                                        |
+| phpMyAdmin              | <https://phpmyadmin.services.in-a-box.cloud>  | root       | password                                 |
+| RabbitMQ                | <https://api.in-a-box.cloud:15672>            | openstack  | BO6yGAAq9eqA7IKqeBdtAEO7aJuNu4zfbhtnRo8Y |
 
 :::note
 
