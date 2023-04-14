@@ -56,6 +56,7 @@ osism apply neutron
 osism apply nova
 osism apply cinder
 osism apply designate
+osism apply barbican
 osism apply octavia
 
 osism apply grafana
