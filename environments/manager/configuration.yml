@@ -49,7 +49,7 @@ netbox_api_url: "https://{{ netbox_host }}"
 configuration_directory: /opt/configuration
 
 configuration_type: git
-configuration_git_version: feature/add_ceph_single_node
+configuration_git_version: main
 configuration_git_host: github.com
 configuration_git_port: 443
 configuration_git_repository: osism/cloud-in-a-box.git
