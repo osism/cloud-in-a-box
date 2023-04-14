@@ -25,3 +25,21 @@ manager.systems.in-a-box.cloud
 # NOTE: Systems used for Neutron services
 [network]
 manager.systems.in-a-box.cloud
+
+[ceph-control:children]
+manager.systems.in-a-box.cloud
+
+[ceph-resource:children]
+manager.systems.in-a-box.cloud
+
+[ceph-mon:children]
+ceph-resource
+
+[ceph-mds:children]
+ceph-resource
+
+[ceph-osd:children]
+ceph-resource
+
+[ceph-rgw:children]
+ceph-resource

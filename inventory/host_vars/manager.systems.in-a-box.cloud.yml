@@ -2,3 +2,27 @@
 node_id: 10
 
 netdata_host_type: server
+
+# Ceph
+monitor_address: "192.168.16.{{ node_id }}"
+radosgw_address: "192.168.16.{{ node_id }}"
+lvm_volumes:
+  - data: osd-1
+    data_vg: osd-vg
+  - data: osd-2
+    data_vg: osd-vg
+  - data: osd-3
+    data_vg: osd-vg
+  - data: osd-4
+    data_vg: osd-vg
+  - data: osd-5
+    data_vg: osd-vg
+  - data: osd-6
+    data_vg: osd-vg
+
+crush_rules:
+  - crush_rule_ciab:
+    name: "replicated_rule_ciab"
+    root: default
+    type: osd
+    default: true

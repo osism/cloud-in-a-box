@@ -28,7 +28,25 @@ osism apply memcached
 osism apply redis
 osism apply mariadb
 osism apply rabbitmq
-osism apply iscsi
+#osism apply iscsi
+
+# Deploy ceph
+# Create LVM if not done via curtin
+if [ -e /dev/nvme0n1p5 ]; then
+    vgcreate osd-vg /dev/nvme0n1p5
+    lvcreate -n osd-1 -l16%VG osd-vg
+    lvcreate -n osd-2 -l16%VG osd-vg
+    lvcreate -n osd-3 -l16%VG osd-vg
+    lvcreate -n osd-4 -l16%VG osd-vg
+    lvcreate -n osd-5 -l16%VG osd-vg
+    lvcreate -n osd-6 -l16%VG osd-vg
+fi
+osism reconciler sync
+osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
+osism apply copy-ceph-keys
+osism apply cephclient
+osism apply ceph-bootstrap-dashboard
+ceph osd pool set device_health_metrics crush_rule replicated_rule_ciab
 
 osism apply keystone
 osism apply horizon

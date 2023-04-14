@@ -1,5 +1,10 @@
 ---
 ##########################
+# cephclient
+cephclient_mons:
+  - 192.168.16.10
+
+##########################
 # cgit
 
 cgit_host: cgit.services.in-a-box.cloud
