@@ -28,12 +28,10 @@ osism apply memcached
 osism apply redis
 osism apply mariadb
 osism apply rabbitmq
-#osism apply iscsi
 
-# Deploy ceph
-# Create LVM if not done via curtin
-if [ -e /dev/nvme0n1p5 ]; then
-    vgcreate osd-vg /dev/nvme0n1p5
+# Create LVs for Ceph since that is currently not possible with Curtin
+# with percentages. The VG osd-vg itself is already created by Curtin.
+if [[ ! -e /dev/osd-vg/osd-1 ]]; then
     lvcreate -n osd-1 -l16%VG osd-vg
     lvcreate -n osd-2 -l16%VG osd-vg
     lvcreate -n osd-3 -l16%VG osd-vg
@@ -41,6 +39,7 @@ if [ -e /dev/nvme0n1p5 ]; then
     lvcreate -n osd-5 -l16%VG osd-vg
     lvcreate -n osd-6 -l16%VG osd-vg
 fi
+
 osism reconciler sync
 osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
 osism apply copy-ceph-keys
