@@ -188,10 +188,37 @@
     - ansible.builtin
     - openstack.cloud
 
-#  vars:
-#    openstack_version: zed
+  vars:
+    openstack_version: zed
 
   tasks:
+    - name: Download amphora image
+      ansible.builtin.get_url:
+        url: "https://minio.services.osism.tech/openstack-octavia-amphora-image/octavia-amphora-haproxy-{{ openstack_version }}.qcow2"
+        dest: /tmp/amphora.img
+        mode: 0644
+
+    - name: Upload OpenStack Octavia Amphora image  # noqa args[module]
+      openstack.cloud.image:
+        cloud: octavia
+        state: present
+        name: "OpenStack Octavia Amphora"
+        container_format: bare
+        disk_format: qcow2
+        filename: /tmp/amphora.img
+        min_disk: 2
+        tags:
+          - amphora
+        properties:
+          cpu_arch: x86_64
+          distro: ubuntu
+          hw_rng_model: virtio
+
+    - name: Remove amphora image
+      ansible.builtin.file:
+        path: /tmp/amphora.img
+        state: absent
+
     - name: Create test project
       openstack.cloud.project:
         cloud: admin
