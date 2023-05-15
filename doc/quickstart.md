@@ -1,13 +1,14 @@
 # Cloud in a Box
 
-Cloud in a Box is a minimalistic installation of OSISM with only services which are needed to make it run.
+Cloud in a Box is a minimalistic installation of OSISM with only services which are needed to
+make it usable with Kubernetes in a meaningful way.
+
 For more information you can consult the [Testbed](https://docs.osism.tech/testbed/index.html) documentation.
-If you want to have a full installation please have a look at the [OSISM](https://docs.osism.tech/) documentation.
+If you want to have a full installation have a look at the [OSISM](https://docs.osism.tech/) documentation.
 
 :::warning
 
-> **Warning:**
-> The secrets are stored in plain text and are not secure. Do not use for publicly
+> The secrets are stored in plain text and are not secure. Do not use for public
 > accessible systems.
 
 :::
@@ -15,22 +16,22 @@ If you want to have a full installation please have a look at the [OSISM](https:
 ## Requirements
 
 * The first blockdevice is available as `/dev/sda` or `/dev/nvme0n1`.
-* USB stick with at least 2GB capacity.
+* USB stick with at least 2 GByte capacity.
 * CPU: 1 socket, 4 cores
-* RAM: 32 GB
-* Storage: 1 TB
-* Network: 1 network interfaces
+* RAM: 32 GByte
+* Storage: 1 TByte
+* Network: 1 network interface
 
 ## Download the Cloud in a Box image
 
 :::warning
 
-> **Warning:** ⚡ When booting from this image, all data on the hard disks will be destroyed without confirmation.
+> When booting from this image, all data on the hard disks will be destroyed without confirmation.
+
+:::
 
 * <https://minio.services.osism.tech/node-image/ubuntu-autoinstall-cloud-in-a-box-1.iso> (with /dev/sda)
 * <https://minio.services.osism.tech/node-image/ubuntu-autoinstall-cloud-in-a-box-2.iso> (with /dev/nvme0n1)
-
-:::
 
 ## Getting started
 
@@ -55,15 +56,16 @@ Login via ssh. Use the user **dragon** with the password **password**.
 ssh dragon@IP_FROM_YOUR_SERVER
 ```
 
-Copy the `/home/dragon/wireguard-client.conf` file to your device. This is necessary for using the web endpoints on your device.
-Rename the wireguard config file to something like `ciab.conf`.
-If you want to connect to the cloud-in-a-box system from multiple clients, change the client IP in the config file to be
+Copy the `/home/dragon/wireguard-client.conf` file to your workstation. This is necessary for
+using the web endpoints on your workstation. Rename the wireguard config file to something like `ciab.conf`.
+
+If you want to connect to the Cloud in a Box system from multiple clients, change the client IP in the config file to be
 different on each client.
 
 :::note
 
 > **Note:**
-> Be aware that the name does not contain any special characters!
+> Ensure that the name does not contain any special characters.
 
 :::
 
@@ -71,9 +73,8 @@ different on each client.
 scp dragon@IP_FROM_YOUR_SERVER:/home/dragon/wireguard-client.conf /home/ubuntu/ciab.conf
 ```
 
-Install wireguard on your device, if you have not done this before. For instructions how to do it on your device, please have
-a look on the documentation of your used distribution.
-The wireguard documentation you will find [here](https://www.wireguard.com/).
+Install wireguard on your workstation, if you have not done this before. For instructions how to do it on your workstation, please have
+a look on the documentation of your used distribution. The wireguard documentation you will find [here](https://www.wireguard.com/).
 
 Start the wireguard tunnel.
 
@@ -103,28 +104,42 @@ If you want to access the services directly please choose the URL from the follo
 :::note
 
 > **Note:**
-> Watch out for http and https. It is necessary to use the right one.
+> Watch out for `http` and `https`. It is necessary to use the right one.
 
 :::
 
-## Configure Openstack-Client
+## Usage
+
+### OpenStack CLI
 
 Connect to your Cloud in a Box via ssh (see command above).
-Select one of the preconfigured environments `system`, `admin`, `test` by exporting the environment variable:
+Select one of the preconfigured environments `system`, `admin`, or `test` by exporting the environment variable `OS_CLOUD`:
 
 ```bash
 export OS_CLOUD=admin
 openstack server list
 ```
 
+### Import additional images
+
+For example to import the Garden Linux image this command can be used:
+
+```bash
+osism manage images --filter 'Garden Linux' --cloud admin
+```
+
+All available images: <https://github.com/osism/openstack-image-manager/tree/main/etc/images>
+
 ## Troubleshooting during installation
 
 ![Broken disk setup](./images/broken_disk_setup.png)
-This error means that your disk setup is broken. Please use `cfdisk` and delete all partitions on the system on which you want
+
+This error means that your disk setup is broken. Use `cfdisk` and delete all partitions on the system on which you want
 to install the Cloud in a Box image.
+
 With `lsblk` you can verify if the partitions are empty.
 
 ## Notes
 
-If you have found a bug, a feature is missing or you have a question just open an issue on github in
+If you have found a bug, a feature is missing or you have a question just open an issue on GitHub in
 [osism/cloud-in-a-box](https://github.com/osism/cloud-in-a-box/issues). We will have a look on it as soon as it is possible.
