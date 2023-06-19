@@ -3,7 +3,8 @@
   name: Create OSISM Cloud-in-a-Box CA
   gather_facts: false
   vars_prompt:
-    - name: secret_ca_passphrase
+    - name: Set secret_ca_passphrase
+      prompt: Enter secret_ca_passphrase
 
   tasks:
     - name: Create private key with password protection

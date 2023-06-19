@@ -3,15 +3,16 @@
   name: Create wildcard cert for cloud-in-a-box
   gather_facts: false
   vars_prompt:
-    - name: secret_ca_passphrase
+    - name: Set secret_ca_passphrase
+      prompt: Enter secret_ca_passphrase
 
   tasks:
-    - name: Create private key for new certificate
+    - name: Create private key for new certificate  # noqa: run-once[task]
       community.crypto.openssl_privatekey:
         path: cloud-in-a-box-certificate.key
       run_once: true
 
-    - name: Create certificate signing request (CSR) for new certificate
+    - name: Create certificate signing request (CSR) for new certificate  # noqa: run-once[task]
       community.crypto.openssl_csr_pipe:
         privatekey_path: cloud-in-a-box-certificate.key
         subject_alt_name:
@@ -19,7 +20,7 @@
       run_once: true
       register: csr
 
-    - name: Sign certificate with our CA
+    - name: Sign certificate with our CA  # noqa: run-once[task]
       community.crypto.x509_certificate_pipe:
         csr_content: "{{ csr.csr }}"
         provider: ownca
@@ -31,7 +32,7 @@
       run_once: true
       register: certificate
 
-    - name: Write certificate file
+    - name: Write certificate file  # noqa: run-once[task]
       ansible.builtin.copy:
         dest: cloud-in-a-box-certificate.pem
         content: "{{ certificate.certificate }}"
