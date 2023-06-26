@@ -3,13 +3,8 @@ use_default_rules: true
 rulesdir:
   - ./.ansible-lint-rules/
 skip_list:
-  - fqcn-builtins
-  - fqcn[keyword]
   - galaxy[no-changelog]
-  - ignore-errors
-  - schema
   - yaml
-  - run-once[task]
 # DO NOT DELETE THE WARNLIST! It is required for our custom rules!
 # If this isn't there our custom rules will only through a warning and wont generate a failure!:
 warn_list:

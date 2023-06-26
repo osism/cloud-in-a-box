@@ -1,0 +1,6 @@
+---
+collections:
+  - name: community.crypto
+    source: https://galaxy.ansible.com
+  - name: openstack.cloud
+    source: https://galaxy.ansible.com
