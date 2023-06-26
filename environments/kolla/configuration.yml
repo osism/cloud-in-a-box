@@ -25,12 +25,6 @@ enable_barbican: "yes"
 # generic
 openstack_service_workers: 2
 
-# elasticsearch
-es_heap_size: "1g"
-
-elasticsearch_curator_soft_retention_period_days: 1
-elasticsearch_curator_hard_retention_period_days: 1
-
 # libvirt
 # NOTE: Doesn't work yet with our setup
 libvirt_enable_sasl: "no"
@@ -70,9 +64,3 @@ ceph_nova_keyring: ceph.client.nova.keyring
 
 # NOTE: public_network from environments/ceph/configuration.yml
 ceph_public_network: 192.168.16.0/20
-
-##########################################################
-# other
-#
-om_enable_rabbitmq_high_availability: false
-external_ceph_always_copy_cinder_keyring: "no"
