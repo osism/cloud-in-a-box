@@ -139,6 +139,18 @@ to install the Cloud in a Box image.
 
 With `lsblk` you can verify if the partitions are empty.
 
+## Upgrade
+
+To upgrade the Cloud-in-a-Box, proceed as follows. It is best to execute the commands within a
+screen session, it takes some time. Please note that you cannot update the Ceph deployment at
+the moment. This will be enabled in the future.
+
+```bash
+osism apply configuration
+/opt/configuration/upgrade.sh
+docker system prune -a
+```
+
 ## Notes
 
 If you have found a bug, a feature is missing or you have a question just open an issue on GitHub in
