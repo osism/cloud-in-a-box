@@ -57,11 +57,8 @@ traefik_port_http: 1080
 ##########################
 # wireguard
 
-wireguard_client_allowed_ips: 192.168.16.0/24, 192.168.112.0/24
-wireguard_server_address: 192.168.17.5/24
-
 wireguard_users:
   - name: dragon
     key: LDweUZxqy/0AieSVw3baZmbRMPBqhfDUcuLAwSYyQkE=
-    ip: 192.168.17.4
+    ip: 192.168.48.4
 wireguard_create_client_config: true
