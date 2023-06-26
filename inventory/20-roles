@@ -26,10 +26,10 @@ manager.systems.in-a-box.cloud
 [network]
 manager.systems.in-a-box.cloud
 
-[ceph-control:children]
+[ceph-control]
 manager.systems.in-a-box.cloud
 
-[ceph-resource:children]
+[ceph-resource]
 manager.systems.in-a-box.cloud
 
 [ceph-mon:children]
