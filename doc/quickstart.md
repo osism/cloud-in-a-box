@@ -8,8 +8,8 @@ If you want to have a full installation have a look at the [OSISM](https://docs.
 
 :::warning
 
-> The secrets are stored in plain text and are not secure. Do not use for public
-> accessible systems.
+The secrets are stored in plain text and are not secure. Do not use for public
+accessible systems.
 
 :::
 
@@ -26,7 +26,7 @@ If you want to have a full installation have a look at the [OSISM](https://docs.
 
 :::warning
 
-> When booting from this image, all data on the hard disks will be destroyed without confirmation.
+When booting from this image, all data on the hard disks will be destroyed without confirmation.
 
 :::
 
@@ -64,8 +64,7 @@ different on each client.
 
 :::note
 
-> **Note:**
-> Ensure that the name does not contain any special characters.
+Ensure that the name does not contain any special characters.
 
 :::
 
@@ -103,8 +102,7 @@ If you want to access the services directly please choose the URL from the follo
 
 :::note
 
-> **Note:**
-> Watch out for `http` and `https`. It is necessary to use the right one.
+Watch out for `http` and `https`. It is necessary to use the right one.
 
 :::
 
