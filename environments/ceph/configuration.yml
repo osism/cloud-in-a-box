@@ -91,7 +91,6 @@ ceph_conf_overrides:
     "rgw keystone admin tenant": "service"
     "rgw keystone admin user": "swift"
     "rgw keystone api version": "3"
-    "rgw keystone revocation interval": "900"
     "rgw keystone url": "https://api.in-a-box.cloud"
     "rgw keystone implicit tenants": "true"
     "rgw s3 auth use keystone": "true"
