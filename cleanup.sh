@@ -17,6 +17,8 @@ systemctl disable motd-news.timer
 systemctl disable ufw.service
 systemctl disable unattended-upgrades.service
 
-swapoff /swap.img
-rm /swap.img
-sed -i '/swap.img/d' /etc/fstab
+if [[ -e /swap.img ]]; then
+    swapoff /swap.img
+    rm /swap.img
+    sed -i '/swap.img/d' /etc/fstab
+fi
