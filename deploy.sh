@@ -20,8 +20,7 @@ osism apply facts
 
 osism apply common
 osism apply loadbalancer
-osism apply elasticsearch
-osism apply kibana
+osism apply opensearch
 osism apply openvswitch
 osism apply ovn
 osism apply memcached
