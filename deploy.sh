@@ -43,7 +43,6 @@ osism reconciler sync
 osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
 osism apply copy-ceph-keys
 osism apply cephclient
-osism apply --environment openstack bootstrap-ceph-rgw
 osism apply ceph-bootstrap-dashboard
 ceph osd pool set device_health_metrics crush_rule replicated_rule_ciab
 
@@ -57,6 +56,8 @@ osism apply cinder
 osism apply designate
 osism apply barbican
 osism apply octavia
+
+osism apply --environment openstack bootstrap-ceph-rgw
 
 osism apply grafana
 osism apply homer
