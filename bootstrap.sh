@@ -54,6 +54,8 @@ find /opt/configuration -type f -exec sed -i "s/eno1/${first_network_interface}/
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     ./run.sh netbox
+elif [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
+    ./disable-netbox.sh
 fi
 ./run.sh manager
 
