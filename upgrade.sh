@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+set -x
+set -e
 
 export INTERACTIVE=false
+source /etc/cloud-in-a-box.env
 
 wait_for_container_healthy() {
     local max_attempts="$1"
@@ -19,7 +22,10 @@ wait_for_container_healthy() {
 osism-update-manager
 
 osism apply traefik
-osism apply netbox
+
+if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
+    osism apply netbox
+fi
 
 osism reconciler sync
 osism apply facts
@@ -48,11 +54,14 @@ osism apply -a upgrade neutron
 osism apply -a upgrade nova
 osism apply -a upgrade cinder
 osism apply -a upgrade designate
-osism apply -a upgrade barbican
 osism apply -a upgrade octavia
 
-osism apply -a upgrade grafana
+if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
+    osism apply -a upgrade barbican
+    osism apply -a upgrade grafana
+    osism apply phpmyadmin
+fi
+
 osism apply homer
 osism apply netdata
 osism apply openstackclient
-osism apply phpmyadmin

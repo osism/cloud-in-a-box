@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -x
+set -e
 
 # This script is only necessary if you are using the Cloud in a Box
 # repository on a preinstalled Ubuntu and the osism/node image has
