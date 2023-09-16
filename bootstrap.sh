@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+set -x
+set -e
 
 export INTERACTIVE=false
+CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
 
 wait_for_container_healthy() {
     local max_attempts="$1"
@@ -48,7 +51,10 @@ chmod o+rw /var/run/docker.sock
 find /opt/configuration -type f -exec sed -i "s/eno1/${first_network_interface}/g" {} \;
 
 ./run.sh traefik
-./run.sh netbox
+
+if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
+    ./run.sh netbox
+fi
 ./run.sh manager
 
 popd

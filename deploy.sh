@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
+set -x
+set -e
 
 export INTERACTIVE=false
+CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
+echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | sudo tee /etc/cloud-in-a-box.env
 
 wait_for_container_healthy() {
     local max_attempts="$1"
@@ -54,16 +58,19 @@ osism apply neutron
 osism apply nova
 osism apply cinder
 osism apply designate
-osism apply barbican
 osism apply octavia
+
+if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
+    osism apply barbican
+    osism apply grafana
+    osism apply phpmyadmin
+fi
 
 osism apply --environment openstack bootstrap-ceph-rgw
 
-osism apply grafana
 osism apply homer
 osism apply netdata
 osism apply openstackclient
-osism apply phpmyadmin
 
 osism apply wireguard
 
@@ -75,7 +82,9 @@ sudo ip addr add dev br-ex 192.168.112.10/24
 sudo ip link set up dev br-ex
 osism apply --environment custom workarounds
 
-osism apply --environment openstack bootstrap
+if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
+    osism apply --environment openstack bootstrap
 
-osism manage images --cloud admin --filter Cirros
-osism manage images --cloud admin --filter "Ubuntu 22.04 Minimal"
+    osism manage images --cloud admin --filter Cirros
+    osism manage images --cloud admin --filter "Ubuntu 22.04 Minimal"
+fi
