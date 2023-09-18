@@ -66,8 +66,8 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply -a upgrade barbican
     osism apply -a upgrade grafana
     osism apply phpmyadmin
+    osism apply homer
 fi
 
-osism apply homer
 osism apply netdata
 osism apply openstackclient
