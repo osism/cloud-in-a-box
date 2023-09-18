@@ -19,6 +19,14 @@ wait_for_container_healthy() {
     done
 }
 
+# The upgrade of Docker must be done on the manager via script because the docker service is restarted.
+# In the future, an "osism update docker" wrapper similar to the "osism update manager" wrapper
+# will be available.
+
+pushd /opt/configuration/environments/manager
+./run.sh docker
+popd
+
 osism-update-manager
 
 osism apply traefik
