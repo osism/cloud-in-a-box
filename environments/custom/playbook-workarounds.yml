@@ -1,9 +1,18 @@
 ---
-- name: Add a workaround service
+- name: Apply cloud-in-a-box specific workarounds
   hosts: all
   gather_facts: false
 
   tasks:
+    - name: Copy /etc/issue file
+      become: true
+      ansible.builtin.copy:
+        src: issue
+        dest: /etc/issue
+        mode: 0644
+        owner: root
+        group: root
+
     - name: Copy workarounds.sh scripts
       become: true
       ansible.builtin.template:
