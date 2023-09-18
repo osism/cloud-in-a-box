@@ -32,7 +32,13 @@ osism apply facts
 
 osism apply -a upgrade common
 osism apply -a upgrade loadbalancer
-osism apply -a upgrade opensearch
+
+# OpenSearch is only required on the sandbox type. On the edge type,
+# the logs will be delivered to a central location in the future.
+if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
+    osism apply -a upgrade opensearch
+fi
+
 osism apply -a upgrade openvswitch
 osism apply -a upgrade ovn
 osism apply -a upgrade memcached

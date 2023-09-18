@@ -3,8 +3,13 @@ set -x
 set -e
 
 export INTERACTIVE=false
-CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
-echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | sudo tee /etc/cloud-in-a-box.env
+
+if [[ -e /etc/cloud-in-a-box.env ]]; then
+    source /etc/cloud-in-a-box.env
+else
+    CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
+    echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | sudo tee /etc/cloud-in-a-box.env
+fi
 
 wait_for_container_healthy() {
     local max_attempts="$1"
@@ -24,7 +29,13 @@ osism apply facts
 
 osism apply common
 osism apply loadbalancer
-osism apply opensearch
+
+# OpenSearch is only required on the sandbox type. On the edge type,
+# the logs will be delivered to a central location in the future.
+if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
+    osism apply opensearch
+fi
+
 osism apply openvswitch
 osism apply ovn
 osism apply memcached
@@ -44,6 +55,7 @@ if [[ ! -e /dev/osd-vg/osd-1 ]]; then
 fi
 
 osism reconciler sync
+
 osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
 osism apply copy-ceph-keys
 osism apply cephclient
