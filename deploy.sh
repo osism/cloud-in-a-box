@@ -93,12 +93,9 @@ sudo ip addr add dev br-ex 192.168.112.10/24
 sudo ip link set up dev br-ex
 osism apply --environment custom workarounds
 
-if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
-    osism apply --environment openstack bootstrap
-
-    osism manage images --cloud admin --filter Cirros
-    osism manage images --cloud admin --filter "Ubuntu 22.04 Minimal"
-fi
+osism apply --environment openstack bootstrap-$CLOUD_IN_A_BOX_TYPE
+osism manage images --cloud admin --filter Cirros
+osism manage images --cloud admin --filter "Ubuntu 22.04 Minimal"
 
 osism apply k3s
 
