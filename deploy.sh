@@ -75,11 +75,11 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply barbican
     osism apply grafana
     osism apply phpmyadmin
+    osism apply homer
 fi
 
 osism apply --environment openstack bootstrap-ceph-rgw
 
-osism apply homer
 osism apply netdata
 osism apply openstackclient
 
