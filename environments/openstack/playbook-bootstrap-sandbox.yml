@@ -157,21 +157,21 @@
         ephemeral: 0
 
     # vCPU:RAM ratio: 1:1
-    - name: "Create SCS-1L:1 SCS flavor"
+    - name: "Create SCS-1L-1 SCS flavor"
       openstack.cloud.compute_flavor:
         cloud: admin
         state: present
-        name: "SCS-1L:1"
+        name: "SCS-1L-1"
         ram: 1024
         vcpus: 1
         disk: 0
         ephemeral: 0
 
-    - name: "Create SCS-1L:1:5 SCS flavor"
+    - name: "Create SCS-1L-1-5 SCS flavor"
       openstack.cloud.compute_flavor:
         cloud: admin
         state: present
-        name: "SCS-1L:1:5"
+        name: "SCS-1L-1-5"
         ram: 1024
         vcpus: 1
         disk: 5

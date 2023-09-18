@@ -50,6 +50,12 @@ chmod o+rw /var/run/docker.sock
 
 find /opt/configuration -type f -exec sed -i "s/eno1/${first_network_interface}/g" {} \;
 
+if [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
+    sed -i "/octavia_network_type:/d" /opt/configuration/environments/kolla/configuration.yml
+    echo 'octavia_provider_drivers: "ovn:OVN provider"' >> /opt/configuration/environments/kolla/configuration.yml
+    echo 'octavia_provider_agents: ovn' >> /opt/configuration/environments/kolla/configuration.yml
+fi
+
 ./run.sh traefik
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
