@@ -102,12 +102,12 @@ osism apply k3s
 # NOTE: The following lines will be moved to an osism.services.clusterapi role
 export KUBECONFIG=/home/dragon/.kube/config
 kubectl label node manager openstack-control-plane=enabled
-sudo curl -Lo /usr/local/bin/clusterctl https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.4.4/clusterctl-linux-amd64
+sudo curl -Lo /usr/local/bin/clusterctl https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.5.1/clusterctl-linux-amd64
 sudo chmod +x /usr/local/bin/clusterctl
 export EXP_CLUSTER_RESOURCE_SET=true
 export CLUSTER_TOPOLOGY=true
 clusterctl init \
-  --core cluster-api:v1.4.4 \
-  --bootstrap kubeadm:v1.4.4 \
-  --control-plane kubeadm:v1.4.4 \
-  --infrastructure openstack:v0.7.1
+  --core cluster-api:v1.5.1 \
+  --bootstrap kubeadm:v1.5.1 \
+  --control-plane kubeadm:v1.5.1 \
+  --infrastructure openstack:v0.8.0
