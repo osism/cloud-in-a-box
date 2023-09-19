@@ -100,7 +100,7 @@ osism manage images --cloud admin --filter "Ubuntu 22.04 Minimal"
 osism apply k3s
 
 # NOTE: The following lines will be moved to an osism.services.clusterapi role
-export KUBECONFIG=$HOME/.kube/config
+export KUBECONFIG=/home/dragon/.kube/config
 kubectl label node manager openstack-control-plane=enabled
 sudo curl -Lo /usr/local/bin/clusterctl https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.4.4/clusterctl-linux-amd64
 sudo chmod +x /usr/local/bin/clusterctl
