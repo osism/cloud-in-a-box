@@ -79,3 +79,14 @@ fi
 
 osism apply netdata
 osism apply openstackclient
+
+export KUBECONFIG=/home/dragon/.kube/config
+sudo curl -Lo /usr/local/bin/clusterctl https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.5.1/clusterctl-linux-amd64
+sudo chmod +x /usr/local/bin/clusterctl
+export EXP_CLUSTER_RESOURCE_SET=true
+export CLUSTER_TOPOLOGY=true
+clusterctl upgrade apply \
+  --core cluster-api:v1.5.1 \
+  --bootstrap kubeadm:v1.5.1 \
+  --control-plane kubeadm:v1.5.1 \
+  --infrastructure openstack:v0.8.0
