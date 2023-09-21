@@ -63,6 +63,7 @@ osism apply ceph-bootstrap-dashboard
 
 osism apply keystone
 osism apply horizon
+osism apply skyline
 osism apply placement
 osism apply glance
 osism apply neutron
