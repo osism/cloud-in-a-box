@@ -62,6 +62,7 @@ osism apply -a upgrade rabbitmq
 
 osism apply -a upgrade keystone
 osism apply -a upgrade horizon
+osism apply -a upgrade skyline
 osism apply -a upgrade placement
 osism apply -a upgrade glance
 osism apply -a upgrade neutron

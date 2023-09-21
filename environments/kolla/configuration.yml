@@ -21,6 +21,7 @@ openstack_cacert: /etc/ssl/certs/ca-certificates.crt
 # openstack
 
 enable_barbican: "yes"
+enable_skyline: "yes"
 
 # generic
 openstack_service_workers: 2

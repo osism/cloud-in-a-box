@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Skyline is now deployed as an alternative to Horizon. Skyline can be accessed
+    at https://api.in-a-box.cloud:9999.
