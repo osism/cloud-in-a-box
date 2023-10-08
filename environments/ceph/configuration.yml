@@ -63,8 +63,6 @@ ceph_mgr_modules:
   - prometheus
   - status
 
-
-
 ##########################
 # custom
 
