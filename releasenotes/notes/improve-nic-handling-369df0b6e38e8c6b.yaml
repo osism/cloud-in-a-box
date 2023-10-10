@@ -1,0 +1,15 @@
+---
+prelude: >
+    improve external NIC handling
+features:
+  - discover the external-interface and -ip by using information from
+    the default route provided by the dhcp-client
+    (sort interface lexically and use the first one if there are multiple default routes)
+  - add infinite wait for a functional uplink connection
+other:
+  - |
+    Add other notes here, or remove this section.  All of the list items in
+    this section are combined when the release notes are rendered, so the text
+    needs to be worded so that it does not depend on any information only
+    available in another section, such as the prelude. This may mean repeating
+    some details.

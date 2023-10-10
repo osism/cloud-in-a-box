@@ -1,2 +1,4 @@
 ironic-agent.kernel
 ironic-agent.initramfs
+*.swo
+*.swp

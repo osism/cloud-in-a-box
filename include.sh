@@ -1,0 +1,62 @@
+
+# Hint: Read the logfile with "less -r /var/log/install-cloud-in-a-box.log" for convenience
+BOOTSTRAP_LOGFILE="/var/log/install-cloud-in-a-box.log"
+
+if [[ -n "$BOOTSTRAP_LOGFILE" ]] ;then
+   log_ident="$(basename $0|sed '~s,\.sh,,')"
+   echo "Logging bootstrap process to $BOOTSTRAP_LOGFILE for $log_ident"
+   exec 1> >(sed "~s,^,$log_ident | ,"|tee -a $BOOTSTRAP_LOGFILE)
+   exec 2> >(sed "~s,^,$log_ident | ,"|tee -a $BOOTSTRAP_LOGFILE >&2)
+fi
+
+wait_for_container_healthy() {
+    set +x
+    local max_attempts="$1"
+    local name="$2"
+    local attempt_num=1
+    until [[ "$(/usr/bin/docker inspect -f '{{.State.Health.Status}}' $name)" == "healthy" ]]; do
+        if (( attempt_num++ == max_attempts )); then
+            set -x
+            return 1
+        else
+            sleep 5
+        fi
+    done
+}
+
+wait_for_uplink_connection() {
+   set +x
+   local url_probe="$1"
+   while true; do
+       echo -e "\033[32m==> $(date) : Checking for available uplink : ${url_probe}\033[0m"
+       if ( curl --max-time 5 "${url_probe}" >/dev/null );then
+          echo
+          echo -e "\033[32mSuccessfully checked ${url_probe}\033[0m"
+          set -x
+          return 0
+       else
+          echo -e "\033[31mWaiting for a successful fetch of ${url_probe} to ensure that a suitable uplink is available\033[0m"
+          echo "(Check that the network card is properly plugged, dhcp available, and the network provides a internet uplink)"
+       fi
+       sleep 2
+   done
+}
+
+get_ethernet_interface_of_default_gateway() {
+   ip --json -4 route ls | \
+      jq 'sort_by(.dev)' | \
+      jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | .dev'
+}
+
+get_v4_ip_of_default_gateway() {
+   ip --json -4 route ls | \
+      jq 'sort_by(.dev)' | \
+      jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | .prefsrc'
+}
+
+
+get_default_gateway_settings() {
+   ip --json route ls | \
+      jq 'sort_by(.dev)' | \
+      jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | "device " + .dev + "with ip address " + .prefsrc + " with gateway " + .gateway'
+}

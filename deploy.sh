@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+BASE_DIR="$(dirname $(readlink -f $0))"
+source $BASE_DIR/include.sh
+
 set -x
 set -e
 
@@ -10,20 +14,6 @@ else
     CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
     echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | sudo tee /etc/cloud-in-a-box.env
 fi
-
-wait_for_container_healthy() {
-    local max_attempts="$1"
-    local name="$2"
-    local attempt_num=1
-
-    until [[ "$(/usr/bin/docker inspect -f '{{.State.Health.Status}}' $name)" == "healthy" ]]; do
-        if (( attempt_num++ == max_attempts )); then
-            return 1
-        else
-            sleep 5
-        fi
-    done
-}
 
 osism apply facts
 
@@ -88,7 +78,7 @@ osism apply wireguard
 
 mv /home/dragon/wg0-dragon.conf /home/dragon/wireguard-client.conf
 sed -i -e "s/CHANGEME - dragon private key/GEQ5eWshKW+4ZhXMcWkAAbqzj7QA9G64oBFB3CbrR0w=/" /home/dragon/wireguard-client.conf
-sed -i -e s/WIREGUARD_PUBLIC_IP_ADDRESS/$(hostname --all-ip-addresses | awk '{print $1}')/ /home/dragon/wireguard-client.conf
+sed -i -e s/WIREGUARD_PUBLIC_IP_ADDRESS/$(get_v4_ip_of_default_gateway)/ /home/dragon/wireguard-client.conf
 
 sudo ip addr add dev br-ex 192.168.112.10/24
 sudo ip link set up dev br-ex
@@ -115,3 +105,5 @@ clusterctl init \
   --bootstrap kubeadm:${CAPI_VERSION} \
   --control-plane kubeadm:${CAPI_VERSION} \
   --infrastructure openstack:${CAPO_VERSION}
+
+echo "DEPLOY COMPLETE"

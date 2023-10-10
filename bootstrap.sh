@@ -1,35 +1,28 @@
 #!/usr/bin/env bash
-set -x
+
 set -e
+
+BASE_DIR="$(dirname $(readlink -f $0))"
+source $BASE_DIR/include.sh
+
+set -x
 
 export INTERACTIVE=false
 CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
 
-wait_for_container_healthy() {
-    local max_attempts="$1"
-    local name="$2"
-    local attempt_num=1
-
-    until [[ "$(/usr/bin/docker inspect -f '{{.State.Health.Status}}' $name)" == "healthy" ]]; do
-        if (( attempt_num++ == max_attempts )); then
-            return 1
-        else
-            sleep 5
-        fi
-    done
-}
+wait_for_uplink_connection "https://scs.community"
 
 apt-get update
-apt-get install -y python3-virtualenv sshpass
+apt-get install -y python3-virtualenv sshpass jq
+
+default_gateway_interface="$(get_ethernet_interface_of_default_gateway)"
+get_default_gateway_settings
 
 cp /opt/cloud-in-a-box/environments/kolla/certificates/ca/cloud-in-a-box.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
-firstip_address=$(hostname --all-ip-addresses | awk '{print $1}')
-first_network_interface=$(ip -br -4 a sh | grep ${firstip_address} | awk '{print $1}')
 
-find /opt/cloud-in-a-box -type f -exec sed -i "s/eno1/${first_network_interface}/g" {} \;
-
+find /opt/cloud-in-a-box -type f -not -name "*.sh" -exec sed -i "s/eno1/${default_gateway_interface}/g" {} +
 pushd /opt/cloud-in-a-box/environments/manager
 
 ./run.sh operator \
@@ -48,7 +41,7 @@ chmod o+rw /var/run/docker.sock
 
 ./run.sh configuration
 
-find /opt/configuration -type f -exec sed -i "s/eno1/${first_network_interface}/g" {} \;
+find /opt/configuration -type f -exec sed -i "s/eno1/${default_gateway_interface}/g" {} +
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
     sed -i "/octavia_network_type:/d" /opt/configuration/environments/kolla/configuration.yml
@@ -78,3 +71,5 @@ docker compose -f /opt/manager/docker-compose.yml restart
 
 # NOTE(berendt): wait for ara-server service
 wait_for_container_healthy 60 manager-ara-server-1
+
+echo "BOOTSTRAP COMPLETE"

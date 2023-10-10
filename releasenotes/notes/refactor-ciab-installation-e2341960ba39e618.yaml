@@ -1,0 +1,10 @@
+---
+prelude: >
+    Refactor installation shell scripts to improve maintainability
+features:
+  - log the entire installation script output to a logfile
+    (/var/log/install-cloud-in-a-box.log)
+  - improve debug output
+other:
+  - reduce the time for text replacements
+  - move common functionalities to a central include file
