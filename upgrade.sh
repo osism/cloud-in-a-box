@@ -1,23 +1,15 @@
 #!/usr/bin/env bash
+
+
+BASE_DIR="$(dirname $(readlink -f $0))"
+source $BASE_DIR/include.sh
+
 set -x
 set -e
 
 export INTERACTIVE=false
 source /etc/cloud-in-a-box.env
 
-wait_for_container_healthy() {
-    local max_attempts="$1"
-    local name="$2"
-    local attempt_num=1
-
-    until [[ "$(/usr/bin/docker inspect -f '{{.State.Health.Status}}' $name)" == "healthy" ]]; do
-        if (( attempt_num++ == max_attempts )); then
-            return 1
-        else
-            sleep 5
-        fi
-    done
-}
 
 # The upgrade of Docker must be done on the manager via script because the docker service is restarted.
 # In the future, an "osism update docker" wrapper similar to the "osism update manager" wrapper
