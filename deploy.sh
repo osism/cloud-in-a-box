@@ -61,6 +61,7 @@ osism apply nova
 osism apply cinder
 osism apply designate
 osism apply octavia
+osism apply kolla-ceph-rgw
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply barbican
@@ -68,8 +69,6 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply phpmyadmin
     osism apply homer
 fi
-
-osism apply --environment openstack bootstrap-ceph-rgw
 
 osism apply netdata
 osism apply openstackclient
