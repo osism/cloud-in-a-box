@@ -59,6 +59,7 @@ ceph_rgw_swift_account_in_url: true
 ceph_rgw_hosts:
   - host: manager
     ip: 192.168.16.10
+    port: 8081
 
 ##########################################################
 # external ceph
