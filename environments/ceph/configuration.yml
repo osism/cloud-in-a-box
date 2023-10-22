@@ -90,10 +90,12 @@ ceph_conf_overrides:
     "rgw keystone admin tenant": "service"
     "rgw keystone admin user": "ceph_rgw"
     "rgw keystone api version": "3"
-    "rgw keystone url": "https://api.in-a-box.cloud"
+    "rgw keystone url": "https://api.in-a-box.cloud:5000"
     "rgw keystone implicit tenants": "true"
     "rgw s3 auth use keystone": "true"
     "rgw swift account in url": "true"
     "rgw swift versioning enabled": "true"
+    "rgw keystone verify ssl": "false"
+    "rgw verify ssl": "false"
 
 # CephFS and RGW pool config moved to inventory/group_vars/ceph.yml
