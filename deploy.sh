@@ -15,6 +15,13 @@ else
     echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | sudo tee /etc/cloud-in-a-box.env
 fi
 
+# On the edge environments we are not interested in the initial Ansible logs.
+if [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
+    docker exec -t ceph-ansible mv /ansible/ara.env /ansible/ara.env.disabled || true
+    docker exec -t kolla-ansible mv /ansible/ara.env /ansible/ara.env.disabled || true
+    docker exec -t osism-ansible mv /ansible/ara.env /ansible/ara.env.disabled || true
+fi
+
 osism apply facts
 
 osism apply common
@@ -106,3 +113,10 @@ clusterctl init \
   --infrastructure openstack:${CAPO_VERSION}
 
 echo "DEPLOY COMPLETE"
+
+# Re-enable the Ansible logs on the edge environments to capture changes after the initial deployment.
+if [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
+    docker exec -t ceph-ansible mv /ansible/ara.env.disabled /ansible/ara.env || true
+    docker exec -t kolla-ansible mv /ansible/ara.env.disabled /ansible/ara.env || true
+    docker exec -t osism-ansible mv /ansible/ara.env.disabled /ansible/ara.env || true
+fi
