@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Set `max-concurrent-downloads = 20` in the Docker configuration.
