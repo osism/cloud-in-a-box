@@ -2,12 +2,6 @@
 ##########################
 # generic
 
-containerized_deployment: true
-
-osd_objectstore: bluestore
-osd_scenario: lvm
-
-generate_fsid: false
 fsid: c2120a4a-669c-4769-a32c-b7e9d7b848f4
 
 ##########################
@@ -53,15 +47,6 @@ openstack_keys:
       mon: "allow r"
       osd: "allow class-read object_prefix rbd_children, allow rwx pool={{ openstack_glance_pool.name }}, allow rwx pool={{ openstack_nova_pool.name }}, allow rwx pool={{ openstack_cinder_pool.name }}, allow rwx pool={{ openstack_cinder_backup_pool.name }}"
     mode: "0600"
-
-##########################
-# manager
-
-ceph_mgr_modules:
-  - balancer
-  - dashboard
-  - prometheus
-  - status
 
 ##########################
 # custom
