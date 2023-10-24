@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    As in osism/testbed, the pull of all necessary images is now started
+    in the background to speed up the deployment or upgrade process.
