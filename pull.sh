@@ -32,3 +32,5 @@ redis
 for kolla_service in ${kolla_services[*]}; do
     osism apply --no-wait -a pull $kolla_service
 done
+
+osism apply --no-wait -e custom pull-container-images

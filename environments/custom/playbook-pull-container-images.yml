@@ -1,0 +1,15 @@
+---
+- name: Pull container images
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Pull container images
+      community.docker.docker_image:
+        name: "{{ item }}"
+        source: pull
+      loop:
+        # Only container images used in plays that do not offer a dedicated pull action are listed here.
+        - "{{ ceph_docker_registry }}/{{ ceph_docker_image }}:{{ ceph_image_version }}"
+        - "{{ docker_registry_cephclient }}/osism/cephclient:{{ cephclient_version }}"
+        - "{{ docker_registry_openstackclient }}/osism/openstackclient:{{ openstackclient_version }}"
