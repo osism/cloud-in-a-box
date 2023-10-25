@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    Currently, only Kolla's playbooks include the ability to trigger the pull of the
+    necessary container images via an action. So that also further necessary container
+    images can be downloaded befor the deployment these were added temporarily in a
+    play `pull-container-images` in the environment `custom`. The play can be removed
+    in the future if the pull of the container images listed there is otherwise possible.
