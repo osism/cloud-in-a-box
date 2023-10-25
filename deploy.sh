@@ -24,6 +24,9 @@ fi
 
 osism apply facts
 
+# pull container images in background
+bash $BASE_DIR/pull.sh
+
 osism apply common
 osism apply loadbalancer
 
