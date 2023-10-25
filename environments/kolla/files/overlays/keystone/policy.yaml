@@ -1,3 +1,4 @@
+---
 # classify domain managers with a special role
 "is_domain_manager": "role:domain-manager"
 
