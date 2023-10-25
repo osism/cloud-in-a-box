@@ -19,7 +19,7 @@ pushd /opt/configuration/environments/manager
 ./run.sh docker
 popd
 
-osism-update-manager
+osism update manager
 
 osism apply traefik
 
