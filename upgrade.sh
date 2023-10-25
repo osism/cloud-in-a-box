@@ -34,7 +34,7 @@ osism apply facts
 bash $BASE_DIR/pull.sh
 
 osism apply -a upgrade common
-osism apply -a upgrade loadbalancer
+osism apply -a upgrade loadbalancer-ng
 
 # OpenSearch is only required on the sandbox type. On the edge type,
 # the logs will be delivered to a central location in the future.
