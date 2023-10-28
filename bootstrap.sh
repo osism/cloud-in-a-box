@@ -66,6 +66,11 @@ osism apply facts
 
 osism apply bootstrap
 
+# Before the 6.1.0 release of OSISM, the execution of the limits play is
+# not yet part of the bootstrap play. Can be removed after the release of
+# OSISM 6.1.0.
+osism apply limits
+
 # NOTE: Restart the manager services to update the /etc/hosts file
 docker compose -f /opt/manager/docker-compose.yml restart
 

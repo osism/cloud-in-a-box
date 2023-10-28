@@ -48,6 +48,18 @@ cleanup_services_extra:
   - ntp
 
 ##########################
+# limits
+
+limits_extra:
+  '*':
+    - type: soft
+      item: nofile
+      value: 262144
+    - type: hard
+      item: nofile
+      value: 1048576
+
+##########################
 # kolla
 
 kolla_internal_vip_address: 192.168.16.254
