@@ -43,6 +43,11 @@ netbox_enable: true
 netbox_host: "netbox.services.in-a-box.cloud"
 netbox_api_url: "https://{{ netbox_host }}"
 
+#########################
+# opensearch
+
+manager_opensearch_address: api.in-a-box.cloud
+
 ##########################
 # configuration
 
