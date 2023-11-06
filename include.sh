@@ -14,15 +14,39 @@ wait_for_container_healthy() {
     local max_attempts="$1"
     local name="$2"
     local attempt_num=1
-    until [[ "$(/usr/bin/docker inspect -f '{{.State.Health.Status}}' $name)" == "healthy" ]]; do
-        if (( attempt_num++ == max_attempts )); then
+    echo "Checking if container '$name' is healthy"
+    until [[ "$(/usr/bin/docker inspect -f '{{.State.Health.Status}}' $name 2>/dev/null)" == "healthy" ]]; do
+        if (( attempt_num++ >= max_attempts )); then
+            echo "ERROR: Max attempts reached waiting for container '$name' to be healthy"
             set -x
-            return 1
+            exit 1
         else
+            echo "$attempt_num/$max_attempts - Waiting for container '$name' to be healthy"
             sleep 5
         fi
     done
+    return 0
 }
+
+wait_for_container_running() {
+    set +x
+    local max_attempts="$1"
+    local name="$2"
+    local attempt_num=1
+    echo "Checking if container '$name' is running"
+    until [[ "$(/usr/bin/docker inspect -f '{{.State.Status}}' $name 2>/dev/null)" == "running" ]]; do
+        if (( attempt_num++ >= max_attempts )); then
+            echo "ERROR: Max attempts reached waiting for container '$name' to be running"
+            set -x
+            exit 1
+        else
+            echo "$attempt_num/$max_attempts - Waiting for container '$name' to be running"
+            sleep 5
+        fi
+    done
+    return 0
+}
+
 
 wait_for_uplink_connection() {
    set +x

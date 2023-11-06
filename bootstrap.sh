@@ -7,6 +7,7 @@ source $BASE_DIR/include.sh
 
 set -x
 
+trap "echo 'BOOTSTRAP FAILED'" TERM INT EXIT
 export INTERACTIVE=false
 CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
 
@@ -60,6 +61,9 @@ fi
 
 popd
 
+
+wait_for_container_running 60 osismclient
+
 # NOTE: gather facts to ensure that the addresses of the new VLAN devices
 #       are in the facts cache
 osism apply facts
@@ -77,4 +81,5 @@ docker compose -f /opt/manager/docker-compose.yml restart
 # NOTE(berendt): wait for ara-server service
 wait_for_container_healthy 60 manager-ara-server-1
 
+trap "" TERM INT EXIT
 echo "BOOTSTRAP COMPLETE"

@@ -3,6 +3,7 @@
 BASE_DIR="$(dirname $(readlink -f $0))"
 source $BASE_DIR/include.sh
 
+trap "echo 'DEPLOY FAILED'" TERM INT EXIT
 set -x
 set -e
 
@@ -115,11 +116,13 @@ clusterctl init \
   --control-plane kubeadm:${CAPI_VERSION} \
   --infrastructure openstack:${CAPO_VERSION}
 
-echo "DEPLOY COMPLETE"
-
 # Re-enable the Ansible logs on the edge environments to capture changes after the initial deployment.
 if [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
     docker exec -t ceph-ansible mv /ansible/ara.env.disabled /ansible/ara.env || true
     docker exec -t kolla-ansible mv /ansible/ara.env.disabled /ansible/ara.env || true
     docker exec -t osism-ansible mv /ansible/ara.env.disabled /ansible/ara.env || true
 fi
+
+
+trap "" TERM INT EXIT
+echo "DEPLOY COMPLETE"
