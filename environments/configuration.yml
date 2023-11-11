@@ -79,3 +79,12 @@ enable_auditd: false
 # ceph
 
 ceph_cluster_fsid: c2120a4a-669c-4769-a32c-b7e9d7b848f4
+
+##########################
+# sysctl
+
+sysctl_extra:
+  generic:
+    # Fixes "Failed to allocate directory watch: Too many open files"
+    - name: fs.inotify.max_user_instances
+      value: 256
