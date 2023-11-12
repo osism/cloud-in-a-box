@@ -22,7 +22,6 @@ get_default_gateway_settings
 cp /opt/cloud-in-a-box/environments/kolla/certificates/ca/cloud-in-a-box.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
-
 find /opt/cloud-in-a-box -type f -not -name "*.sh" -exec sed -i "s/eno1/${default_gateway_interface}/g" {} +
 pushd /opt/cloud-in-a-box/environments/manager
 
@@ -33,7 +32,12 @@ pushd /opt/cloud-in-a-box/environments/manager
 
 export INSTALL_ANSIBLE_ROLES=false
 ./run.sh network
+
+# NOTE: Apply network changes without rebooting
 netplan apply
+
+# NOTE: Ensure the APT cache is always up to date
+apt-get update
 
 ./run.sh bootstrap
 
@@ -61,7 +65,14 @@ fi
 
 popd
 
+# NOTE: In some configurations, the manager service is currently not coming up properly.
+#       We therefore perform another explicit restart of the manager service here.
+systemctl restart docker-compose@manager
 
+# NOTE: wait for the manager services
+wait_for_container_healthy 60 osism-ansible
+wait_for_container_healthy 60 ceph-ansible
+wait_for_container_healthy 60 kolla-ansible
 wait_for_container_running 60 osismclient
 
 # NOTE: gather facts to ensure that the addresses of the new VLAN devices
@@ -78,7 +89,7 @@ osism apply limits
 # NOTE: Restart the manager services to update the /etc/hosts file
 docker compose -f /opt/manager/docker-compose.yml restart
 
-# NOTE(berendt): wait for ara-server service
+# NOTE: wait for the manager service
 wait_for_container_healthy 60 manager-ara-server-1
 
 trap "" TERM INT EXIT
