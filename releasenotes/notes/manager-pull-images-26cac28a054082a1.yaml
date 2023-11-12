@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Manager images are now pulled before deployment.
