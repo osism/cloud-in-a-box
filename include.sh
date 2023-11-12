@@ -5,8 +5,8 @@ BOOTSTRAP_LOGFILE="/var/log/install-cloud-in-a-box.log"
 if [[ -n "$BOOTSTRAP_LOGFILE" ]] ;then
    log_ident="$(basename $0|sed '~s,\.sh,,')"
    echo "Logging bootstrap process to $BOOTSTRAP_LOGFILE for $log_ident"
-   exec 1> >(sed "~s,^,$log_ident | ,"|tee -a $BOOTSTRAP_LOGFILE)
-   exec 2> >(sed "~s,^,$log_ident | ,"|tee -a $BOOTSTRAP_LOGFILE >&2)
+   exec 1> >(sed "~s,^,$log_ident | ," | sudo tee -a $BOOTSTRAP_LOGFILE)
+   exec 2> >(sed "~s,^,$log_ident | ," | sudo tee -a $BOOTSTRAP_LOGFILE >&2)
 fi
 
 wait_for_container_healthy() {
