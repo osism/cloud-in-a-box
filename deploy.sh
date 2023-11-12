@@ -16,13 +16,6 @@ else
     echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | sudo tee /etc/cloud-in-a-box.env
 fi
 
-# On the edge environments we are not interested in the initial Ansible logs.
-if [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
-    docker exec -t ceph-ansible mv /ansible/ara.env /ansible/ara.env.disabled || true
-    docker exec -t kolla-ansible mv /ansible/ara.env /ansible/ara.env.disabled || true
-    docker exec -t osism-ansible mv /ansible/ara.env /ansible/ara.env.disabled || true
-fi
-
 osism apply facts
 
 # pull container images in background

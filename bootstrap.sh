@@ -76,6 +76,13 @@ wait_for_container_healthy 60 ceph-ansible
 wait_for_container_healthy 60 kolla-ansible
 wait_for_container_running 60 osismclient
 
+# On the edge environments we are not interested in the initial Ansible logs.
+if [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
+    docker exec -t ceph-ansible mv /ansible/ara.env /ansible/ara.env.disabled || true
+    docker exec -t kolla-ansible mv /ansible/ara.env /ansible/ara.env.disabled || true
+    docker exec -t osism-ansible mv /ansible/ara.env /ansible/ara.env.disabled || true
+fi
+
 # NOTE: gather facts to ensure that the addresses of the new VLAN devices
 #       are in the facts cache
 osism apply facts
