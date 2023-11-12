@@ -40,12 +40,12 @@ osism apply rabbitmq
 # Create LVs for Ceph since that is currently not possible with Curtin
 # with percentages. The VG osd-vg itself is already created by Curtin.
 if [[ ! -e /dev/osd-vg/osd-1 ]]; then
-    lvcreate -n osd-1 -l16%VG osd-vg
-    lvcreate -n osd-2 -l16%VG osd-vg
-    lvcreate -n osd-3 -l16%VG osd-vg
-    lvcreate -n osd-4 -l16%VG osd-vg
-    lvcreate -n osd-5 -l16%VG osd-vg
-    lvcreate -n osd-6 -l16%VG osd-vg
+    sudo lvcreate -n osd-1 -l16%VG osd-vg
+    sudo lvcreate -n osd-2 -l16%VG osd-vg
+    sudo lvcreate -n osd-3 -l16%VG osd-vg
+    sudo lvcreate -n osd-4 -l16%VG osd-vg
+    sudo lvcreate -n osd-5 -l16%VG osd-vg
+    sudo lvcreate -n osd-6 -l16%VG osd-vg
 fi
 
 osism reconciler sync
