@@ -61,6 +61,7 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
 elif [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
     ./disable-netbox.sh
 fi
+./run.sh pull
 ./run.sh manager
 
 popd
