@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Deploy & upgrade the Prometheus service.
