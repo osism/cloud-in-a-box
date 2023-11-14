@@ -3,7 +3,7 @@
 BASE_DIR="$(dirname $(readlink -f $0))"
 source $BASE_DIR/include.sh
 
-trap "echo 'DEPLOY FAILED'" TERM INT EXIT
+trap "echo 'OVERALL STATUS: DEPLOY FAILED'" TERM INT EXIT
 set -x
 set -e
 
@@ -119,4 +119,4 @@ fi
 
 
 trap "" TERM INT EXIT
-echo "DEPLOY COMPLETE"
+add_status info "OVERALL STATUS: DEPLOY COMPLETED SUCCESSFULLY"
