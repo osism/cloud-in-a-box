@@ -84,3 +84,26 @@ get_default_gateway_settings() {
       jq 'sort_by(.dev)' | \
       jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | "device " + .dev + "with ip address " + .prefsrc + " with gateway " + .gateway'
 }
+
+add_status(){
+   local type="$1"
+   local text="$2"
+
+   if [ "$type" = "warn" ];then
+     text="\e[5;43;1mWARNING: $text\e[0m"
+   elif [ "$type" = "info" ];then
+     text="\e[5;42;1mINFORMATION: $text\e[0m"
+   else
+     text="\e[5;41;1mALERT: $text\e[0m"
+   fi
+
+   if [[ "$type" = "info" ]] && [[ -n "$BOOTSTRAP_LOGFILE" ]];then
+       text="$text\n\nReview the progress in $BOOTSTRAP_LOGFILE"
+   elif [[ -n "$BOOTSTRAP_LOGFILE" ]];then
+       text="$text\n\nReview $BOOTSTRAP_LOGFILE to analyze what went wrong"
+   fi
+
+   echo -e "$text" | sudo tee /etc/issue.net
+   echo -e "$text" | sudo tee /etc/issue
+}
+

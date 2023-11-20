@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Add missing function add_status.
