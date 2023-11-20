@@ -48,6 +48,9 @@ octavia_network_type: tenant
 # designate
 designate_ns_record: cloud.in-a-box.cloud
 
+# horizon
+horizon_keystone_multidomain: true
+
 # rgw integration
 
 enable_ceph_rgw: true
