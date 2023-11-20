@@ -1,4 +1,12 @@
 ---
+- name: Prepare what is required for the test project
+  hosts: manager
+
+  tasks:
+    - name: Generate an OpenSSH keypair
+      community.crypto.openssh_keypair:
+        path: /opt/configuration/environments/openstack/id_rsa.test
+
 - name: Create test project
   hosts: localhost
   connection: local
