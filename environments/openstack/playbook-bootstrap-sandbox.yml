@@ -235,3 +235,9 @@
         dns_nameservers:
           - 8.8.8.8
           - 9.9.9.9
+
+    - name: Create domain-manager role
+      openstack.cloud.identity_role:
+        cloud: admin
+        state: present
+        name: domain-manager
