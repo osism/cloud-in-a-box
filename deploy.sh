@@ -88,9 +88,15 @@ sudo ip addr add dev br-ex 192.168.112.10/24
 sudo ip link set up dev br-ex
 osism apply --environment custom workarounds
 
+# Bootstrap the openstack environment
 osism apply --environment openstack bootstrap-$CLOUD_IN_A_BOX_TYPE
+
+# Upload machine images
 osism manage images --cloud admin --filter Cirros
 osism manage images --cloud admin --filter "Ubuntu 22.04 Minimal"
+
+# Create test project (without a server and attached volume)
+osism apply --environment openstack test --skip-tags test-server,test-volume
 
 osism apply k3s
 

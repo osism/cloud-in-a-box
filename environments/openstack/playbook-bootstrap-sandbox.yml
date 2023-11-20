@@ -182,7 +182,7 @@
   connection: local
 
   vars:
-    openstack_version: zed
+    openstack_version: "2023.1"
 
   tasks:
     - name: Download amphora image
@@ -211,35 +211,6 @@
       ansible.builtin.file:
         path: /tmp/amphora.img
         state: absent
-
-    - name: Create test project
-      openstack.cloud.project:
-        cloud: admin
-        state: present
-        name: test
-        domain_id: default
-
-    - name: Create test user
-      openstack.cloud.identity_user:
-        cloud: admin
-        state: present
-        name: test
-        password: test
-        email: test@testbed.osism.xyz
-        domain: default
-        default_project: test
-      no_log: true
-
-    - name: Add member roles to user test
-      openstack.cloud.role_assignment:
-        cloud: admin
-        state: present
-        user: test
-        role: "{{ item }}"
-        project: test
-      loop:
-        - load-balancer_member
-        - member
 
     - name: Create public network
       openstack.cloud.network:
