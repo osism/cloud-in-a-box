@@ -6,6 +6,9 @@ clouds:
   admin:
     auth:
       password: password
+  test-admin:
+    auth:
+      password: test
   test:
     auth:
       password: test
