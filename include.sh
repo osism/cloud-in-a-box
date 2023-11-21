@@ -90,11 +90,11 @@ add_status(){
    local text="$2"
 
    if [ "$type" = "warn" ];then
-     text="\e[5;43;1mWARNING: $text\e[0m"
+     text="\e[5;43;1mWARN: $text\e[0m"
    elif [ "$type" = "info" ];then
-     text="\e[5;42;1mINFORMATION: $text\e[0m"
+     text="\e[5;42;1mINFO: $text\e[0m"
    else
-     text="\e[5;41;1mALERT: $text\e[0m"
+     text="\e[5;41;1mERROR: $text\e[0m"
    fi
 
    if [[ "$type" = "info" ]] && [[ -n "$BOOTSTRAP_LOGFILE" ]];then
@@ -103,7 +103,9 @@ add_status(){
        text="$text\n\nReview $BOOTSTRAP_LOGFILE to analyze what went wrong"
    fi
 
-   echo -e "$text" | sudo tee /etc/issue.net
-   echo -e "$text" | sudo tee /etc/issue
-}
+   sudo cp /etc/issue.net /etc/.issue.net.backup
+   sudo cp /etc/issue /etc/.issue.backup
 
+   (cat /etc/.issue.net.backup; echo -e "$text") | sudo tee /etc/issue.net >/dev/null
+   (cat /etc/.issue.backup ; echo -e "$text") | sudo tee /etc/issue
+}
