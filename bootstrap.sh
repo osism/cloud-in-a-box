@@ -7,7 +7,7 @@ source $BASE_DIR/include.sh
 
 set -x
 
-trap "echo 'OVERALL STATUS: BOOTSTRAP FAILED'" TERM INT EXIT
+trap "add_status 'error' 'BOOTSTRAP FAILED'" TERM INT EXIT
 export INTERACTIVE=false
 CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
 
@@ -96,4 +96,4 @@ docker compose -f /opt/manager/docker-compose.yml restart
 wait_for_container_healthy 60 manager-ara-server-1
 
 trap "" TERM INT EXIT
-add_status "info" "OVERALL STATUS: BOOTSTRAP COMPLETE"
+add_status "info" "BOOTSTRAP COMPLETE"

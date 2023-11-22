@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Beautify status output and add lost code for status.
