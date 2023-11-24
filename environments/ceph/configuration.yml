@@ -49,6 +49,12 @@ openstack_keys:
     mode: "0600"
 
 ##########################
+# dashboard
+
+ceph_dashboard_port: 7000
+ceph_dashboard_addr: 192.168.16.10
+
+##########################
 # custom
 
 ceph_conf_overrides:
