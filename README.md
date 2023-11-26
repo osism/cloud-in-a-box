@@ -1,10 +1,11 @@
 # Cloud in a Box
 
 Cloud in a Box is a minimalistic installation of OSISM with only services which are
-needed to make it run.
+needed to make it run. With the Cloud in a Box, it is possible to run a full
+[Sovereign Cloud Stack](https://scs.community) deployment.
 
 For informations how to install the Cloud in a Box, please have a look at the
-[Cloud in a Box Guide](https://osism.github.io/docs/advanced-guides/cloud-in-a-box).
+[Cloud in a Box Guide](https://osism.github.io/docs/guides/deploy-guide/examples/cloud-in-a-box).
 
 ## Types
 
