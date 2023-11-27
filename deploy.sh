@@ -53,14 +53,8 @@ osism reconciler sync
 osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
 osism apply copy-ceph-keys
 osism apply cephclient
-
 osism apply ceph-bootstrap-dashboard
 
-# NOTE: The following ceph commands can be removed after release of OSISM 6.1.0.
-ceph mgr module disable dashboard
-ceph config set mgr mgr/dashboard/server_port 7000
-ceph config set mgr mgr/dashboard/server_addr 192.168.16.10
-ceph mgr module enable dashboard
 
 osism apply keystone
 osism apply horizon
