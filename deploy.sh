@@ -40,12 +40,7 @@ osism apply rabbitmq
 # Create LVs for Ceph since that is currently not possible with Curtin
 # with percentages. The VG osd-vg itself is already created by Curtin.
 if [[ ! -e /dev/osd-vg/osd-1 ]]; then
-    sudo lvcreate -n osd-1 -l16%VG osd-vg
-    sudo lvcreate -n osd-2 -l16%VG osd-vg
-    sudo lvcreate -n osd-3 -l16%VG osd-vg
-    sudo lvcreate -n osd-4 -l16%VG osd-vg
-    sudo lvcreate -n osd-5 -l16%VG osd-vg
-    sudo lvcreate -n osd-6 -l16%VG osd-vg
+    osism apply --environment custom create-logical-volumes
 fi
 
 osism reconciler sync
@@ -85,8 +80,6 @@ mv /home/dragon/wg0-dragon.conf /home/dragon/wireguard-client.conf
 sed -i -e "s/CHANGEME - dragon private key/GEQ5eWshKW+4ZhXMcWkAAbqzj7QA9G64oBFB3CbrR0w=/" /home/dragon/wireguard-client.conf
 sed -i -e s/WIREGUARD_PUBLIC_IP_ADDRESS/$(get_v4_ip_of_default_gateway)/ /home/dragon/wireguard-client.conf
 
-sudo ip addr add dev br-ex 192.168.112.10/24
-sudo ip link set up dev br-ex
 osism apply --environment custom workarounds
 
 # Bootstrap the openstack environment

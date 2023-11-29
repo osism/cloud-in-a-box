@@ -4,6 +4,18 @@
   gather_facts: false
 
   tasks:
+    - name: Add 192.168.112.10/24 to br-ex
+      become: true
+      ansible.builtin.command:
+        cmd: ip addr add dev br-ex 192.168.112.10/24
+      changed_when: true
+
+    - name: Bring up br-ex
+      become: true
+      ansible.builtin.command:
+        cmd: ip link set up dev br-ex
+      changed_when: true
+
     - name: Copy /etc/issue file
       become: true
       ansible.builtin.copy:
