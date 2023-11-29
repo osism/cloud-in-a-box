@@ -1,0 +1,18 @@
+---
+- name: Create logical volumes required by Ceph
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Create logical volume
+      community.general.lvol:
+        vg: osd-vg
+        lv: "{{ item }}"
+        size: 16%VG
+      loop:
+        - osd-1
+        - osd-2
+        - osd-3
+        - osd-4
+        - osd-5
+        - osd-6
