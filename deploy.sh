@@ -74,12 +74,10 @@ fi
 osism apply netdata
 osism apply openstackclient
 
+# Deploy wireguard service
 osism apply wireguard
 
-mv /home/dragon/wg0-dragon.conf /home/dragon/wireguard-client.conf
-sed -i -e "s/CHANGEME - dragon private key/GEQ5eWshKW+4ZhXMcWkAAbqzj7QA9G64oBFB3CbrR0w=/" /home/dragon/wireguard-client.conf
-sed -i -e s/WIREGUARD_PUBLIC_IP_ADDRESS/$(get_v4_ip_of_default_gateway)/ /home/dragon/wireguard-client.conf
-
+# Apply cloud in a box specific workarounds
 osism apply --environment custom workarounds
 
 # Bootstrap the openstack environment
@@ -95,6 +93,7 @@ osism manage flavors
 # Create test project (without a server and attached volume)
 osism apply --environment openstack test --skip-tags test-server,test-volume
 
+# Deploy kubernetes
 osism apply k3s
 
 CAPI_VERSION="v1.5.1"
