@@ -5,6 +5,7 @@
 
   tasks:
     - name: Create logical volume
+      become: true
       community.general.lvol:
         vg: osd-vg
         lv: "{{ item }}"
