@@ -72,13 +72,6 @@ get_ethernet_interface_of_default_gateway() {
       jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | .dev'
 }
 
-get_v4_ip_of_default_gateway() {
-   ip --json -4 route ls | \
-      jq 'sort_by(.dev)' | \
-      jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | .prefsrc'
-}
-
-
 get_default_gateway_settings() {
    ip --json route ls | \
       jq 'sort_by(.dev)' | \

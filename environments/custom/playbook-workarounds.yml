@@ -16,6 +16,50 @@
         cmd: ip link set up dev br-ex
       changed_when: true
 
+    - name: Check for wg0-dragon.conf file
+      ansible.builtin.stat:
+        path: /home/dragon/wg0-dragon.conf
+      register: result
+
+    - name: Prepare wireguard-client.conf file
+      ansible.builtin.copy:
+        src: /home/dragon/wg0-dragon.conf
+        dest: /home/dragon/wireguard-client.conf
+        remote_src: true
+        owner: dragon
+        group: dragon
+        mode: 0600
+      when: result.stat.exists is defined and result.stat.exists
+
+    - name: Remove wg0-dragon.conf file
+      ansible.builtin.file:
+        path: /home/dragon/wg0-dragon.conf
+        state: absent
+      when: result.stat.exists is defined and result.stat.exists
+
+    - name: Replace CHANGEME in wireguard-client.conf
+      ansible.builtin.lineinfile:
+        path: /home/dragon/wireguard-client.conf
+        regexp: "^PrivateKey = CHANGEME"
+        line: "PrivateKey = GEQ5eWshKW+4ZhXMcWkAAbqzj7QA9G64oBFB3CbrR0w="
+
+    - name: Get ipv4 address of the interface with the default gateway
+      ansible.builtin.shell: |
+        set -o pipefail
+        ip --json -4 route ls | \
+          jq 'sort_by(.dev)' | \
+          jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | .prefsrc'
+      args:
+        executable: /bin/bash
+      register: result
+      changed_when: true
+
+    - name: Replace WIREGUARD_PUBLIC_IP_ADDRESS in wireguard-client.conf
+      ansible.builtin.lineinfile:
+        path: /home/dragon/wireguard-client.conf
+        regexp: "^Endpoint = WIREGUARD_PUBLIC_IP_ADDRESS"
+        line: "Endpoint = {{ result.stdout }}:51820"
+
     - name: Copy /etc/issue file
       become: true
       ansible.builtin.copy:
