@@ -112,13 +112,5 @@ clusterctl init \
   --control-plane kubeadm:${CAPI_VERSION} \
   --infrastructure openstack:${CAPO_VERSION}
 
-# Re-enable the Ansible logs on the edge environments to capture changes after the initial deployment.
-if [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
-    docker exec -t ceph-ansible mv /ansible/ara.env.disabled /ansible/ara.env || true
-    docker exec -t kolla-ansible mv /ansible/ara.env.disabled /ansible/ara.env || true
-    docker exec -t osism-ansible mv /ansible/ara.env.disabled /ansible/ara.env || true
-fi
-
-
 trap "" TERM INT EXIT
 add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
