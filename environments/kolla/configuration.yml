@@ -21,6 +21,7 @@ openstack_cacert: /etc/ssl/certs/ca-certificates.crt
 # openstack
 
 enable_barbican: "yes"
+enable_proxysql: "yes"
 enable_skyline: "yes"
 
 # generic
