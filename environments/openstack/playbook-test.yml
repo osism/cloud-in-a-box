@@ -147,7 +147,7 @@
         state: present
         name: test
         image: "Cirros 0.6.0"
-        flavor: "SCS-1L-1-5"
+        flavor: "SCS-1L-1"
         delete_fip: true
         key_name: test
         security_groups:
@@ -155,6 +155,9 @@
           - ssh
         nics:
           - port-name: test-port
+        boot_from_volume: true
+        terminate_volume: true
+        volume_size: 1
       tags:
         - test-server
 
