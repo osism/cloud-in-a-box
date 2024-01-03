@@ -112,5 +112,7 @@ clusterctl init \
   --control-plane kubeadm:${CAPI_VERSION} \
   --infrastructure openstack:${CAPO_VERSION}
 
+set_boot_device
+
 trap "" TERM INT EXIT
 add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"

@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    Automatically modify the boot order using efibootmgr by adding the
+    the installtion to the existing boot order and remove all duplicate
+    entries to eliminate the process of lurking in the hardware boot process
+    for the right time to press a button.
+    It is no longer necessary to remove the USB device before the first boot.
