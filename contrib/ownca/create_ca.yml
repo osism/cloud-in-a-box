@@ -1,7 +1,8 @@
 ---
-- hosts: localhost
-  name: Create OSISM Cloud-in-a-Box CA
+- name: Create OSISM Cloud-in-a-Box CA
+  hosts: localhost
   gather_facts: false
+
   vars_prompt:
     - name: Set secret_ca_passphrase
       prompt: Enter secret_ca_passphrase

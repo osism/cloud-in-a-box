@@ -1,7 +1,8 @@
 ---
-- hosts: localhost
-  name: Create manager cert for cloud-in-a-box
+- name: Create manager cert for cloud-in-a-box
+  hosts: localhost
   gather_facts: false
+
   vars_prompt:
     - name: Set secret_ca_passphrase
       prompt: Enter secret_ca_passphrase
