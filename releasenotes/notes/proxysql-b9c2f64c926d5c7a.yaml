@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    ProxySQL instead of HAProxy is now used to access MariaDB.
