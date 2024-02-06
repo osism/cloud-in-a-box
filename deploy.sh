@@ -18,8 +18,8 @@ fi
 
 osism apply facts
 
-# pull container images in background
-bash $BASE_DIR/pull.sh
+# Pull container images
+osism apply -e custom pull-container-images
 
 osism apply common
 osism apply loadbalancer
@@ -30,6 +30,7 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply opensearch
 fi
 
+# Deploy infrastructure services
 osism apply openvswitch
 osism apply ovn
 osism apply memcached
@@ -45,11 +46,13 @@ fi
 
 osism reconciler sync
 
+# Deploy Ceph services
 osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
 osism apply copy-ceph-keys
 osism apply cephclient
 osism apply ceph-bootstrap-dashboard
 
+# Deploy OpenStack services
 osism apply keystone
 osism apply horizon
 osism apply skyline
@@ -60,6 +63,7 @@ osism apply nova
 osism apply cinder
 osism apply designate
 osism apply octavia
+osism apply openstackclient
 
 osism apply kolla-ceph-rgw
 
@@ -71,8 +75,8 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply homer
 fi
 
+# Deploy netdata service
 osism apply netdata
-osism apply openstackclient
 
 # Deploy wireguard service
 osism apply wireguard
