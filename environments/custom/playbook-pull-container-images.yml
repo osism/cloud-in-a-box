@@ -3,7 +3,41 @@
   hosts: all
   gather_facts: false
 
+  vars:
+    images:
+      - barbican
+      - cinder
+      - common
+      - designate
+      - glance
+      - grafana
+      - heat
+      - horizon
+      - keystone
+      - loadbalancer
+      - mariadb
+      - memcached
+      - neutron
+      - nova
+      - octavia
+      - opensearch
+      - openvswitch
+      - ovn
+      - placement
+      - prometheus
+      - rabbitmq
+      - redis
+      - skyline
+
   tasks:
+    - name: Pull kolla images
+      ansible.builtin.command:
+        cmd: "osism apply -r 2 -a pull {{ item }}"
+      environment:
+        INTERACTIVE: "false"
+      loop: "{{ images }}"
+      changed_when: true
+
     - name: Pull container images
       community.docker.docker_image:
         name: "{{ item }}"
