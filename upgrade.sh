@@ -30,8 +30,8 @@ fi
 osism reconciler sync
 osism apply facts
 
-# pull container images in background
-bash $BASE_DIR/pull.sh
+# Pull container images
+osism apply -e custom pull-container-images
 
 osism apply -a upgrade common
 osism apply -a upgrade loadbalancer
