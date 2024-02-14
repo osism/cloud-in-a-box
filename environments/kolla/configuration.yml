@@ -53,7 +53,6 @@ designate_ns_record: cloud.in-a-box.cloud
 horizon_keystone_multidomain: true
 
 # rgw integration
-
 enable_ceph_rgw: true
 enable_ceph_rgw_keystone: true
 
