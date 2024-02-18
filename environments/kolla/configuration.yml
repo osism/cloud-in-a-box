@@ -44,7 +44,8 @@ nova_libvirt_logging_debug: "no"
 nova_console: novnc
 
 # octavia
-octavia_network_type: tenant
+octavia_provider_drivers: "ovn:OVN provider"
+octavia_provider_agents: ovn
 
 # designate
 designate_ns_record: cloud.in-a-box.cloud
