@@ -47,8 +47,6 @@ phpmyadmin_traefik: true
 
 traefik_enable: true
 traefik_host: "{{ hostvars[inventory_hostname]['ansible_' + internal_interface]['ipv4']['address'] }}"
-traefik_port_http: 1080
-traefik_port_https: 10443
 
 ##########################
 # wireguard
