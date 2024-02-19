@@ -53,6 +53,13 @@ designate_ns_record: cloud.in-a-box.cloud
 # horizon
 horizon_keystone_multidomain: true
 
+# On the Cloud in a Box, we have an overlap with Traefik on port 80
+# on the internal interface. Therefore we move the internal port of
+# Horizon to port 1080. Horizon is accessed via the load balancer on
+# the external IP address. Therefore, nothing changes when accessing
+# Horizon itself.
+horizon_port: 1080
+
 # rgw integration
 enable_ceph_rgw: true
 enable_ceph_rgw_keystone: true
