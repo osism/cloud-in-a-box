@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 BASE_DIR="$(dirname $(readlink -f $0))"
 source $BASE_DIR/include.sh
 
@@ -10,17 +9,8 @@ set -e
 export INTERACTIVE=false
 source /etc/cloud-in-a-box.env
 
-
-# The upgrade of Docker must be done on the manager via script because the docker service is restarted.
-# In the future, an "osism update docker" wrapper similar to the "osism update manager" wrapper
-# will be available.
-
-pushd /opt/configuration/environments/manager
-./run.sh docker
-popd
-
 osism update manager
-
+osism update docker
 osism apply traefik
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
