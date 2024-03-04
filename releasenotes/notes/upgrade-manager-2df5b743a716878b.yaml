@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    With the `upgrade-manager.sh` script it is possible to only upgrade
+    the manager service.
