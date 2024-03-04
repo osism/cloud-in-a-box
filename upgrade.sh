@@ -76,3 +76,5 @@ osism apply openstackclient
 
 osism apply kubernetes
 osism apply clusterapi
+
+osism apply cleanup-docker-images -e ireallymeanit=yes
