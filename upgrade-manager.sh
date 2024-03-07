@@ -17,3 +17,5 @@ git pull
 popd
 
 osism update manager
+
+osism apply cleanup-docker-images -e ireallymeanit=yes
