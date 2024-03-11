@@ -103,5 +103,9 @@ osism apply kubernetes
 # Deploy clusterapi
 osism apply clusterapi
 
+# Deploy magnum
+osism apply copy-kubeconfig
+osism apply magnum
+
 trap "" TERM INT EXIT
 add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
