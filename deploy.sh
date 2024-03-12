@@ -100,6 +100,9 @@ osism apply --environment openstack test --skip-tags test-server,test-volume
 # Deploy kubernetes
 osism apply kubernetes
 
+# Deploy kubernetes-dashboard
+osism apply kubernetes-dashboard
+
 # Deploy clusterapi
 osism apply clusterapi
 
