@@ -8,6 +8,8 @@
       dst: ./gilt.yml
     - src: requirements.txt
       dst: ./requirements.txt
+    - src: Makefile
+      dst: ./Makefile
     - src: environments/manager/images.yml
       dst: environments/manager/images.yml
     - src: environments/manager/run.sh
