@@ -8,9 +8,6 @@ fsid: c2120a4a-669c-4769-a32c-b7e9d7b848f4
 # osd
 
 dmcrypt: false
-# NOTE: It is common to place more than 1 OSD on flash devices. To simulate
-#       upgrades etc. with this approach this is also used here.
-osds_per_device: 1
 crush_rule_config: true
 
 ##########################
