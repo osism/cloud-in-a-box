@@ -21,6 +21,7 @@ openstack_cacert: /etc/ssl/certs/ca-certificates.crt
 # openstack
 
 enable_barbican: "yes"
+enable_ironic: "yes"
 enable_magnum: "yes"
 enable_proxysql: "yes"
 enable_skyline: "yes"
@@ -31,6 +32,13 @@ openstack_service_workers: 2
 # libvirt
 # NOTE: Doesn't work yet with our setup
 libvirt_enable_sasl: "no"
+
+# ironic
+# ironic_dnsmasq_interface: "eno2"
+# ironic_cleaning_network: "public"
+# ironic_dnsmasq_dhcp_ranges:
+#   - range: "192.168.88.100,192.168.88.110"
+#     routers: "192.168.88.1"
 
 # neutron
 neutron_plugin_agent: ovn
