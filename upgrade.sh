@@ -84,6 +84,7 @@ osism apply clusterapi
 # to check in advance whether the service is already available. If not, a deployment must be
 # carried out instead of an upgrade.
 if [[ -z $(openstack --os-cloud admin service list -f value -c Name | grep magnum) ]]; then
+    osism apply copy-kubeconfig
     osism apply magnum
 else
     osism apply -a upgrade magnum
