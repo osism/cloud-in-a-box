@@ -63,6 +63,9 @@ osism apply -a upgrade cinder
 osism apply -a upgrade designate
 osism apply -a upgrade octavia
 
+# upload octavia amphora image
+ osism manage image octavia
+
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply -a upgrade barbican
     osism apply -a upgrade prometheus

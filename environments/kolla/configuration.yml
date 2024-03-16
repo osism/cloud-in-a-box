@@ -40,6 +40,9 @@ libvirt_enable_sasl: "no"
 #   - range: "192.168.88.100,192.168.88.110"
 #     routers: "192.168.88.1"
 
+# octavia
+octavia_loadbalancer_topology: "SINGLE"
+
 # neutron
 neutron_plugin_agent: ovn
 neutron_ovn_availability_zones:
@@ -51,10 +54,6 @@ nova_libvirt_logging_debug: "no"
 
 # nova
 nova_console: novnc
-
-# octavia
-octavia_provider_drivers: "ovn:OVN provider"
-octavia_provider_agents: ovn
 
 # designate
 designate_ns_record: cloud.in-a-box.cloud
