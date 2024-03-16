@@ -33,11 +33,17 @@ openstack_service_workers: 2
 libvirt_enable_sasl: "no"
 
 # ironic
-# ironic_dnsmasq_interface: "eno2"
-# ironic_cleaning_network: "public"
-# ironic_dnsmasq_dhcp_ranges:
-#   - range: "192.168.88.100,192.168.88.110"
-#     routers: "192.168.88.1"
+ironic_cleaning_network: "public"
+
+# No DNS is usable in the introspect network
+ironic_inspector_internal_endpoint: https://192.168.16.254:5050
+ironic_dnsmasq_dhcp_ranges:
+  - range: "192.168.17.100,192.168.17.110"
+    routers: "192.168.17.10"
+
+# No trusted CA is used in the Cloud in a box
+ironic_inspector_kernel_cmdline_extras:
+  - ipa-insecure=True
 
 # octavia
 octavia_loadbalancer_topology: "SINGLE"
@@ -47,8 +53,8 @@ neutron_plugin_agent: ovn
 neutron_ovn_availability_zones:
   - nova
 
-# NOTE: Disable the debugging logs for Libvirt as Libvirt writes a lot of logs
-#       that are not of interest.
+# We disable the debugging logs for Libvirt as Libvirt writes a lot of logs
+# that are not of interest.
 nova_libvirt_logging_debug: "no"
 
 # nova

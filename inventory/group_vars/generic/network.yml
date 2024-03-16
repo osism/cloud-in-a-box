@@ -1,10 +1,15 @@
 ---
-##########################################################
-# network
+# The network_*_interface parameters are only used within the
+# Cloud in a Box inventory for simplification.
+
+network_mgmt_interface: eno1
 
 network_internal_interface: vlan100
-network_mgmt_interface: eno1
 network_workload_interface: vlan101
+network_metal_interface: vlan102
+
+##########################################################
+# network
 
 network_type: netplan
 
@@ -21,6 +26,11 @@ network_vlans:
   vlan101:
     id: 101
     link: "{{ network_mgmt_interface }}"
+  vlan102:
+    id: 102
+    link: "{{ network_mgmt_interface }}"
+    addresses:
+      - "192.168.17.{{ node_id }}/24"
 
 network_dispatcher_scripts:
   - src: /opt/configuration/environments/manager/files/osism.sh

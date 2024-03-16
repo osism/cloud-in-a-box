@@ -46,7 +46,6 @@
         name: subnet-public
         network_name: public
         cidr: 192.168.112.0/24
-        enable_dhcp: false
         allocation_pool_start: 192.168.112.100
         allocation_pool_end: 192.168.112.200
         gateway_ip: 192.168.112.10
