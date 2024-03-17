@@ -65,7 +65,11 @@ osism apply designate
 osism apply octavia
 osism apply openstackclient
 
+# Make Swift API endpoint available
 osism apply kolla-ceph-rgw
+
+# upload octavia amphora image
+osism manage image octavia
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply barbican
