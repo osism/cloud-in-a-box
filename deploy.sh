@@ -59,6 +59,12 @@ osism apply skyline
 osism apply placement
 osism apply glance
 osism apply neutron
+
+# As the deployment of Ironic has been prepared so far, but will only be deployed
+# later in a manual step, the service is deactivated here for the moment.
+sudo systemctl disable kolla-ironic_neutron_agent-container.service
+sudo systemctl stop kolla-ironic_neutron_agent-container.service
+
 osism apply nova
 osism apply cinder
 osism apply designate
