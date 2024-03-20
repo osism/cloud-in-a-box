@@ -5,7 +5,7 @@ needed to make it run. With the Cloud in a Box, it is possible to run a full
 [Sovereign Cloud Stack](https://scs.community) deployment.
 
 For information how to install the Cloud in a Box, please have a look at the
-[Cloud in a Box Guide](https://osism.github.io/docs/guides/other-guides/cloud-in-a-box).
+[Cloud in a Box Guide](https://osism.tech/docs/guides/other-guides/cloud-in-a-box).
 
 ## Types
 
