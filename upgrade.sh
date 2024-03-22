@@ -54,7 +54,6 @@ osism apply -a upgrade rabbitmq
 
 osism apply -a upgrade keystone
 osism apply -a upgrade horizon
-osism apply -a upgrade skyline
 osism apply -a upgrade placement
 osism apply -a upgrade glance
 osism apply -a upgrade neutron
@@ -73,14 +72,15 @@ osism apply -a upgrade octavia
  osism manage image octavia
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
+    osism apply -a upgrade skyline
     osism apply -a upgrade barbican
     osism apply -a upgrade prometheus
     osism apply -a upgrade grafana
     osism apply phpmyadmin
     osism apply homer
+    osism apply netdata
 fi
 
-osism apply netdata
 osism apply openstackclient
 
 # Upgrade kubernetes
