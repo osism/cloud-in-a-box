@@ -55,7 +55,6 @@ osism apply ceph-bootstrap-dashboard
 # Deploy OpenStack services
 osism apply keystone
 osism apply horizon
-osism apply skyline
 osism apply placement
 osism apply glance
 osism apply neutron
@@ -78,15 +77,14 @@ osism apply kolla-ceph-rgw
 osism manage image octavia
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
+    osism apply skyline
     osism apply barbican
     osism apply prometheus
     osism apply grafana
     osism apply phpmyadmin
     osism apply homer
+    osism apply netdata
 fi
-
-# Deploy netdata service
-osism apply netdata
 
 # Deploy wireguard service
 osism apply wireguard
