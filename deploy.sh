@@ -47,7 +47,7 @@ fi
 osism reconciler sync
 
 # Deploy Ceph services
-osism apply ceph -e enable_ceph_mds=true -e enable_ceph_rgw=true
+osism apply ceph
 osism apply ceph-pools
 osism apply copy-ceph-keys
 osism apply cephclient
