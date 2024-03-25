@@ -4,6 +4,9 @@
 
 fsid: c2120a4a-669c-4769-a32c-b7e9d7b848f4
 
+enable_ceph_mds: true
+enable_ceph_rgw: true
+
 ##########################
 # osd
 
