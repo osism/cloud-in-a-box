@@ -8,10 +8,6 @@ radosgw_address: "192.168.16.{{ node_id }}"
 ##########################
 # openstack
 
-# NOTE: After the initial deployment of the Ceph Clusters, the following parameter can be
-#       set to false. It must only be set to true again when new pools or keys are added.
-openstack_config: true
-
 openstack_cinder_backup_pool:
   name: backups
   pg_num: 8
