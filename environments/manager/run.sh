@@ -10,6 +10,8 @@ ANSIBLE_COLLECTION_COMMONS_SOURCE=${ANSIBLE_COLLECTION_COMMONS_SOURCE:-git+https
 ANSIBLE_COLLECTION_SERVICES_SOURCE=${ANSIBLE_COLLECTION_SERVICES_SOURCE:-git+https://github.com/osism/ansible-collection-services}
 ANSIBLE_PLAYBOOKS_MANAGER_SOURCE=${ANSIBLE_PLAYBOOKS_MANAGER_SOURCE:-git+https://github.com/osism/ansible-playbooks-manager}
 
+ANSIBLE_VERSION=${ANSIBLE_VERSION:-9.4.0}
+
 INSTALL_ANSIBLE=${INSTALL_ANSIBLE:-true}
 INSTALL_ANSIBLE_ROLES=${INSTALL_ANSIBLE_ROLES:-true}
 VENV_PATH=${VENV_PATH:-.venv}
@@ -32,6 +34,7 @@ if [[ $INSTALL_ANSIBLE == "true" ]]; then
         # shellcheck source=/dev/null
         source "$VENV_PATH/bin/activate"
         pip3 install -r requirements.txt
+        pip3 install "ansible==$ANSIBLE_VERSION"
 
     else
 
