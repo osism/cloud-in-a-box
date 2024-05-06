@@ -35,15 +35,15 @@ registry_image: "{{ docker_registry }}/library/registry:{{ registry_tag }}"
 osism_ansible_tag: "{{ manager_version|default('latest') }}"
 osism_ansible_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/osism-ansible:{{ osism_ansible_tag }}"
 
-inventory_reconciler_tag: "7.0.1"
+inventory_reconciler_tag: "7.0.3"
 
 inventory_reconciler_image: "{{ docker_registry_ansible }}/osism/inventory-reconciler:{{ inventory_reconciler_tag }}"
 
-osism_tag: "0.20240327.0"
+osism_tag: "0.20240503.1"
 
 osism_image: "{{ docker_registry_ansible }}/osism/osism:{{ osism_tag }}"
 
-osism_netbox_tag: "0.20240327.0"
+osism_netbox_tag: "0.20240503.1"
 
 osism_netbox_image: "{{ docker_registry_ansible }}/osism/osism-netbox:{{ osism_netbox_tag }}"
 
