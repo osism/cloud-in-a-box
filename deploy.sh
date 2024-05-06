@@ -18,6 +18,20 @@ fi
 
 osism apply facts
 
+# Minified version of the Cloud in a Box in which only Kubernetes is deployed.
+if [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
+    # Deploy kubernetes
+    osism apply kubernetes
+
+    # Deploy kubernetes-dashboard
+    osism apply kubernetes-dashboard
+
+    trap "" TERM INT EXIT
+    add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
+
+    exit 0
+fi
+
 # Pull container images
 osism apply -e custom pull-container-images
 
