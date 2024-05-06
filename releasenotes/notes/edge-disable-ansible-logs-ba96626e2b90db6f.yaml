@@ -1,6 +1,0 @@
----
-features:
-  - |
-    On the edge environments we are not interested in the initial Ansible logs
-    and disable them at the beginning of the deployment and re-enable them
-    after the initial deployment.

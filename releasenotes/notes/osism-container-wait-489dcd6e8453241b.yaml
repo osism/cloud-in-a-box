@@ -1,4 +1,0 @@
----
-fixes:
-  - |
-    Wait for osismclient to prevent timing problems
