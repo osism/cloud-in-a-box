@@ -2,5 +2,5 @@
 
 ansible-pylibssh==1.1.0
 debops==3.1.0
-netaddr==0.10.1
+netaddr==1.2.1
 paramiko==3.4.0
