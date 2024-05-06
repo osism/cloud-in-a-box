@@ -1,6 +1,0 @@
----
-features:
-  - |
-    The normal way of updating the configuration repository (osism apply configuration)
-    is not used as we have made manual changes in the configuration repository
-    on the Cloud in a Box. For example, for the primary network card.

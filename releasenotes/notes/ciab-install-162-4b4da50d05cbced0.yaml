@@ -1,5 +1,0 @@
----
-features:
-  - |
-    - Provides the infastructure to specify the repo url and the repo branch from
-      the grub menu (ciab_repo_url and ciab_branch).

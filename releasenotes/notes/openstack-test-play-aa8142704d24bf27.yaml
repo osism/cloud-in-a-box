@@ -1,4 +1,0 @@
----
-features:
-  - |
-    As in osism/testbed, the test resources are now also managed via a dedicated playbook.

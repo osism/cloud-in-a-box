@@ -1,4 +1,0 @@
----
-features:
-  - |
-    Ceph dashboard now listens on `192.168.16.10:7000`.

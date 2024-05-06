@@ -1,6 +1,0 @@
----
-fixes:
-  - |
-    The too many open files in various places are now fixed by significantly
-    increasing the limit for the number of open files. This is done via the
-    new osism.commons.limits role.
