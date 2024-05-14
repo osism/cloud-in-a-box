@@ -35,7 +35,7 @@ registry_image: "{{ docker_registry }}/library/registry:{{ registry_tag }}"
 osism_ansible_tag: "{{ manager_version|default('latest') }}"
 osism_ansible_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/osism-ansible:{{ osism_ansible_tag }}"
 
-inventory_reconciler_tag: "7.0.3"
+inventory_reconciler_tag: "7.0.4"
 
 inventory_reconciler_image: "{{ docker_registry_ansible }}/osism/inventory-reconciler:{{ inventory_reconciler_tag }}"
 
