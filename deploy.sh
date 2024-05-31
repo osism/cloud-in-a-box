@@ -26,6 +26,9 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
     # Deploy kubernetes-dashboard
     osism apply kubernetes-dashboard
 
+    # Deploy netdata
+    osism apply netdata
+
     trap "" TERM INT EXIT
     add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
 
