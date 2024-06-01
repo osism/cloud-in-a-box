@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
 
-set -e
-
 BASE_DIR="$(dirname $(readlink -f $0))"
 source $BASE_DIR/include.sh
 
+trap "add_status 'error' 'BOOTSTRAP FAILED'" TERM INT EXIT
+set -e
 set -x
 
-trap "add_status 'error' 'BOOTSTRAP FAILED'" TERM INT EXIT
 export INTERACTIVE=false
-CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
+
+if [[ -e /etc/cloud-in-a-box.env ]]; then
+    source /etc/cloud-in-a-box.env
+else
+    CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
+    echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | sudo tee /etc/cloud-in-a-box.env
+fi
 
 wait_for_uplink_connection "https://scs.community"
 
@@ -33,15 +38,15 @@ pushd /opt/cloud-in-a-box/environments/manager
 export INSTALL_ANSIBLE_ROLES=false
 ./run.sh network
 
-# NOTE: Apply network changes without rebooting
+# Apply network changes without rebooting
 netplan apply
 
-# NOTE: Ensure the APT cache is always up to date
+# Ensure the APT cache is always up to date
 apt-get update
 
 ./run.sh bootstrap
 
-# NOTE: hackish workaround for initial permission denied issues
+# Hackish workaround for initial permission denied issues
 chmod o+rw /var/run/docker.sock
 
 ./run.sh configuration
@@ -55,16 +60,23 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
 elif [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
     ./disable-netbox.sh
 elif [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
-    sed -i "s/manager_version: .*/manager_version: latest/g" /opt/cloud-in-a-box/environments/manager/configuration.yml
-    sed -i "s/manager_version: .*/manager_version: latest/g" /opt/configuration/environments/manager/configuration.yml
-
-    # disable ceph & kolla ansible containers for the initial deployment
+    # Disable ceph & kolla ansible containers for the initial deployment
     echo "enable_ceph_ansible: false" >> /opt/cloud-in-a-box/environments/manager/configuration.yml
     echo "enable_kolla_ansible: false" >> /opt/cloud-in-a-box/environments/manager/configuration.yml
 
-    # disable ceph & kolla ansible containers for upgrades
+    # Disable ceph & kolla ansible containers for upgrades
     echo "enable_ceph_ansible: false" >> /opt/configuration/environments/manager/configuration.yml
     echo "enable_kolla_ansible: false" >> /opt/configuration/environments/manager/configuration.yml
+
+    # Use latest manager
+    sed -i "s/manager_version: .*/manager_version: latest/g" /opt/cloud-in-a-box/environments/manager/configuration.yml
+    sed -i "s/manager_version: .*/manager_version: latest/g" /opt/configuration/environments/manager/configuration.yml
+
+    pushd /opt/cloud-in-a-box
+    make sync
+    cp /opt/cloud-in-a-box/environments/manager/images.yml /opt/configuration/environments/manager/images.yml
+    chown dragon:dragon /opt/configuration/environments/manager/images.yml
+    popd
 fi
 
 ./run.sh pull
@@ -72,11 +84,11 @@ fi
 
 popd
 
-# NOTE: In some configurations, the manager service is currently not coming up properly.
-#       We therefore perform another explicit restart of the manager service here.
+# In some configurations, the manager service is currently not coming up properly.
+# We therefore perform another explicit restart of the manager service here.
 systemctl restart docker-compose@manager
 
-# NOTE: wait for the manager services
+# Wait for the manager services
 wait_for_container_healthy 60 osism-ansible
 
 if [[ $CLOUD_IN_A_BOX_TYPE != "kubernetes" ]]; then
@@ -86,16 +98,16 @@ fi
 
 wait_for_container_running 60 osismclient
 
-# NOTE: gather facts to ensure that the addresses of the new VLAN devices
-#       are in the facts cache
+# Gather facts to ensure that the addresses of the new VLAN devices
+# are in the facts cache
 osism apply facts
 
 osism apply bootstrap
 
-# NOTE: Restart the manager services to update the /etc/hosts file
+# Restart the manager services to update the /etc/hosts file
 docker compose -f /opt/manager/docker-compose.yml restart
 
-# NOTE: wait for the manager service
+# Wait for the manager service
 wait_for_container_healthy 60 manager-ara-server-1
 
 trap "" TERM INT EXIT
