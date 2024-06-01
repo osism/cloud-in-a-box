@@ -100,7 +100,7 @@ osism apply openstackclient
 # Make Swift API endpoint available
 osism apply kolla-ceph-rgw
 
-# upload octavia amphora image
+# Upload octavia amphora image
 osism manage image octavia
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
