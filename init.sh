@@ -19,9 +19,9 @@ else
   fi
 
   # Write parameters
-  echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | tee /etc/cloud-in-a-box.env
+  echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | tee -a /etc/cloud-in-a-box.env
   for extra in "$@"; do
-    echo "$extra" | tee /etc/cloud-in-a-box.env
+    echo "$extra" | tee -a /etc/cloud-in-a-box.env
   done
 fi
 
