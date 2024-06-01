@@ -2,7 +2,6 @@
 
 echo "INIT"
 set -x
-set -e
 
 VALID_CLOUD_IN_A_BOX_TYPES=("edge" "kubernetes" "sandbox")
 
@@ -36,6 +35,9 @@ vars="$(tr ' ' '\n' < $param_file | grep -P '^ciab_.+=.+')"
 if [ -n "$vars" ]; then
    eval "$vars"
 fi
+
+set -x
+set -e
 
 # Get initial configuration repository
 git clone "${ciab_repo_url:-https://github.com/osism/cloud-in-a-box}" /opt/cloud-in-a-box
