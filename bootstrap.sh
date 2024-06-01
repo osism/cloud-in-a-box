@@ -14,7 +14,7 @@ CLOUD_IN_A_BOX_TYPE=${1:-sandbox}
 wait_for_uplink_connection "https://scs.community"
 
 apt-get update
-apt-get install -y python3-virtualenv sshpass jq
+apt-get install -y python3-virtualenv python3-venv sshpass jq
 
 default_gateway_interface="$(get_ethernet_interface_of_default_gateway)"
 get_default_gateway_settings
