@@ -55,6 +55,11 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
 elif [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
     ./disable-netbox.sh
 elif [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
+    # disable ceph & kolla ansible containers for the initial deployment
+    echo "enable_ceph_ansible: false" >> /opt/cloud-in-a-box/environments/manager/configuration.yml
+    echo "enable_kolla_ansible: false" >> /opt/cloud-in-a-box/environments/manager/configuration.yml
+
+    # disable ceph & kolla ansible containers for upgrades
     echo "enable_ceph_ansible: false" >> /opt/configuration/environments/manager/configuration.yml
     echo "enable_kolla_ansible: false" >> /opt/configuration/environments/manager/configuration.yml
 fi
