@@ -54,7 +54,11 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     ./run.sh netbox
 elif [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
     ./disable-netbox.sh
+elif [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
+    echo "enable_ceph_ansible: false" >> /opt/configuration/environments/manager/configuration.yml
+    echo "enable_kolla_ansible: false" >> /opt/configuration/environments/manager/configuration.yml
 fi
+
 ./run.sh pull
 ./run.sh manager
 
@@ -66,8 +70,12 @@ systemctl restart docker-compose@manager
 
 # NOTE: wait for the manager services
 wait_for_container_healthy 60 osism-ansible
-wait_for_container_healthy 60 ceph-ansible
-wait_for_container_healthy 60 kolla-ansible
+
+if [[ $CLOUD_IN_A_BOX_TYPE != "kubernetes" ]]; then
+    wait_for_container_healthy 60 ceph-ansible
+    wait_for_container_healthy 60 kolla-ansible
+fi
+
 wait_for_container_running 60 osismclient
 
 # NOTE: gather facts to ensure that the addresses of the new VLAN devices
