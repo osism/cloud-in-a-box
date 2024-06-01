@@ -29,6 +29,15 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
     # Deploy netdata
     osism apply netdata
 
+    # Deploy netbird
+    if [[ ! -z "$NB_SETUP_KEY" ]]; then
+        echo "netbird_setup_key: $NB_SETUP_KEY" >> /opt/configuration/environments/infrastructure/configuration.yml
+        if [[ ! -z "$NB_MANAGEMENT_URL" ]]; then
+            echo "netbird_management_url: $NB_MANAGEMENT_URL" >> /opt/configuration/environments/infrastructure/configuration.yml
+        fi
+        osism apply netbird
+    fi
+
     trap "" TERM INT EXIT
     add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
 
