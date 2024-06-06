@@ -108,14 +108,18 @@ popd
 # We therefore perform another explicit restart of the manager service here.
 systemctl restart docker-compose@manager
 
-# Wait for the manager services
+# Wait for the osism-ansible service
 wait_for_container_healthy 60 osism-ansible
 
 if [[ $CLOUD_IN_A_BOX_TYPE != "kubernetes" ]]; then
+    # Wait for the ceph-ansible service
     wait_for_container_healthy 60 ceph-ansible
+
+    # Wait for the kolla-ansible service
     wait_for_container_healthy 60 kolla-ansible
 fi
 
+# wait for the osismclient service
 wait_for_container_running 60 osismclient
 
 # Gather facts to ensure that the addresses of the new VLAN devices
@@ -127,8 +131,10 @@ osism apply bootstrap
 # Restart the manager services to update the /etc/hosts file
 docker compose -f /opt/manager/docker-compose.yml restart
 
-# Wait for the manager service
-wait_for_container_healthy 60 manager-ara-server-1
+if [[ $CLOUD_IN_A_BOX_TYPE != "kubernetes" ]]; then
+    # Wait for the manager service
+    wait_for_container_healthy 60 manager-ara-server-1
+fi
 
 trap "" TERM INT EXIT
 add_status "info" "BOOTSTRAP COMPLETE"
