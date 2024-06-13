@@ -31,6 +31,7 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
 
     # Deploy netbird
     if [[ ! -z "$NB_SETUP_KEY" ]]; then
+        echo "netbird_hostname: vice-$(head -c 8 /etc/machine-id)" >> /opt/configuration/environments/infrastructure/configuration.yml
         echo "netbird_setup_key: $NB_SETUP_KEY" >> /opt/configuration/environments/infrastructure/configuration.yml
         if [[ ! -z "$NB_MANAGEMENT_URL" ]]; then
             echo "netbird_management_url: $NB_MANAGEMENT_URL" >> /opt/configuration/environments/infrastructure/configuration.yml
