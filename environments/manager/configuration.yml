@@ -48,6 +48,11 @@ netbox_plugins_extra:
   - netbox_bgp
   - netbox_dns
 
+##########################
+# kubernetes
+
+enable_osism_kubernetes: true
+
 #########################
 # opensearch
 
