@@ -1,0 +1,2 @@
+---
+cilium_iface: "{{ network_internal_interface }}"
