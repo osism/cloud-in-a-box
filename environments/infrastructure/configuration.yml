@@ -28,14 +28,6 @@ homer_url_prometheus: ""
 homer_url_vault: ""
 
 ##########################
-# k3s
-
-cilium_bgp: true
-kube_vip_arp: false
-kube_vip_bgp: true
-kube_vip_iface:
-
-##########################
 # netbox
 
 netbox_traefik: true
