@@ -1,2 +1,2 @@
 ---
-cilium_iface: "{{ network_internal_interface }}"
+flannel_iface: "{{ network_internal_interface }}"
