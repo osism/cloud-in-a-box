@@ -22,10 +22,6 @@ phpmyadmin_image: "{{ docker_registry }}/phpmyadmin/phpmyadmin:{{ phpmyadmin_tag
 postgres_tag: "15.7-alpine"
 postgres_image: "{{ docker_registry }}/library/postgres:{{ postgres_tag }}"
 
-postgres_upgrade_tag: "14-to-15"
-postgres_upgrade_image: "{{ docker_registry }}/tianon/postgres-upgrade:{{ postgres_upgrade_tag }}"
-
-
 manager_redis_tag: "7.2.5-alpine"
 manager_redis_image: "{{ docker_registry }}/library/redis:{{ manager_redis_tag }}"
 
@@ -42,11 +38,11 @@ inventory_reconciler_tag: "7.1.1"
 
 inventory_reconciler_image: "{{ docker_registry_ansible }}/osism/inventory-reconciler:{{ inventory_reconciler_tag }}"
 
-osism_tag: "0.20240723.0"
+osism_tag: "0.20240812.0"
 
 osism_image: "{{ docker_registry_ansible }}/osism/osism:{{ osism_tag }}"
 
-osism_netbox_tag: "0.20240723.0"
+osism_netbox_tag: "0.20240812.0"
 
 osism_netbox_image: "{{ docker_registry_ansible }}/osism/osism-netbox:{{ osism_netbox_tag }}"
 
