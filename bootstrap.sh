@@ -3,7 +3,7 @@
 BASE_DIR="$(dirname $(readlink -f $0))"
 source $BASE_DIR/include.sh
 
-trap "add_status 'error' 'BOOTSTRAP FAILED'" TERM INT EXIT
+trap "set +x; add_status 'error' 'BOOTSTRAP FAILED'; sleep 90" TERM INT EXIT
 set -e
 set -x
 

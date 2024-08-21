@@ -3,6 +3,8 @@
 BASE_DIR="$(dirname $(readlink -f $0))"
 source $BASE_DIR/include.sh
 
+trap "set +x; add_status 'error' 'PREPARE FAILED'; sleep 90" TERM INT EXIT
+
 set -x
 set -e
 
