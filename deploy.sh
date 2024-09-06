@@ -23,8 +23,8 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
     # Deploy kubernetes
     osism apply kubernetes
 
-    # Deploy kubernetes-dashboard
-    osism apply kubernetes-dashboard
+    # Deploy kubernetes dashboard
+    osism apply k8s-dashboard
 
     # Deploy netdata
     osism apply netdata
@@ -136,8 +136,8 @@ osism apply --environment openstack test --skip-tags test-server,test-volume
 # Deploy kubernetes
 osism apply kubernetes
 
-# Deploy kubernetes-dashboard
-osism apply kubernetes-dashboard
+# Deploy kubernetes dashboard
+osism apply k8s-dashboard
 
 # Deploy clusterapi
 osism apply clusterapi
