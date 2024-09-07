@@ -4,7 +4,7 @@
 adminer_tag: "4.8.1"
 adminer_image: "{{ docker_registry }}/library/adminer:{{ adminer_tag }}"
 
-ara_server_tag: "1.7.1"
+ara_server_tag: "1.7.2"
 ara_server_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/ara-server:{{ ara_server_tag }}"
 
 ara_server_mariadb_tag: "11.4.2"
@@ -34,15 +34,15 @@ osism_ansible_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/osi
 osism_kubernetes_tag: "{{ manager_version|default('latest') }}"
 osism_kubernetes_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/osism-kubernetes:{{ osism_kubernetes_tag }}"
 
-inventory_reconciler_tag: "7.1.2"
+inventory_reconciler_tag: "7.1.3"
 
 inventory_reconciler_image: "{{ docker_registry_ansible }}/osism/inventory-reconciler:{{ inventory_reconciler_tag }}"
 
-osism_tag: "0.20240818.0"
+osism_tag: "0.20240907.0"
 
 osism_image: "{{ docker_registry_ansible }}/osism/osism:{{ osism_tag }}"
 
-osism_netbox_tag: "0.20240818.0"
+osism_netbox_tag: "0.20240907.0"
 
 osism_netbox_image: "{{ docker_registry_ansible }}/osism/osism-netbox:{{ osism_netbox_tag }}"
 
