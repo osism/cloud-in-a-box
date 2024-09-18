@@ -33,10 +33,6 @@ homer_url_vault: ""
 netbox_traefik: true
 netbox_host: netbox.services.in-a-box.cloud
 
-netbox_plugins_extra:
-  - netbox_bgp
-  - netbox_dns
-
 ##########################
 # phpmyadmin
 
