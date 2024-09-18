@@ -9,6 +9,9 @@ deployment.
 For information how to install the Cloud in a Box, please have a look at the
 [Cloud in a Box Guide](https://osism.tech/docs/guides/other-guides/cloud-in-a-box).
 
+The development notes in the official documentation are useful for
+[bug fixes and the further development](https://osism.tech/docs/guides/other-guides/cloud-in-a-box/#development) of CiaB.
+
 ## Types
 
 There are three types of Cloud in a Box.

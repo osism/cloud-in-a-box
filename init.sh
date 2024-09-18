@@ -42,6 +42,8 @@ set -e
 # Get initial configuration repository
 git clone "${ciab_repo_url:-https://github.com/osism/cloud-in-a-box}" /opt/cloud-in-a-box
 git -C /opt/cloud-in-a-box checkout "${ciab_branch:-main}"
+sed -i "~s,configuration_git_version:.*,configuration_git_version: ${ciab_branch:-main}," \
+   /opt/cloud-in-a-box/environments/manager/configuration.yml
 
 # Run bootstrap script
 /opt/cloud-in-a-box/bootstrap.sh $CLOUD_IN_A_BOX_TYPE
