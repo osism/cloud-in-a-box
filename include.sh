@@ -98,7 +98,10 @@ add_status(){
 
    sudo cp /etc/issue.net /etc/.issue.net.backup
    sudo cp /etc/issue /etc/.issue.backup
+   sudo touch /etc/motd
+   sudo cp /etc/motd /etc/.motd.backup
 
    (cat /etc/.issue.net.backup; echo -e "$text") | sudo tee /etc/issue.net >/dev/null
    (cat /etc/.issue.backup ; echo -e "$text") | sudo tee /etc/issue
+   (cat /etc/.motd.backup ; echo -e "$text") | sudo tee /etc/motd
 }

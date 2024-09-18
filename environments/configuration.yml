@@ -20,6 +20,8 @@ docker_registry_service: index.docker.io
 operator_authorized_keys:
   - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDIquLz7xZ1rzpsoivjOiZTarg+jri0ezRn823wGw4G0gFfosxPxNJ4BS1LaGjje9YI4JVsU2btDuxcNIvmRehVLPHxRwpDHE+FVajltnF1DQXiySitdbC27N1NIaVbWv8y1C2PFnXL+QUrF2VddOzNnMBXingEV2Ev/bTW/XfVTTArpHsNTS0DJRMpMeUROHmCwxhWjjuFfCcH2EEn5KyBCvgiQIozkwf5Q7nK3DeG2QODxtLPJkmCEuvpqbwZF8VkaE1n1TLr7a9CD/p4sn1+Z1BJO+Zsg72AM9A0lKQ0/1TCsAHLMIoZoNH2F7JeNtApFhDAEg9EZGyk0RDkrKxojYzuimvoyYXI84JDdKx3kDFGiXB3ITDMOFRajGLdgJwAZT2Aw62H0uWQs1dMNRtMgaemLIDmschZDVH5j9iDwEZaKVzJ6LLDSn1Wl09nuZNV8okNIvsBe4X6mHzqwLOYYga/HmI6y4nudTLSeckFraMXGRFFfGHDVpNwKRRavx0= dragon@osism
 
+motd_show_ssh: true
+
 ##########################
 # resolvconf
 
