@@ -10,11 +10,14 @@ ara_server_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/ara-se
 ara_server_mariadb_tag: "11.5.2"
 ara_server_mariadb_image: "{{ docker_registry }}/library/mariadb:{{ ara_server_mariadb_tag }}"
 
-netbox_tag: "v4.1.0"
+netbox_tag: "v4.1.1"
 netbox_image: "{{ docker_registry_netbox|default('quay.io') }}/osism/netbox:{{ netbox_tag }}"
 
 nginx_tag: "1.27.1-alpine"
 nginx_image: "{{ docker_registry }}/library/nginx:{{ nginx_tag }}"
+
+pgautoupgrade_tag: "16-alpine"
+pgautoupgrade_image: "{{ docker_registry }}/pgautoupgrade/pgautoupgrade:{{ pgautoupgrade_tag }}"
 
 phpmyadmin_tag: "5.2.1"
 phpmyadmin_image: "{{ docker_registry }}/phpmyadmin/phpmyadmin:{{ phpmyadmin_tag }}"
@@ -34,22 +37,22 @@ osism_ansible_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/osi
 osism_kubernetes_tag: "{{ manager_version|default('latest') }}"
 osism_kubernetes_image: "{{ docker_registry_ansible|default('quay.io') }}/osism/osism-kubernetes:{{ osism_kubernetes_tag }}"
 
-inventory_reconciler_tag: "8.0.0"
+inventory_reconciler_tag: "8.0.1"
 
 inventory_reconciler_image: "{{ docker_registry_ansible }}/osism/inventory-reconciler:{{ inventory_reconciler_tag }}"
 
-osism_tag: "0.20240911.0"
+osism_tag: "0.20240924.0"
 
 osism_image: "{{ docker_registry_ansible }}/osism/osism:{{ osism_tag }}"
 
-osism_netbox_tag: "0.20240911.0"
+osism_netbox_tag: "0.20240924.0"
 
 osism_netbox_image: "{{ docker_registry_ansible }}/osism/osism-netbox:{{ osism_netbox_tag }}"
 
 vault_tag: "1.17.5"
 vault_image: "{{ docker_registry }}/hashicorp/vault:{{ vault_tag }}"
 
-traefik_tag: "v3.1.2"
+traefik_tag: "v3.1.4"
 traefik_image: "{{ docker_registry }}/library/traefik:{{ traefik_tag }}"
 
 # image tag depends on CEPH_VERSION or OPENSTACK_VERSION
