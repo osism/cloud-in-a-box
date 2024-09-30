@@ -140,5 +140,7 @@ osism apply clusterapi
 osism apply copy-kubeconfig
 osism apply magnum
 
+touch /etc/cloud/cloud-init.disabled
+
 trap "" TERM INT EXIT
 add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
