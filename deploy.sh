@@ -141,6 +141,7 @@ osism apply copy-kubeconfig
 osism apply magnum
 
 touch /etc/cloud/cloud-init.disabled
+rm -f /etc/netplan/50-cloud-init.yaml
 
 trap "" TERM INT EXIT
 add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
