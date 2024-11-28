@@ -44,6 +44,8 @@ netbox_host: "netbox.services.in-a-box.cloud"
 netbox_traefik: true
 netbox_api_url: "https://{{ netbox_host }}"
 
+netbox_service_netbox_start_period: 240s
+
 ##########################
 # kubernetes
 
