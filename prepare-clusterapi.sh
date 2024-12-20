@@ -9,9 +9,9 @@ set -x
 
 export INTERACTIVE=false
 
-osism manage image clusterapi --filter 1.29
+osism manage image clusterapi --filter 1.31
 
-KUBERNETES_VERSION=1.29.2
+KUBERNETES_VERSION=1.31.3
 IMAGE_NAME="Kubernetes CAPI $KUBERNETES_VERSION"
 
 openstack --os-cloud admin coe cluster template create \
