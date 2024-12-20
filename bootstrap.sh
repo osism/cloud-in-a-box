@@ -16,7 +16,7 @@ else
     echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | sudo tee /etc/cloud-in-a-box.env
 fi
 
-wait_for_uplink_connection "https://scs.community"
+wait_for_uplink_connection "https://heise.de"
 
 apt-get update
 apt-get install -y python3-virtualenv python3-venv sshpass jq
