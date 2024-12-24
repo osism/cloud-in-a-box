@@ -1,4 +1,4 @@
-Jinja2==3.1.4
+Jinja2==3.1.5
 PyYAML==6.0.2
 ansible==10.7.0
 packaging==24.2
