@@ -38,6 +38,10 @@ pushd /opt/cloud-in-a-box/environments/manager
 export INSTALL_ANSIBLE_ROLES=false
 ./run.sh network
 
+# Disable cloud-init network configuration
+echo "network: {config: disabled}" > /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+rm -f /etc/netplan/50-cloud-init.yaml
+
 # Apply network changes without rebooting
 netplan apply
 
