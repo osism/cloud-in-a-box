@@ -81,6 +81,7 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply -a upgrade prometheus
     osism apply -a upgrade grafana
     osism apply phpmyadmin
+    osism apply cgit
     osism apply homer
     osism apply netdata
 fi
