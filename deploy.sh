@@ -104,6 +104,7 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply prometheus
     osism apply grafana
     osism apply phpmyadmin
+    osism apply cgit
     osism apply homer
     osism apply netdata
 fi
