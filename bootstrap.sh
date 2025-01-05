@@ -124,7 +124,7 @@ fi
 wait_for_container_running 60 osismclient
 
 # Disable ARA service
-./disable-ara.sh
+/opt/configuration/disable-ara.sh
 
 # Gather facts to ensure that the addresses of the new VLAN devices
 # are in the facts cache
