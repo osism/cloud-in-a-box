@@ -1,7 +1,4 @@
 ---
-##########################################################
-# generic
-
 internal_address: "{{ '192.168.16.0/24' | ansible.utils.ipaddr('net') | ansible.utils.ipaddr(node_id) | ansible.utils.ipaddr('address') }}"
 internal_interface: "{{ network_internal_interface }}"
 

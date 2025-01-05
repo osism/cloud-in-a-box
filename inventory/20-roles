@@ -1,45 +1,43 @@
 ##########################################################
 # roles
 
-# NOTE: add all systems to this group, regardless of whether they are
-#       listed in other groups
+# The "all" group is not used in OSISM. Therefore it is important
+# that all nodes are explicitly listed here.
 [generic]
 manager.systems.in-a-box.cloud
 
-# NOTE: Here the manager services (Netbox, Ansible, ..) run
+# Nodes that act as manager node (sometimes called deployment node)
+# are included in this group.
 [manager]
 manager.systems.in-a-box.cloud
 
-# NOTE: Systems to be used for monitoring (Prometheus, Netdata, ..)
+# Nodes which are intended for monitoring services belong to
+# this group
 [monitoring]
 manager.systems.in-a-box.cloud
 
-# NOTE: Services that are necessary for the control of OpenStack (API, scheduler, messaging, ..)
+# Nodes that serve as controllers, so things like scheduler,
+# API or database run there, of the environment.
 [control]
 manager.systems.in-a-box.cloud
 
-# NOTE: Systems used for virtualization
+# Virtual systems managed by OpenStack Nova are placed on
+# nodes in this group.
 [compute]
 manager.systems.in-a-box.cloud
 
-# NOTE: Systems used for Neutron services
+# Network resources managed by OpenStack Neutron, Octavia and Designate,
+# such as routers, are placed on these nodes. This group has nothing
+# to do with the general network configuration.
 [network]
 manager.systems.in-a-box.cloud
 
+# Nodes that serve as controllers for Ceph, so things like the
+# Ceph monitor service run here.
 [ceph-control]
 manager.systems.in-a-box.cloud
 
+# The storage available in these systems is provided in the
+# form of OSDs for Ceph.
 [ceph-resource]
 manager.systems.in-a-box.cloud
-
-[ceph-mon:children]
-ceph-resource
-
-[ceph-mds:children]
-ceph-resource
-
-[ceph-osd:children]
-ceph-resource
-
-[ceph-rgw:children]
-ceph-resource

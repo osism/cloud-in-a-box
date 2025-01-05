@@ -1,7 +1,4 @@
 ---
-##########################################################
-# network
-
 network_internal_interface: vlan100
 network_mgmt_interface: eno1
 network_workload_interface: vlan101
