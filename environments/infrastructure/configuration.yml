@@ -12,6 +12,7 @@ homer_host: homer.services.in-a-box.cloud
 homer_traefik: true
 
 homer_url_ara: "https://ara.services.in-a-box.cloud/"
+homer_url_cgit: "https://cgit.services.in-a-box.cloud/"
 homer_url_flower: "https://flower.services.in-a-box.cloud/"
 homer_url_grafana: "https://api.in-a-box.cloud:3000"
 homer_url_horizon: "https://api.in-a-box.cloud/"
@@ -23,15 +24,14 @@ homer_url_rabbitmq: "https://api.in-a-box.cloud:15672"
 
 homer_url_ceph: ""
 homer_url_keycloak: ""
-homer_url_patchman: ""
 homer_url_prometheus: ""
 homer_url_vault: ""
 
 ##########################
 # netbox
 
-netbox_traefik: true
 netbox_host: netbox.services.in-a-box.cloud
+netbox_traefik: true
 
 ##########################
 # phpmyadmin
