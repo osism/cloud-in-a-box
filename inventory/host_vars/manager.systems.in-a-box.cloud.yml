@@ -3,7 +3,6 @@ node_id: 10
 
 netdata_host_type: server
 
-# Ceph
 monitor_address: "192.168.16.{{ node_id }}"
 radosgw_address: "192.168.16.{{ node_id }}"
 lvm_volumes:

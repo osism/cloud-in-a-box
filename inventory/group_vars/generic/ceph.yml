@@ -1,12 +1,12 @@
 ---
 ##########################################################
-# ceph
+# addresses
 
 monitor_address: "192.168.16.{{ node_id }}"
 radosgw_address: "192.168.16.{{ node_id }}"
 
 ##########################
-# openstack
+# pools
 
 openstack_cinder_backup_pool:
   name: backups
