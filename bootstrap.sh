@@ -73,9 +73,6 @@ elif [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
     # Disable netbox integration
     ./disable-netbox.sh
 
-    # Disable ara service
-    ./disable-ara.sh
-
     # Disable openstack integration
     echo "manager_enable_openstack: false" >> /opt/cloud-in-a-box/environments/manager/configuration.yml
     echo "manager_enable_openstack: false" >> /opt/configuration/environments/manager/configuration.yml
@@ -123,8 +120,11 @@ if [[ $CLOUD_IN_A_BOX_TYPE != "kubernetes" ]]; then
     wait_for_container_healthy 60 kolla-ansible
 fi
 
-# wait for the osismclient service
+# Wait for the osismclient service
 wait_for_container_running 60 osismclient
+
+# Disable ARA service
+./disable-ara.sh
 
 # Gather facts to ensure that the addresses of the new VLAN devices
 # are in the facts cache

@@ -39,6 +39,9 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
         osism apply netbird
     fi
 
+    # Enable ARA service
+    /opt/configuration/enable-ara.sh
+
     trap "" TERM INT EXIT
     add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
 
@@ -142,6 +145,9 @@ osism apply copy-kubeconfig
 osism apply magnum
 
 touch /etc/cloud/cloud-init.disabled
+
+# Enable ARA service
+/opt/configuration//enable-ara.sh
 
 trap "" TERM INT EXIT
 add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
