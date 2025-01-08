@@ -9,6 +9,7 @@ set -x
 set -e
 
 export INTERACTIVE=false
+export OSISM_APPLY_RETRY=1
 source /etc/cloud-in-a-box.env
 
 # The normal way of updating the configuration repository (osism apply configuration)

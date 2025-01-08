@@ -8,6 +8,7 @@ set -x
 set -e
 
 export INTERACTIVE=false
+export OSISM_APPLY_RETRY=1
 
 if [[ -e /etc/cloud-in-a-box.env ]]; then
     source /etc/cloud-in-a-box.env
