@@ -90,12 +90,6 @@ add_status(){
      text="\e[5;41;1mERROR: $text\e[0m"
    fi
 
-   if [[ "$type" = "info" ]] && [[ -n "$BOOTSTRAP_LOGFILE" ]];then
-       text="$text\n\nReview the progress in $BOOTSTRAP_LOGFILE"
-   elif [[ -n "$BOOTSTRAP_LOGFILE" ]];then
-       text="$text\n\nReview $BOOTSTRAP_LOGFILE to analyze what went wrong"
-   fi
-
    sudo cp /etc/issue.net /etc/.issue.net.backup
    sudo cp /etc/issue /etc/.issue.backup
    sudo touch /etc/motd
