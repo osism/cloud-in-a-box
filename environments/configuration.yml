@@ -39,6 +39,7 @@ resolvconf_dnssec: false
 
 hosts_additional_entries:
   api.in-a-box.cloud: 192.168.16.254
+  manager.systems.in-a-box.cloud: 192.168.16.10
 
 ##########################
 # common

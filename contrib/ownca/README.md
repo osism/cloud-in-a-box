@@ -17,12 +17,6 @@ Create a wildcard certificate:
 ansible-playbook create_wildcard.yml
 ```
 
-Create a manager certificate (optional, can also use wildcard cert):
-
-```
-ansible-playbook create_manager.yml
-```
-
 Install the new certificates into the environment:
 
 ```

@@ -4,40 +4,40 @@
 # The "all" group is not used in OSISM. Therefore it is important
 # that all nodes are explicitly listed here.
 [generic]
-manager
+cumulus
 
 # Nodes that act as manager node (sometimes called deployment node)
 # are included in this group.
 [manager]
-manager
+cumulus
 
 # Nodes which are intended for monitoring services belong to
 # this group
 [monitoring]
-manager
+cumulus
 
 # Nodes that serve as controllers, so things like scheduler,
 # API or database run there, of the environment.
 [control]
-manager
+cumulus
 
 # Virtual systems managed by OpenStack Nova are placed on
 # nodes in this group.
 [compute]
-manager
+cumulus
 
 # Network resources managed by OpenStack Neutron, Octavia and Designate,
 # such as routers, are placed on these nodes. This group has nothing
 # to do with the general network configuration.
 [network]
-manager
+cumulus
 
 # Nodes that serve as controllers for Ceph, so things like the
 # Ceph monitor service run here.
 [ceph-control]
-manager
+cumulus
 
 # The storage available in these systems is provided in the
 # form of OSDs for Ceph.
 [ceph-resource]
-manager
+cumulus
