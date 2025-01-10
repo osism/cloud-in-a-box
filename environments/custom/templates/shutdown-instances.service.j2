@@ -1,0 +1,23 @@
+[Unit]
+Description=Run shutdown-instances script on system shutdown
+DefaultDependencies=no
+After=ceph-osd.target
+After=ceph.target
+After=docker.service
+After=kolla-nova_libvirt-container.service
+Before=halt.target
+Before=reboot.target
+Before=shutdown.target
+Conflicts=shutdown.target reboot.target halt.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/true
+ExecStop=/usr/local/bin/shutdown-instances.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=halt.target
+WantedBy=multi-user.target
+WantedBy=reboot.target
+WantedBy=shutdown.target

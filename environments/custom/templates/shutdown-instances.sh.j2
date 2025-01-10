@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# SPDX-License-Identifier: Apache-2.0
+
+set -ex
+
+CONTAINER=nova_libvirt
+
+wait_for_shutdown() {
+  for ((i=1; i<=30; i+=1)); do
+    domstate=$(docker exec $CONTAINER virsh domstate $1 2>/dev/null)
+
+    if [[ "$domstate" == "shut off" ]]; then
+      return 0
+    fi
+
+    sleep 1
+  done
+}
+
+run() {
+  DOMAINS=$(docker exec $CONTAINER virsh list --name)
+
+  if [[ -n $DOMAINS ]]; then
+    for domain in "$DOMAINS"; do
+      if [[ -n $domain ]]; then
+        docker exec $CONTAINER virsh $1 $domain
+        if [[ $1 == "shutdown" ]]; then
+          wait_for_shutdown $domain
+        fi
+      fi
+    done
+  fi
+}
+
+# destroy all remaining domains
+run shutdown
+
+# shutdown all domains
+run destroy

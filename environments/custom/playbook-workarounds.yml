@@ -69,7 +69,46 @@
         owner: root
         group: root
 
-    - name: Copy workarounds.sh scripts
+    - name: Copy shutdown-instances.sh script
+      become: true
+      ansible.builtin.template:
+        src: shutdown-instances.sh.j2
+        dest: /usr/local/bin/shutdown-instances.sh
+        mode: 0755
+        owner: root
+        group: root
+
+    - name: Copy shutdown-instances systemd unit file
+      become: true
+      ansible.builtin.template:
+        src: shutdown-instances.service.j2
+        dest: /etc/systemd/system/shutdown-instances.service
+        mode: 0644
+        owner: root
+        group: root
+
+    - name: Create /etc/systemd/system/kolla-nova_libvirt-container.service.d/ directory
+      become: true
+      ansible.builtin.file:
+        path: /etc/systemd/system/kolla-nova_libvirt-container.service.d/
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Copy override.conf file for kolla-nova_libvirt-container.service
+      become: true
+      ansible.builtin.copy:
+        content: |
+          [Unit]
+          After=ceph.target
+          After=ceph-osd.target
+        dest: /etc/systemd/system/kolla-nova_libvirt-container.service.d/override.conf
+        mode: 0644
+        owner: root
+        group: root
+
+    - name: Copy workarounds.sh script
       become: true
       ansible.builtin.template:
         src: workarounds.sh.j2
@@ -91,6 +130,13 @@
       become: true
       ansible.builtin.systemd:
         daemon_reload: true
+
+    - name: Enable shutdown-instances.service
+      become: true
+      ansible.builtin.service:
+        name: shutdown-instances
+        enabled: true
+        state: started
 
     - name: Enable workarounds.service
       become: true
