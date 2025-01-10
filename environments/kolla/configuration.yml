@@ -28,10 +28,6 @@ enable_skyline: "yes"
 # generic
 openstack_service_workers: 2
 
-# libvirt
-# NOTE: Doesn't work yet with our setup
-libvirt_enable_sasl: "no"
-
 # ironic
 # ironic_dnsmasq_interface: "eno2"
 # ironic_cleaning_network: "public"
