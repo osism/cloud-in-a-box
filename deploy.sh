@@ -124,7 +124,7 @@ osism apply --environment openstack bootstrap-$CLOUD_IN_A_BOX_TYPE
 
 # Upload machine images
 osism manage images --cloud admin --filter Cirros
-osism manage images --cloud admin --filter "Ubuntu 22.04 Minimal"
+osism manage images --cloud admin --filter "Ubuntu 24.04 Minimal"
 
 # Create machine types
 osism manage flavors
