@@ -4,40 +4,40 @@
 # The "all" group is not used in OSISM. Therefore it is important
 # that all nodes are explicitly listed here.
 [generic]
-manager.systems.in-a-box.cloud
+manager
 
 # Nodes that act as manager node (sometimes called deployment node)
 # are included in this group.
 [manager]
-manager.systems.in-a-box.cloud
+manager
 
 # Nodes which are intended for monitoring services belong to
 # this group
 [monitoring]
-manager.systems.in-a-box.cloud
+manager
 
 # Nodes that serve as controllers, so things like scheduler,
 # API or database run there, of the environment.
 [control]
-manager.systems.in-a-box.cloud
+manager
 
 # Virtual systems managed by OpenStack Nova are placed on
 # nodes in this group.
 [compute]
-manager.systems.in-a-box.cloud
+manager
 
 # Network resources managed by OpenStack Neutron, Octavia and Designate,
 # such as routers, are placed on these nodes. This group has nothing
 # to do with the general network configuration.
 [network]
-manager.systems.in-a-box.cloud
+manager
 
 # Nodes that serve as controllers for Ceph, so things like the
 # Ceph monitor service run here.
 [ceph-control]
-manager.systems.in-a-box.cloud
+manager
 
 # The storage available in these systems is provided in the
 # form of OSDs for Ceph.
 [ceph-resource]
-manager.systems.in-a-box.cloud
+manager
