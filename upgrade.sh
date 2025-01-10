@@ -58,7 +58,7 @@ osism apply -a upgrade mariadb
 osism apply -a upgrade rabbitmq
 
 # TASK [fail when less than three monitors] **************************************
-# fatal: [manager]: FAILED! => {"changed": false, "msg": "Upgrade
+# fatal: [cumulus]: FAILED! => {"changed": false, "msg": "Upgrade
 # of cluster with less than three monitors is not supported."}
 # osism apply ceph-rolling_update -e ireallymeanit=yes
 # osism apply cephclient
