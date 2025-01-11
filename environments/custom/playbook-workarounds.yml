@@ -60,7 +60,7 @@
         regexp: "^Endpoint = WIREGUARD_PUBLIC_IP_ADDRESS"
         line: "Endpoint = {{ result.stdout }}:51820"
 
-    - name: Copy /etc/issue file
+    - name: Copy login banner
       become: true
       ansible.builtin.copy:
         src: issue
@@ -68,6 +68,10 @@
         mode: 0644
         owner: root
         group: root
+      loop:
+        - /etc/issue
+        - /etc/issue.net
+        - /etc/motd
 
     - name: Copy shutdown-instances.sh script
       become: true
