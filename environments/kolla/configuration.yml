@@ -52,6 +52,8 @@ nova_console: novnc
 
 # designate
 designate_ns_record: cloud.in-a-box.cloud
+designate_forwarders_addresses: ""
+designate_recursion: "no"
 
 # horizon
 horizon_keystone_multidomain: true

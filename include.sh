@@ -47,7 +47,6 @@ wait_for_container_running() {
     return 0
 }
 
-
 wait_for_uplink_connection() {
    set +x
    local url_probe="$1"
@@ -76,6 +75,10 @@ get_default_gateway_settings() {
    ip --json route ls | \
       jq 'sort_by(.dev)' | \
       jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | "device " + .dev + "with ip address " + .prefsrc + " with gateway " + .gateway'
+}
+
+get_default_dns_servers() {
+    resolvectl dns | grep Global | awk -F': ' '{ print $2 }' | sed 's/ /; /g'
 }
 
 add_status(){
