@@ -54,3 +54,4 @@ wireguard_users:
     ip: 192.168.48.4
 wireguard_create_client_config: true
 wireguard_client_allowed_ips: "192.168.16.0/20,192.168.112.0/24"
+wireguard_dns: 192.168.16.10
