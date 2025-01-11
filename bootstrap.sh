@@ -131,6 +131,7 @@ wait_for_container_running 60 osismclient
 osism apply facts
 
 osism apply bootstrap
+osism apply dotfiles
 
 # Restart the manager services to update the /etc/hosts file
 docker compose -f /opt/manager/docker-compose.yml restart
