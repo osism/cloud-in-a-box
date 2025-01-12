@@ -24,10 +24,14 @@ apt-get install -y python3-virtualenv python3-venv sshpass jq
 default_gateway_interface="$(get_ethernet_interface_of_default_gateway)"
 get_default_gateway_settings
 
+find /opt/cloud-in-a-box -type f -not -name "*.sh" -exec sed -i "s/eno1/${default_gateway_interface}/g" {} +
+
+default_dns_servers="$(get_default_dns_servers)"
+sed -i "s/designate_forwarders_addresses: .*/designate_forwarders_addresses: \"$default_dns_servers\"/" /opt/configuration/environments/kolla/configuration.yml
+
 cp /opt/cloud-in-a-box/environments/kolla/certificates/ca/cloud-in-a-box.crt /usr/local/share/ca-certificates/
 update-ca-certificates
 
-find /opt/cloud-in-a-box -type f -not -name "*.sh" -exec sed -i "s/eno1/${default_gateway_interface}/g" {} +
 pushd /opt/cloud-in-a-box/environments/manager
 
 ./run.sh operator \
