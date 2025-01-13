@@ -1,16 +1,20 @@
 ---
+- job:
+    name: cloud-in-a-box
+    nodeset: ubuntu-jammy-large
+    run: playbooks/run.yml
+    timeout: 10800
+
 - project:
     merge-mode: squash-merge
     default-branch: main
     check:
       jobs:
         - ansible-lint
-        - yamllint
-    gate:
-      jobs:
-        - ansible-lint
+        - cloud-in-a-box
         - yamllint
     periodic-daily:
       jobs:
         - ansible-lint
+        - cloud-in-a-box
         - yamllint

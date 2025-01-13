@@ -69,6 +69,16 @@ osism apply redis
 osism apply mariadb
 osism apply rabbitmq
 
+# In the CI environment, no Volume Group (VG) is created. Instead, a
+# loopback device is used.
+vgdisplay osd-vg > /dev/null 2>&1
+if [[ $? -ne 0 ]]; then
+    dd if=/dev/zero of=/opt/loopback.img bs=1G count=50
+    losetup /dev/loop0 /opt/loopback.img
+    pvcreate /dev/loop0
+    vgcreate osd-vg /dev/loop0
+fi
+
 # Create LVs for Ceph since that is currently not possible with Curtin
 # with percentages. The VG osd-vg itself is already created by Curtin.
 if [[ ! -e /dev/osd-vg/osd-1 ]]; then

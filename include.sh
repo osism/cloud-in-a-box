@@ -1,6 +1,5 @@
-
 # Hint: Read the logfile with "less -r /var/log/install-cloud-in-a-box.log" for convenience
-BOOTSTRAP_LOGFILE="/var/log/install-cloud-in-a-box.log"
+BOOTSTRAP_LOGFILE=/var/log/install-cloud-in-a-box.log
 
 if [[ -n "$BOOTSTRAP_LOGFILE" ]] ;then
    log_ident="$(basename $0|sed '~s,\.sh,,')"
@@ -65,20 +64,21 @@ wait_for_uplink_connection() {
    done
 }
 
-get_ethernet_interface_of_default_gateway() {
+get_interface_of_default_gateway() {
    ip --json -4 route ls | \
       jq 'sort_by(.dev)' | \
-      jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | .dev'
+      jq -r 'first(.[] | select(.dst == "default")) | .dev'
 }
 
 get_default_gateway_settings() {
    ip --json route ls | \
       jq 'sort_by(.dev)' | \
-      jq -r 'first(.[] | select(.dst == "default" and .protocol == "dhcp")) | "device " + .dev + "with ip address " + .prefsrc + " with gateway " + .gateway'
+      jq -r 'first(.[] | select(.dst == "default")) | "device " + .dev + " with ip address " + .prefsrc + " with gateway " + .gateway'
 }
 
 get_default_dns_servers() {
-    resolvectl dns | grep Global | awk -F': ' '{ print $2 }' | sed 's/ /; /g'
+    interface=$(get_interface_of_default_gateway)
+    resolvectl dns | grep $interface | awk -F': ' '{ print $2 }' | sed 's/ /; /g'
 }
 
 add_status(){
