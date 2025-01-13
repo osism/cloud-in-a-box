@@ -27,7 +27,7 @@ get_default_gateway_settings
 find /opt/cloud-in-a-box -type f -not -name "*.sh" -exec sed -i "s/eno1/${default_gateway_interface}/g" {} +
 
 default_dns_servers="$(get_default_dns_servers)"
-sed -i "s/designate_forwarders_addresses: .*/designate_forwarders_addresses: \"$default_dns_servers\"/" /opt/configuration/environments/kolla/configuration.yml
+sed -i "s/designate_forwarders_addresses: .*/designate_forwarders_addresses: \"$default_dns_servers\"/" /opt/cloud-in-a-box/environments/kolla/configuration.yml
 
 cp /opt/cloud-in-a-box/environments/kolla/certificates/ca/cloud-in-a-box.crt /usr/local/share/ca-certificates/
 update-ca-certificates
