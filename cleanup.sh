@@ -14,11 +14,28 @@ for service in apt-daily-upgrade.timer apt-daily.timer motd-news.timer multipath
 done
 
 apt-get update
-apt-get purge --yes snapd modemmanager lxd-agent-loader frr
-apt-get purge --yes plymouth plymouth-theme-ubuntu-text
-apt-get purge --yes ubuntu-advantage-tools xauth landscape-common btrfs-progs
-apt-get purge --yes apport apport-symptoms open-vm-tools ntfs-3g
-apt-get purge --yes telnet pastebinit tnftp ftp open-iscsi bolt packagekit
+apt-get purge --yes \
+  apport \
+  apport-symptoms \
+  bolt \
+  btrfs-progs \
+  frr \
+  ftp \
+  landscape-common \
+  lxd-agent-loader \
+  modemmanager \
+  ntfs-3g \
+  open-iscsi \
+  open-vm-tools \
+  packagekit \
+  pastebinit \
+  plymouth \
+  plymouth-theme-ubuntu-text \
+  snapd \
+  telnet \
+  tnftp \
+  ubuntu-advantage-tools \
+  xauth
 apt-get autoremove --yes --purge
 
 if [[ -e /swap.img ]]; then
