@@ -2,7 +2,7 @@
 - job:
     name: abstract-cloud-in-a-box
     abstract: true
-    nodeset: ubuntu-jammy-large
+    nodeset: ubuntu-noble-large
     run: playbooks/run.yml
     timeout: 10800
 
