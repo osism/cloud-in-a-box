@@ -34,7 +34,7 @@ update-ca-certificates
 
 pushd /opt/cloud-in-a-box/environments/manager
 
-git config --global advice.detachedHead false
+HOME=/root git config --global advice.detachedHead false
 ./run.sh operator \
   -e ansible_ssh_pass=password \
   -e ansible_ssh_user=osism \
