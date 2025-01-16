@@ -7,6 +7,12 @@
     timeout: 10800
 
 - job:
+    name: cloud-in-a-box-edge
+    parent: abstract-cloud-in-a-box
+    vars:
+      cloud_in_a_box_type: edge
+
+- job:
     name: cloud-in-a-box-kubernetes
     parent: abstract-cloud-in-a-box
     vars:
@@ -18,10 +24,12 @@
     check:
       jobs:
         - ansible-lint
+        - cloud-in-a-box-edge
         - cloud-in-a-box-kubernetes
         - yamllint
     periodic-daily:
       jobs:
         - ansible-lint
+        - cloud-in-a-box-edge
         - cloud-in-a-box-kubernetes
         - yamllint
