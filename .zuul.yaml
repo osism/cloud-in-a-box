@@ -1,9 +1,16 @@
 ---
 - job:
-    name: cloud-in-a-box
-    nodeset: ubuntu-jammy-large
+    name: abstract-cloud-in-a-box
+    abstract: true
+    nodeset: ubuntu-noble-large
     run: playbooks/run.yml
     timeout: 10800
+
+- job:
+    name: cloud-in-a-box-kubernetes
+    parent: abstract-cloud-in-a-box
+    vars:
+      cloud_in_a_box_type: kubernetes
 
 - project:
     merge-mode: squash-merge
@@ -11,10 +18,10 @@
     check:
       jobs:
         - ansible-lint
-        - cloud-in-a-box
+        - cloud-in-a-box-kubernetes
         - yamllint
     periodic-daily:
       jobs:
         - ansible-lint
-        - cloud-in-a-box
+        - cloud-in-a-box-kubernetes
         - yamllint
