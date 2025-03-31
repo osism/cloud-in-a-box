@@ -19,9 +19,7 @@ manager_listener_broker_uri: "{% for host in manager_listener_broker_hosts %}amq
 ##########################
 # celery
 
-celery_enable: true
 flower_enable: true
-
 flower_traefik: true
 flower_host: flower.services.in-a-box.cloud
 
@@ -29,8 +27,6 @@ osism_api_host: "{{ hostvars[inventory_hostname]['ansible_' + internal_interface
 
 ##########################
 # ara
-
-ara_enable: true
 
 ara_server_host: ara.services.in-a-box.cloud
 ara_server_traefik: true
