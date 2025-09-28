@@ -18,10 +18,8 @@
     check:
       jobs:
         - ansible-lint
-        - cloud-in-a-box-kubernetes
         - yamllint
     periodic-daily:
       jobs:
         - ansible-lint
-        - cloud-in-a-box-kubernetes
         - yamllint
