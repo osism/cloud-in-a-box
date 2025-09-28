@@ -2,7 +2,7 @@
 ##########################
 # docker
 
-docker_version: '5:27.4.1'
+docker_version: '5:27.5.1'
 
 docker_opts:
   max-concurrent-downloads: 20
