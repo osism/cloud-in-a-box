@@ -18,20 +18,14 @@ homer_url_flower: "https://flower.services.in-a-box.cloud/"
 homer_url_grafana: "https://api.in-a-box.cloud:3000"
 homer_url_horizon: "https://api.in-a-box.cloud/"
 homer_url_kibana: "https://api.in-a-box.cloud:5601"
-homer_url_netbox: "https://netbox.services.in-a-box.cloud/"
 homer_url_netdata: "http://manager.systems.in-a-box.cloud:19999"
 homer_url_phpmyadmin: "https://phpmyadmin.services.in-a-box.cloud/"
 homer_url_prometheus: "https://api.in-a-box.cloud:9091"
 homer_url_rabbitmq: "https://api.in-a-box.cloud:15672"
 
 homer_url_keycloak: ""
+homer_url_netbox: ""
 homer_url_vault: ""
-
-##########################
-# netbox
-
-netbox_host: netbox.services.in-a-box.cloud
-netbox_traefik: true
 
 ##########################
 # phpmyadmin

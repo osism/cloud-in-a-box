@@ -63,21 +63,12 @@ chmod o+rw /var/run/docker.sock
 find /opt/configuration -type f -exec sed -i "s/eno1/${default_interface}/g" {} +
 
 if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
-    # Deploy netbox service
-    ./run.sh netbox
-
     # Deploy traefik service
     ./run.sh traefik
 elif [[ $CLOUD_IN_A_BOX_TYPE == "edge" ]]; then
-    # Disable netbox integration
-    ./disable-netbox.sh
-
     # Deploy traefik service
     ./run.sh traefik
 elif [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
-    # Disable netbox integration
-    ./disable-netbox.sh
-
     # Disable openstack integration
     echo "manager_enable_openstack: false" >> /opt/cloud-in-a-box/environments/manager/configuration.yml
     echo "manager_enable_openstack: false" >> /opt/configuration/environments/manager/configuration.yml
