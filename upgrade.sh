@@ -23,10 +23,6 @@ osism update manager
 osism update docker
 osism apply traefik
 
-if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
-    osism apply netbox
-fi
-
 osism reconciler sync
 osism apply facts
 
