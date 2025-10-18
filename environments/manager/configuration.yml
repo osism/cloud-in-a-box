@@ -2,7 +2,9 @@
 ##########################
 # versions
 
-manager_version: 8.1.0
+manager_version: latest
+ceph_version: reef
+openstack_version: 2025.1
 
 ##########################
 # listener
