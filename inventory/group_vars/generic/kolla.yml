@@ -1,4 +1,5 @@
 ---
+docker_namespace: kolla
 network_interface: "{{ network_internal_interface }}"
 neutron_external_interface: "{{ network_workload_interface }}"
 tunnel_interface: "{{ network_internal_interface }}"
