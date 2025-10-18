@@ -8,13 +8,6 @@ docker_opts:
   max-concurrent-downloads: 20
 
 ##########################
-# docker registries
-
-docker_registry: index.docker.io
-docker_registry_ansible: quay.io
-docker_registry_service: index.docker.io
-
-##########################
 # operator
 
 operator_authorized_keys:
