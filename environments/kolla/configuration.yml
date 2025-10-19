@@ -12,6 +12,8 @@ kolla_enable_tls_internal: "yes"
 kolla_copy_ca_into_containers: "yes"
 openstack_cacert: /etc/ssl/certs/ca-certificates.crt
 
+database_enable_tls_internal: "no"
+
 ##########################################################
 # openstack
 
