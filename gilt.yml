@@ -1,6 +1,6 @@
 ---
 - git: https://github.com/osism/generics.git
-  version: v0.20251012.0
+  version: v0.20251019.0
   files:
     - src: gilt.yml
       dst: ./gilt.yml
