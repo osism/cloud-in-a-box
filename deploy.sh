@@ -90,7 +90,7 @@ osism sync inventory
 # Deploy Ceph services
 osism apply ceph
 osism apply ceph-pools
-osism apply copy-ceph-keys
+osism sync ceph-keys
 osism apply cephclient
 osism apply ceph-bootstrap-dashboard
 
