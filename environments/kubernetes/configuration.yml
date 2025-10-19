@@ -1,4 +1,4 @@
 ---
-# Dummy variable to avoid error because ansible does not recognize the
-# file as a good configuration file when no variable in it.
-dummy:
+apiserver_endpoint: 192.168.16.8
+cilium_bgp: false
+kube_vip_bgp: false

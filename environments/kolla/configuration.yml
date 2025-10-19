@@ -53,6 +53,9 @@ horizon_keystone_multidomain: true
 # Horizon itself.
 horizon_port: 1080
 
+# magnum
+magnum_kubeconfig: /share/kubeconfig
+
 # rgw integration
 enable_ceph_rgw: true
 enable_ceph_rgw_keystone: true
