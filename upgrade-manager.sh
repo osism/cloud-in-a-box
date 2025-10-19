@@ -11,7 +11,7 @@ set -e
 export INTERACTIVE=false
 source /etc/cloud-in-a-box.env
 
-# The normal way of updating the configuration repository (osism apply configuration)
+# The normal way of updating the configuration repository (osism sync configuration)
 # is not used as we have made manual changes in the configuration repository
 # on the Cloud in a Box. For example, for the primary network card.
 pushd /opt/configuration

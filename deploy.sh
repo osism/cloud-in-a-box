@@ -17,7 +17,7 @@ else
     echo "CLOUD_IN_A_BOX_TYPE=$CLOUD_IN_A_BOX_TYPE" | sudo tee /etc/cloud-in-a-box.env
 fi
 
-osism apply facts
+osism sync facts
 
 # Minified version of the Cloud in a Box in which only Kubernetes is deployed.
 if [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
@@ -85,7 +85,7 @@ if [[ ! -e /dev/osd-vg/osd-1 ]]; then
     osism apply --environment custom create-logical-volumes
 fi
 
-osism reconciler sync
+osism sync inventory
 
 # Deploy Ceph services
 osism apply ceph

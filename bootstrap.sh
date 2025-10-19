@@ -124,7 +124,7 @@ wait_for_container_running 60 osismclient
 
 # Gather facts to ensure that the addresses of the new VLAN devices
 # are in the facts cache
-osism apply facts
+osism sync facts
 
 osism apply bootstrap
 osism apply dotfiles
