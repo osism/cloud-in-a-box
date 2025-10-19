@@ -12,7 +12,7 @@ export INTERACTIVE=false
 export OSISM_APPLY_RETRY=1
 source /etc/cloud-in-a-box.env
 
-# The normal way of updating the configuration repository (osism apply configuration)
+# The normal way of updating the configuration repository (osism sync configuration)
 # is not used as we have made manual changes in the configuration repository
 # on the Cloud in a Box. For example, for the primary network card.
 pushd /opt/configuration
@@ -23,8 +23,8 @@ osism update manager
 osism update docker
 osism apply traefik
 
-osism reconciler sync
-osism apply facts
+osism sync inventory
+osism sync facts
 
 # Minified version of the Cloud in a Box in which only Kubernetes is upgraded.
 if [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
