@@ -86,19 +86,12 @@ fi
 osism apply openstackclient
 
 # Upgrade kubernetes
-osism apply kubernetes
+# osism apply kubernetes
 
 # Upgrade clusterapi
-osism apply clusterapi
+# osism apply clusterapi
 
-# In the Cloud in a Box, the service was only added with OSISM 7.0.0. It is therefore necessary
-# to check in advance whether the service is already available. If not, a deployment must be
-# carried out instead of an upgrade.
-if [[ -z $(openstack --os-cloud admin service list -f value -c Name | grep magnum) ]]; then
-    osism apply copy-kubeconfig
-    osism apply magnum
-else
-    osism apply -a upgrade magnum
-fi
+# Upgrade magnum
+# osism apply -a upgrade magnum
 
 osism apply cleanup-docker-images -e ireallymeanit=yes
