@@ -143,17 +143,17 @@ osism manage flavors
 osism apply --environment openstack test --skip-tags test-server,test-volume
 
 # Deploy kubernetes
-osism apply kubernetes
+# osism apply kubernetes
 
 # Deploy kubernetes dashboard
-osism apply k8s-dashboard
+# osism apply k8s-dashboard
 
 # Deploy clusterapi
-osism apply clusterapi
+# osism apply clusterapi
 
 # Deploy magnum
-osism apply copy-kubeconfig
-osism apply magnum
+# osism apply copy-kubeconfig
+# osism apply magnum
 
 touch /etc/cloud/cloud-init.disabled
 
