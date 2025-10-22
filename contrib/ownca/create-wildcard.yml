@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars_prompt:
-    - name: Set secret_ca_passphrase
+    - name: secret_ca_passphrase
       prompt: Enter secret_ca_passphrase
 
   tasks:
@@ -16,8 +16,19 @@
     - name: Create certificate signing request (CSR) for new certificate  # noqa: run-once[task]
       community.crypto.openssl_csr_pipe:
         privatekey_path: cloud-in-a-box-certificate.key
+        common_name: "*.in-a-box.cloud"
+        organization_name: "OSISM"
+        organizational_unit_name: "Cloud in a Box"
         subject_alt_name:
           - "DNS:*.in-a-box.cloud"
+          - "DNS:api.in-a-box.cloud"
+          - "DNS:in-a-box.cloud"
+        key_usage:
+          - digitalSignature
+          - keyEncipherment
+        extended_key_usage:
+          - serverAuth
+          - clientAuth
       run_once: true
       register: csr
 
