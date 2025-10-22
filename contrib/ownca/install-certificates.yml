@@ -1,0 +1,58 @@
+---
+- name: Install Cloud in a Box certificates into environment
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Ensure Kolla CA directory exists
+      ansible.builtin.file:
+        path: ../../environments/kolla/certificates/ca
+        state: directory
+        mode: 0755
+
+    - name: Copy CA certificate to Kolla CA directory
+      ansible.builtin.copy:
+        src: cloud-in-a-box-ca-certificate.pem
+        dest: ../../environments/kolla/certificates/ca/cloud-in-a-box.crt
+        mode: 0644
+
+    - name: Copy CA certificate to OpenStack directory
+      ansible.builtin.copy:
+        src: cloud-in-a-box-ca-certificate.pem
+        dest: ../../environments/openstack/cloud-in-a-box.pem
+        mode: 0644
+
+    - name: Create concatenated HAProxy certificate
+      ansible.builtin.shell: |
+        cat cloud-in-a-box-certificate.key \
+            cloud-in-a-box-certificate.pem \
+            cloud-in-a-box-ca-certificate.pem \
+            > ../../environments/kolla/certificates/haproxy.pem
+      args:
+        creates: ../../environments/kolla/certificates/haproxy.pem
+
+    - name: Set permissions on HAProxy certificate
+      ansible.builtin.file:
+        path: ../../environments/kolla/certificates/haproxy.pem
+        mode: 0640
+
+    - name: Copy HAProxy certificate to internal certificate
+      ansible.builtin.copy:
+        src: ../../environments/kolla/certificates/haproxy.pem
+        dest: ../../environments/kolla/certificates/haproxy-internal.pem
+        mode: 0640
+
+    - name: Display installation summary
+      ansible.builtin.debug:
+        msg:
+          - "===================================="
+          - "Certificate Installation Complete"
+          - "===================================="
+          - ""
+          - "Installed certificates:"
+          - "  - CA certificate: ../../environments/kolla/certificates/ca/cloud-in-a-box.crt"
+          - "  - CA certificate: ../../environments/openstack/cloud-in-a-box.pem"
+          - "  - HAProxy certificate: ../../environments/kolla/certificates/haproxy.pem"
+          - "  - HAProxy internal certificate: ../../environments/kolla/certificates/haproxy-internal.pem"
+          - ""
+          - "All certificates have been successfully installed into the environment."

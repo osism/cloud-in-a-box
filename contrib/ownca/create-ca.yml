@@ -1,10 +1,10 @@
 ---
-- name: Create OSISM Cloud-in-a-Box CA
+- name: Create OSISM Cloud in a Box CA
   hosts: localhost
   gather_facts: false
 
   vars_prompt:
-    - name: Set secret_ca_passphrase
+    - name: secret_ca_passphrase
       prompt: Enter secret_ca_passphrase
 
   tasks:
@@ -18,7 +18,7 @@
       community.crypto.openssl_csr_pipe:
         privatekey_path: cloud-in-a-box-ca-certificate.key
         privatekey_passphrase: "{{ secret_ca_passphrase }}"
-        common_name: OSISM Cloud-in-a-Box CA
+        common_name: OSISM Cloud in a Box CA
         use_common_name_for_san: false  # since we do not specify SANs, don't use CN as a SAN
         basic_constraints:
           - 'CA:TRUE'
