@@ -3,11 +3,13 @@
 BASE_DIR="$(dirname $(readlink -f $0))"
 source $BASE_DIR/include.sh
 
-trap "set +x; add_status 'error' 'PREPARE-CLUSTERAPI FAILED'; sleep 90" TERM INT EXIT
+trap "set +x; add_status 'error' 'PREPARE CLUSTERAPI FAILED'; sleep 90" TERM INT EXIT
 set -e
 set -x
 
 export INTERACTIVE=false
+
+add_status "info" "PREPARE CLUSTERAPI STARTED"
 
 osism manage image clusterapi --filter 1.33
 
@@ -27,3 +29,6 @@ openstack --os-cloud admin coe cluster template create \
   --coe kubernetes \
   --label kube_tag=v$KUBERNETES_VERSION \
   k8s-$KUBERNETES_VERSION
+
+trap "" TERM INT EXIT
+add_status "info" "PREPARE CLUSTERAPI COMPLETED"

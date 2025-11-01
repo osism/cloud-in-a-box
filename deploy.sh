@@ -3,12 +3,14 @@
 BASE_DIR="$(dirname $(readlink -f $0))"
 source $BASE_DIR/include.sh
 
-trap "set +x; add_status 'error' 'DEPLOY FAILED'; sleep 90" TERM INT EXIT
+trap "set +x; add_status 'error' 'DEPLOYMENT FAILED'; sleep 90" TERM INT EXIT
 set -x
 set -e
 
 export INTERACTIVE=false
 export OSISM_APPLY_RETRY=1
+
+add_status "info" "DEPLOYMENT STARTED"
 
 if [[ -e /etc/cloud-in-a-box.env ]]; then
     source /etc/cloud-in-a-box.env
@@ -44,7 +46,7 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "kubernetes" ]]; then
     /opt/configuration/enable-ara.sh
 
     trap "" TERM INT EXIT
-    add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
+    add_status info "DEPLOYMENT COMPLETED"
 
     exit 0
 fi
@@ -161,4 +163,4 @@ touch /etc/cloud/cloud-init.disabled
 /opt/configuration//enable-ara.sh
 
 trap "" TERM INT EXIT
-add_status info "DEPLOYMENT COMPLETED SUCCESSFULLY"
+add_status info "DEPLOYMENT COMPLETED"
