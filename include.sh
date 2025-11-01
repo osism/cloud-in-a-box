@@ -84,13 +84,14 @@ get_default_dns_servers() {
 add_status(){
    local type="$1"
    local text="$2"
+   local timestamp="$(date '+%Y-%m-%d %H:%M:%S')"
 
    if [ "$type" = "warn" ];then
-     text="\e[5;43;1mWARN: $text\e[0m"
+     text="${timestamp} \e[5;43;1mWARN: $text\e[0m"
    elif [ "$type" = "info" ];then
-     text="\e[5;42;1mINFO: $text\e[0m"
+     text="${timestamp} \e[5;42;1mINFO: $text\e[0m"
    else
-     text="\e[5;41;1mERROR: $text\e[0m"
+     text="${timestamp} \e[5;41;1mERROR: $text\e[0m"
    fi
 
    sudo cp /etc/issue.net /etc/.issue.net.backup

@@ -138,4 +138,4 @@ if [[ $CLOUD_IN_A_BOX_TYPE != "kubernetes" ]]; then
 fi
 
 trap "" TERM INT EXIT
-add_status "info" "BOOTSTRAP COMPLETE"
+add_status "info" "BOOTSTRAP COMPLETED"
