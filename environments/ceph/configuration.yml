@@ -65,7 +65,7 @@ ceph_conf_overrides:
     mon allow pool delete: true
     mon max pg per osd: 400
 
-  "client.rgw.{{ hostvars[inventory_hostname]['ansible_hostname'] }}.rgw0":
+  "client.rgw.{{ rgw_zone }}.{{ hostvars[inventory_hostname]['ansible_hostname'] }}.rgw0":
     "rgw content length compat": "true"
     "rgw enable apis": "swift, s3, admin"
     "rgw keystone accepted roles": "member, admin"
