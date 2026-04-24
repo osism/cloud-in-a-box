@@ -4,9 +4,9 @@
 # This applies to both the form with :children and without.
 #
 # All predefined and usable inventory groups can be found
-# in the cfg-generics repository.
+# in the generics repository.
 #
-# https://github.com/osism/cfg-generics/tree/main/inventory
+# https://github.com/osism/generics/tree/main/inventory
 
 [ceph-rgw:children]
 ceph-resource
