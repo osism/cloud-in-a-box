@@ -46,10 +46,11 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
     osism apply -a upgrade opensearch
 fi
 
+key_value_store=$(valkey_or_redis)
 osism apply -a upgrade openvswitch
 osism apply -a upgrade ovn
 osism apply -a upgrade memcached
-osism apply -a upgrade redis
+osism apply -a upgrade "$key_value_store"
 osism apply -a upgrade mariadb
 osism apply -a upgrade rabbitmq
 

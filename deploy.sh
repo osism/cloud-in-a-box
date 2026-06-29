@@ -64,10 +64,11 @@ if [[ $CLOUD_IN_A_BOX_TYPE == "sandbox" ]]; then
 fi
 
 # Deploy infrastructure services
+key_value_store=$(valkey_or_redis)
 osism apply openvswitch
 osism apply ovn
 osism apply memcached
-osism apply redis
+osism apply "$key_value_store"
 osism apply mariadb
 osism apply rabbitmq
 
