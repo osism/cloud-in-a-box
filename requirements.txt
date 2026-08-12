@@ -4,5 +4,5 @@ ansible==11.12.0
 packaging==26.3
 pwgen==0.8.2.post0
 python-gilt==1.2.3
-requests==2.33.0
+requests==2.34.2
 tabulate==0.10.0
