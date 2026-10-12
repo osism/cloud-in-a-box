@@ -47,3 +47,7 @@
         - "{{ ceph_docker_registry }}/{{ ceph_docker_image }}:{{ ceph_image_version }}"
         - "{{ docker_registry_cephclient }}/osism/cephclient:{{ cephclient_version }}"
         - "{{ docker_registry_openstackclient }}/osism/openstackclient:{{ openstackclient_version }}"
+      register: result
+      until: result is success
+      retries: 3
+      delay: 30
